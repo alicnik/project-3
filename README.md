@@ -1,6 +1,6 @@
 # project3
 
-This is Alex's second attempt
+Okie dokie
 
 let's do project 3
 
