@@ -1,10 +1,5 @@
 # project3
 
-This is Alex's second attempt
-
-let's do project 3
-
+Today is kind of sunny
 We are all git masters.
-
 ali was here
-
