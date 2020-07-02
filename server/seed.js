@@ -1,6 +1,6 @@
 const fs = require('fs')
 const mongoose = require('mongoose')
-// const User = require('./models/userModel')
+const User = require('./models/userModel')
 const RecArea = require('./models/recAreaModel')
 const Campground = require('./models/campgroundModel')
 
@@ -57,7 +57,25 @@ mongoose.connect('mongodb://localhost/wildernessdb', {
         }
       }))
     })
-    .then(recAreas => console.log(`${recAreas.length} rec areas created. Time to get rickety-recked.`))
+    .then(recAreas => {
+      console.log(`${recAreas.length} rec areas created. Time to get rickety-recked.`)
+      return User.create([
+        {
+          username: 'alicnik',
+          email: 'alicnik@hotmail.com',
+          password: 'Alicnik1',
+          passwordConfirmation: 'Alicnik1',
+          isAdmin: true
+        },
+        {
+          username: 'ali_bhimani',
+          email: 'ali_bhimani21@aol.com',
+          password: 'Ali4President',
+          passwordConfirmation: 'Ali4President',
+          isAdmin: true
+        }
+      ])
+    })
     .catch(err => console.log(err))
     .finally(() => mongoose.connection.close())
 })

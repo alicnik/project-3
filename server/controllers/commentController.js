@@ -2,8 +2,7 @@ const Review = require('../models/reviewModel')
 
 function createComment(req, res) {
   const comment = req.body
-  req.body.user = req.currentuser
-
+  req.body.user = req.currentUser._id
   Review
     .findById(req.params.id)
     .then(review => {
@@ -24,6 +23,7 @@ function editComment(req, res) {
     .then(review => {
       if (!review) return res.status(404).send({ message: 'Comment not found' })
       const comment = review.comments.id(req.params.commentId)
+      if (!review.user.equals(req.currentUser._id) && !req.currentUser.isAdmin) return res.status(401).send({ message: 'You can\'t edit someone else\'s comment' })
       comment.set(req.body)
       return review.save()
     })
@@ -39,9 +39,11 @@ function deleteComment(req, res) {
     .then(review => {
       // const currentUserId = req.currentUser._id
       const comment = review.comments.id(req.params.commentId)
+      if (!review.user.equals(req.currentUser._id) && !req.currentUser.isAdmin) return res.status(401).send({ message: 'You can\'t delete someone else\'s comment' })
       comment.remove()
-      review.save()
+      return review.save()
     })
+    .then(review => res.status(202).send(review))
     .catch(err => res.send(err))
 }
 

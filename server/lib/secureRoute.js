@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
-const secret = 'campgrounds are the same as campsites and area 51 is rec area but trump did not want you to know'
+const secret = 'campgrounds are the same as campsites and area 51 is a rec area but trump did not want you to know'
 
-const User = require('../models/user')
+const User = require('../models/userModel')
 
 
 function secureRoute(req, res, next) {
@@ -12,10 +12,13 @@ function secureRoute(req, res, next) {
     return res.status(401).send({ message: 'Unauthorized: no user token attatched' })
   }
 
-  const token = rawToken.replace('Bearer', '')
+  const token = rawToken.replace('Bearer ', '')
 
   jwt.verify(token, secret, (err, tokenBody) => {
-    if (err) return res.status(401).send({ message: 'Unauthorized: token error' })
+    if (err) {
+      console.log(err)
+      return res.status(401).send({ message: 'Unauthorized: token error' })
+    }
 
     const userId = tokenBody.sub
     User

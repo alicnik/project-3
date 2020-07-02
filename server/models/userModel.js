@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 })
 
-userSchema.plugin(mongooseHidden({ defautHidden: { password: true } }))
+userSchema.plugin(mongooseHidden({ defaultHidden: { password: true } }))
 userSchema.plugin(mongooseUniqueValidator)
 
 userSchema
@@ -67,7 +67,6 @@ userSchema
 
 userSchema
   .pre('save', function hashPassword(next) {
-    console.log(this._passwordConfirmation)
     if (this.isModified('password')) {
       this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync())
     }
