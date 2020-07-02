@@ -38,7 +38,7 @@ userSchema.plugin(mongooseUniqueValidator)
 userSchema
   .virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {
-    this.passwordConfirmation = passwordConfirmation
+    this._passwordConfirmation = passwordConfirmation
   })
 
 userSchema

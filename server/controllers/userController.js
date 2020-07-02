@@ -8,12 +8,12 @@ function register(req, res) {
     .then(user => {
       res.status(201).send(user)
     })
-    .catch(error => res.status(403).send(error))
+    .catch(error => console.log(error))
 }
 
 function login(req, res) {
   User
-    .findOne({ email: req.body.email })
+    .findOne({ $or: [{ email: req.body.email }, { username: req.body.username }] })
     .then(user => {
       if (!user.validatePassword(req.body.password)) {
         return res.status(401).send({ message: 'Passwords do not match' })
