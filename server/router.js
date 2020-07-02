@@ -12,8 +12,8 @@ router.route('/campgrounds')
 router.route('/campgrounds/:id')
   .get(campgroundController.getOneSpot)
 
-router.route('/campgrounds/:campgroundId/reviews')
-  .post(secureRoute, reviewController.createCampgroundReview)
+router.route('/campgrounds/:siteId/reviews')
+  .post(secureRoute, reviewController.createReview)
 
 
 router.route('/recareas')
@@ -22,9 +22,12 @@ router.route('/recareas')
 router.route('/recareas/:id')
   .get(recAreaController.getOneSpot)
 
-router.route('/recareas/:recAreaId/reviews')
-  .post(secureRoute, reviewController.createRecAreaReview)
+router.route('/recareas/:siteId/reviews')
+  .post(secureRoute, reviewController.createReview)
 
+router.route('/reviews/:id')
+  .put(secureRoute, reviewController.editReview)
+  .delete(secureRoute, reviewController.deleteReview)
 
 router.route('/register')
   .post(userController.register)

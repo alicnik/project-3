@@ -1,20 +1,24 @@
 const Review = require('../models/reviewModel')
 const Campground = require('../models/campgroundModel')
 const RecArea = require('../models/recAreaModel')
+const User = require('../models/userModel')
 
-function createCampgroundReview(req, res) {
-  const review = req.body
-  const campgroundId = req.params.campgroundId
-  Campground
-    .findById(campgroundId)
-    .then(campground => {
+function findSiteAndCreateReview(siteCollection, siteId, review, req, res) {
+  siteCollection
+    .findById(siteId)
+    .then(site => {
       Review
         .create(review)
         .then(review => {
-          review.user = req.user
-          review.campgroundRef = campgroundId
-          campground.reviews.push(review)
-          campground.save()
+          console.log(req.currentUser)
+          review.user = req.currentUser._id
+          console.log('line 14')
+          site.ridbCampgroundId ? review.campgroundRef = siteId : review.recAreaRef = siteId
+          console.log('line 16')
+          site.reviews.push(review)
+          console.log('line 18')
+          site.save()
+          console.log('line 20')
           res.status(201).send({ message: 'Review successfully posted.' })
         })
         .catch(err => res.status(400).send(err))
@@ -22,25 +26,33 @@ function createCampgroundReview(req, res) {
     .catch(err => res.status(400).send(err))
 }
 
-function createRecAreaReview(req, res) {
+function createReview(req, res) {
+  const siteCollection = req.url.includes('campgrounds') ? Campground : RecArea
+  const siteId = req.params.siteId
   const review = req.body
-  const recAreaId = req.params.recAreaId
-  RecArea
-    .findById(recAreaId)
-    .then(recArea => {
-      console.log('log', recArea)
-      Review
-        .create(review)
-        .then(review => {
-          review.user = req.user
-          review.recAreaRef = recAreaId
-          recArea.reviews.push(review)
-          recArea.save()
-          res.status(201).send({ message: 'Review successfully posted.' })
-        })
-        .catch(err => res.status(400).send(err))
+  findSiteAndCreateReview(siteCollection, siteId, review, req, res)
+}
+
+function editReview(req, res) {
+  Review
+    .findById(req.params.id)
+    .then(review => {
+      if (!review) return res.status(404).send({ message: 'Review not found' })
+      if (!review.user.equals(req.currentUser._id) && !req.currentUser.isAdmin) return res.status(401).send({ message: 'You can\'t edit someone else\'s review' })
+      review.set(req.body)
+      return review.save()
     })
-    .catch(err => res.status(400).send(err))
+    .then(updatedReview => res.status(201).send(updatedReview))
+}
+
+function deleteReview(req, res) {
+  Review
+    .findById(req.params.id)
+    .then(review => {
+      if (!review) return res.status(404).send({ message: 'Not found' })
+      if (!review.user.equals(req.currentUser._id) && !req.currentUser.isAdmin) return res.status(401).send({ message: 'You can\'t delete someone else\'s review.' })
+      return (review.remove())
+    })
 }
 
 function readAllForUser(req, res) {
@@ -53,4 +65,4 @@ function readAllForUser(req, res) {
     .catch(err => console.log(err))
 }
 
-module.exports = { createRecAreaReview, createCampgroundReview, readAllForUser }
+module.exports = { createReview, readAllForUser, editReview, deleteReview }
