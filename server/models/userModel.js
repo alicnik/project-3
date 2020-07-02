@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 })
 
-userSchema.plugin(mongooseHidden({ defautHidden: { password: true } }))
+userSchema.plugin(mongooseHidden({ defaultHidden: { password: true } }))
 userSchema.plugin(mongooseUniqueValidator)
 
 userSchema
