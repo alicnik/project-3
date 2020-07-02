@@ -4,7 +4,7 @@ const recAreaController = require('./controllers/recAreaController')
 const userController = require('./controllers/userController')
 const reviewController = require('./controllers/reviewController')
 
-// const secureRoute = require('./lib/secureRoute')
+const secureRoute = require('./lib/secureRoute')
 
 router.route('/campgrounds')
   .get(campgroundController.index)
@@ -13,7 +13,7 @@ router.route('/campgrounds/:id')
   .get(campgroundController.getOneSpot)
 
 router.route('/campgrounds/:campgroundId/reviews')
-  .post(reviewController.createCampgroundReview)
+  .post(secureRoute, reviewController.createCampgroundReview)
 
 
 router.route('/recareas')
@@ -23,7 +23,7 @@ router.route('/recareas/:id')
   .get(recAreaController.getOneSpot)
 
 router.route('/recareas/:recAreaId/reviews')
-  .post(reviewController.createRecAreaReview)
+  .post(secureRoute, reviewController.createRecAreaReview)
 
 
 router.route('/register')
