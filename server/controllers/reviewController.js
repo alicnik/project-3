@@ -46,8 +46,9 @@ function deleteReview(req, res) {
     .then(review => {
       if (!review) return res.status(404).send({ message: 'Not found' })
       if (!review.user.equals(req.currentUser._id) && !req.currentUser.isAdmin) return res.status(401).send({ message: 'You can\'t delete someone else\'s review.' })
-      return (review.remove())
+      return review.remove()
     })
+    .then(deletedReview => res.status(200).send(deletedReview))
 }
 
 function readAllForUser(req, res) {

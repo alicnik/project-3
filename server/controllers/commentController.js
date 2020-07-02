@@ -2,7 +2,7 @@ const Review = require('../models/reviewModel')
 
 function createComment(req, res) {
   const comment = req.body
-  req.body.user = req.currentuser
+  req.body.user = req.currentUser._id
   Review
     .findById(req.params.id)
     .then(review => {
@@ -42,6 +42,7 @@ function deleteComment(req, res) {
       comment.remove()
       return review.save()
     })
+    .then(review => res.status(202).send(review))
     .catch(err => res.send(err))
 }
 
