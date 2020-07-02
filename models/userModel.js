@@ -19,15 +19,15 @@ const schema = new mongoose.Schema({
   },
   password: { type: String, required: true, match: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/ },
   showWishList: { type: Boolean },
-  campsiteWishList: [{ type: mongoose.Schema.ObjectId, ref: 'Campsite' }],
+  campgroundWishList: [{ type: mongoose.Schema.ObjectId, ref: 'Campground' }],
   showVisited: { type: Boolean },
-  campsitesVisited: [{ type: mongoose.Schema.ObjectId, ref: 'Campsite' }],
+  campgroundsVisited: [{ type: mongoose.Schema.ObjectId, ref: 'Campground' }],
   avatarPhoto: { type: String },
   isAdmin: { type: Boolean },
   isVIP: { type: Boolean },
   bio: { type: String },
   recAreaReviews: [{ type: mongoose.Schema.ObjectId, ref: 'Review' }],
-  campsiteReviews: [{ type: mongoose.Schema.ObjectId, ref: 'Review' }]
+  campgroundReviews: [{ type: mongoose.Schema.ObjectId, ref: 'Review' }]
 }, {
   timestamps: true
 })

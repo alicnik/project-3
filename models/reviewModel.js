@@ -6,7 +6,7 @@ const reviewSchema = new mongoose.Schema({
   rating: { type: Number, required: true },
   review: { type: String, required: true },
   isRecAreaReview: { type: Boolean, required: true },
-  isCampsiteReview: { type: Boolean, reequired: true },
+  isCampgroundReview: { type: Boolean, reequired: true },
   comments: [commentSchema]
 }, {
   timestamps: true

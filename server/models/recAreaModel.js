@@ -5,6 +5,10 @@ const recAreaSchema = new mongoose.Schema({
   description: { type: String },
   phone: { type: String },
   email: { type: String },
+  address: { type: String },
+  address2: { type: String },
+  city: { type: String },
+  state: { type: String },
   longitude: { type: Number },
   latitude: { type: Number },
   keywords: [ { type: String } ],
@@ -15,7 +19,7 @@ const recAreaSchema = new mongoose.Schema({
     url: { type: String },
     title: { type: String }
   }],
-  campsites: [{ type: mongoose.Schema.ObjectId, ref: 'Campsite' }]
+  campgrounds: [{ type: mongoose.Schema.ObjectId, ref: 'Campground' }]
 })
 
 module.exports = mongoose.model('RecArea', recAreaSchema)
