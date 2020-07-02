@@ -67,7 +67,6 @@ userSchema
 
 userSchema
   .pre('save', function hashPassword(next) {
-    console.log(this._passwordConfirmation)
     if (this.isModified('password')) {
       this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync())
     }
