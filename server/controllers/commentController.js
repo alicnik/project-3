@@ -37,6 +37,7 @@ function deleteComment(req, res) {
   Review
     .findById(req.params.reviewId)
     .then(review => {
+      // const currentUserId = req.currentUser._id
       const comment = review.comments.id(req.params.commentId)
       comment.remove()
       review.save()
