@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/alibhimani21/project-3#readme",
   "dependencies": {
+    "@hookform/resolvers": "0.0.5",
     "axios": "^0.19.2",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
@@ -30,6 +31,7 @@
     "mongoose-unique-validator": "^2.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.0.0",
     "react-map-gl": "^5.2.7",
     "react-router-dom": "^5.2.0",
     "yup": "^0.29.1"

@@ -13,3 +13,4 @@ mongoose.connect('mongodb://localhost/wildernessdb', {
   if (err) return console.log(err)
   console.log('Mongoose connected!')
 })
+

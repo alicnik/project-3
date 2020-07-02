@@ -5,8 +5,8 @@ const reviewSchema = new mongoose.Schema({
   title: { type: String, required: true },
   rating: { type: Number, required: true },
   review: { type: String, required: true },
-  isRecAreaReview: { type: Boolean, required: true },
-  isCampgroundReview: { type: Boolean, reequired: true },
+  recAreaRef: { type: mongoose.Schema.ObjectId, ref: 'RecArea' },
+  campgroundRef: { type: mongoose.Schema.ObjectId, ref: 'Campground' },
   comments: [commentSchema]
 }, {
   timestamps: true
