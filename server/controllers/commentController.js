@@ -37,6 +37,7 @@ function deleteComment(req, res) {
   Review
     .findById(req.params.reviewId)
     .then(review => {
+      // const currentUserId = req.currentUser._id
       const comment = review.comments.id(req.params.commentId)
       if (!review.user.equals(req.currentUser._id) && !req.currentUser.isAdmin) return res.status(401).send({ message: 'You can\'t delete someone else\'s comment' })
       comment.remove()
