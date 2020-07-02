@@ -60,3 +60,4 @@ mongoose.connect('mongodb://localhost/wildernessdb', {
     .catch(err => console.log(err))
     .finally(() => mongoose.connection.close())
 })
+
