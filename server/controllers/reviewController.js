@@ -4,34 +4,43 @@ const RecArea = require('../models/recAreaModel')
 
 function createCampgroundReview(req, res) {
   const review = req.body
-  Review
-    .create(review)
-    .then(review => {
-      review.user = req.user
-      review.campgroundRef = req.params.campgroundId
-      Campground.findById(req.params.campgroundId).then(campground => {
-        campground.reviews.push(review)
-        campground.save()
-      })
-      res.status(201).send({ message: 'Review successfully posted.' })
+  const campgroundId = req.params.campgroundId
+  Campground
+    .findById(campgroundId)
+    .then(campground => {
+      Review
+        .create(review)
+        .then(review => {
+          review.user = req.user
+          review.campgroundRef = campgroundId
+          campground.reviews.push(review)
+          campground.save()
+          res.status(201).send({ message: 'Review successfully posted.' })
+        })
+        .catch(err => res.status(400).send(err))
     })
-    .catch(err => res.send(err))
+    .catch(err => res.status(400).send(err))
 }
 
 function createRecAreaReview(req, res) {
   const review = req.body
-  Review
-    .create(review)
-    .then(review => {
-      review.user = req.user
-      review.recAreaRef = req.params.recAreaId
-      RecArea.findById(req.params.recAreaId).then(recArea => {
-        recArea.reviews.push(review)
-        recArea.save()
-      })
-      res.status(201).send({ message: 'Review successfully posted.' })
+  const recAreaId = req.params.recAreaId
+  RecArea
+    .findById(recAreaId)
+    .then(recArea => {
+      console.log('log', recArea)
+      Review
+        .create(review)
+        .then(review => {
+          review.user = req.user
+          review.recAreaRef = recAreaId
+          recArea.reviews.push(review)
+          recArea.save()
+          res.status(201).send({ message: 'Review successfully posted.' })
+        })
+        .catch(err => res.status(400).send(err))
     })
-    .catch(err => res.send(err))
+    .catch(err => res.status(400).send(err))
 }
 
 function readAllForUser(req, res) {

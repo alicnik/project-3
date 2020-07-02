@@ -32,13 +32,13 @@ const schema = new mongoose.Schema({
   timestamps: true
 })
 
-schema.plugin(mongooseHidden({ defautHidden: { password: true } }))
+schema.plugin(mongooseHidden({ defaultHidden: { password: true } }))
 schema.plugin(mongooseUniqueValidator)
 
 schema
   .virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {
-    this.passwordConfirmation = passwordConfirmation
+    this._passwordConfirmation = passwordConfirmation
   })
 
 schema
