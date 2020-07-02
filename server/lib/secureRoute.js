@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const secret = 'campgrounds are the same as campsites and area 51 is rec area but trump did not want you to know'
+const secret = 'campgrounds are the same as campsites and area 51 is a rec area but trump did not want you to know'
 
 const User = require('../models/userModel')
 

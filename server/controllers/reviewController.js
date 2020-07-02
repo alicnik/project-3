@@ -10,15 +10,8 @@ function findSiteAndCreateReview(siteCollection, siteId, review, req, res) {
       Review
         .create(review)
         .then(review => {
-          console.log(req.currentUser)
-          review.user = req.currentUser._id
-          console.log('line 14')
-          site.ridbCampgroundId ? review.campgroundRef = siteId : review.recAreaRef = siteId
-          console.log('line 16')
           site.reviews.push(review)
-          console.log('line 18')
           site.save()
-          console.log('line 20')
           res.status(201).send({ message: 'Review successfully posted.' })
         })
         .catch(err => res.status(400).send(err))
@@ -29,6 +22,8 @@ function findSiteAndCreateReview(siteCollection, siteId, review, req, res) {
 function createReview(req, res) {
   const siteCollection = req.url.includes('campgrounds') ? Campground : RecArea
   const siteId = req.params.siteId
+  req.body.user = req.currentUser._id
+  siteCollection === Campground ? req.body.campgroundRef = siteId : req.body.recAreaRef = siteId
   const review = req.body
   findSiteAndCreateReview(siteCollection, siteId, review, req, res)
 }
