@@ -24,7 +24,10 @@ function login(req, res) {
     .catch(error => res.status(403).send(error))
 }
 
+const getAllUsers = (req, res) =>User.find().then(users => res.status(200).send(users))
+
 module.exports = {
   register,
-  login
+  login,
+  getAllUsers
 }
