@@ -12,7 +12,6 @@ const recAreaSchema = new mongoose.Schema({
   state: { type: String },
   longitude: { type: Number },
   latitude: { type: Number },
-  keywords: [ { type: String } ],
   lastUpdated: { type: String },
   ridbRecAreaId: { type: String },
   reviews: [{ type: mongoose.Schema.ObjectId, ref: 'Review' }],
