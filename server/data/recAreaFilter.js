@@ -21,7 +21,6 @@ const recAreaContent = JSON.parse(recAreaData).RECDATA
     RecAreaMapURL: recArea.RecAreaMapURL,
     RecAreaLongitude: recArea.RecAreaLongitude,
     RecAreaLatitude: recArea.RecAreaLatitude,
-    keywords: recArea.keywords,
     lastUpdated: recArea.LastUpdatedDate
   }))
 const arrayOfAllRecAreaIds = recAreaContent.map(recArea => recArea.RecAreaID)
@@ -51,9 +50,10 @@ const recAreasWithAddressesAndMedia = recAreasWithAddresses.map(recArea => {
       title: media.Title,
       url: media.URL
     }))
+  if (!matchedMedia.length) return
   return {
     ...recArea,
-    media: matchedMedia
+    media: [...matchedMedia]
   }
 }).filter(recArea => recArea)
 
@@ -69,17 +69,21 @@ const recAreasWithAddressesMediaAndWebsite = recAreasWithAddressesAndMedia.map(r
   }
 }).filter(recArea => recArea)
 
-const activitiesData = fs.readFileSync('./archive/EntityActivities_API_v1.json')
-const activitiesContent = JSON.parse(activitiesData).RECDATA
-.filter(activity => activity.ActivityDescription && activity.EntityType === 'Rec Area')
-const finalRecAreas = recAreasWithAddressesMediaAndWebsite.map(recArea => {
-  const matchedActivities = activitiesContent.filter(activity => activity.EntityID === recArea.RecAreaID)
-  .map(activity => activity.ActivityDescription)
-  if (!matchedActivities) return
-  return {
-    ...recArea,
-    keywords: matchedActivities
-  }
-}).filter(recArea => recArea)
+fs.writeFile('finalRecAreaData.json', JSON.stringify(recAreasWithAddressesMediaAndWebsite), err => console.log(err) )
 
-fs.writeFile('finalRecAreaData.json', JSON.stringify(finalRecAreas), err => console.log(err) )
+// module.exports = recAreasWithAddressesMediaAndWebsite.map(recArea => recArea.RecAreaID)
+
+// const activitiesData = fs.readFileSync('./archive/EntityActivities_API_v1.json')
+// const activitiesContent = JSON.parse(activitiesData).RECDATA
+// .filter(activity => activity.ActivityDescription && activity.EntityType === 'Rec Area')
+// const finalRecAreas = recAreasWithAddressesMediaAndWebsite.map(recArea => {
+//   const matchedActivities = activitiesContent.filter(activity => activity.EntityID === recArea.RecAreaID)
+//   .map(activity => activity.ActivityDescription)
+//   if (!matchedActivities) return
+//   return {
+//     ...recArea,
+//     keywords: [...matchedActivities]
+//   }
+// }).filter(recArea => recArea)
+
+// fs.writeFile('finalRecAreaData.json', JSON.stringify(finalRecAreas), err => console.log(err) )

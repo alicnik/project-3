@@ -17,8 +17,6 @@ const fullFacilitiesContent = JSON.parse(fullFacilitiesData).RECDATA
 const filteredFacilitiesData = fullFacilitiesContent.filter(facility => facility.FacilityTypeDescription === 'Campground' && facility.ParentRecAreaID)
 const arrayOfFacilityIds = filteredFacilitiesData.map(facility => facility.FacilityID)
 
-console.log('Array of Facility IDs length: ', arrayOfFacilityIds.length)
-
 const fullFacilitiesAddressesData = fs.readFileSync('./archive/FacilityAddresses_API_v1.json')
 const fullFacilitiesAddressesContent = JSON.parse(fullFacilitiesAddressesData).RECDATA
 const filteredFacilitiesAddressesData = fullFacilitiesAddressesContent.filter(facility => arrayOfFacilityIds.includes(facility.FacilityID))
