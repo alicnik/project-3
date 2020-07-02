@@ -3,6 +3,7 @@ const campgroundController = require('./controllers/campgroundController')
 const recAreaController = require('./controllers/recAreaController')
 const userController = require('./controllers/userController')
 const reviewController = require('./controllers/reviewController')
+const commentController = require('./controllers/commentController')
 
 const secureRoute = require('./lib/secureRoute')
 
@@ -25,9 +26,17 @@ router.route('/recareas/:id')
 router.route('/recareas/:siteId/reviews')
   .post(secureRoute, reviewController.createReview)
 
+
 router.route('/reviews/:id')
   .put(secureRoute, reviewController.editReview)
   .delete(secureRoute, reviewController.deleteReview)
+
+router.route('/reviews/:id/comments')
+  .post(secureRoute, commentController.createComment)
+
+router.route('/reviews/:reviewId/comments/:commentId')
+  .delete(secureRoute, commentController.deleteComment)
+  .put(secureRoute, commentController.editComment )
 
 router.route('/register')
   .post(userController.register)
