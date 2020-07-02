@@ -21,7 +21,7 @@ expressServer.use((req, res, next) => {
 
 expressServer.use(bodyParser.json())
 
-// expressServer.use('/api/', Router)
+expressServer.use('/api/', Router)
 
 expressServer.listen(port, () => console.log(`Running on port ${port}`))
 

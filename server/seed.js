@@ -29,32 +29,33 @@ mongoose.connect('mongodb://localhost/wildernessdb', {
         accessible: facility.accessible,
         longitude: facility.longitude,
         latitude: facility.latitude,
-        attributes: facility.attributes,
-        media: facility.media
+        attributes: [...facility.attributes],
+        media: [...facility.entityMedia]
       })))
     })
     .then(returnedCampgrounds => {
       console.log(`${returnedCampgrounds.length} campgrounds created. Happy camping!`)
       const recAreaData = fs.readFileSync('./data/finalRecAreaData.json')
       const recAreaContent = JSON.parse(recAreaData)
-      return RecArea.create(recAreaContent.map(recArea => ({
-        ridbRecAreaId: recArea.RecAreaID,
-        name: recArea.RecAreaName ,
-        description: recArea.RecAreaDescription ,
-        phone: recArea.RecAreaPhone ,
-        email: recArea.RecAreaEmail ,
-        address1: recArea.address1 ,
-        address2: recArea.address2 ,
-        website: recArea.website ,
-        city: recArea.city ,
-        state: recArea.state ,
-        longitude: recArea.longitude ,
-        latitude: recArea.latitude ,
-        keywords: recArea.keywords,
-        lastUpdated: recArea.lastUpdated,
-        media: recArea.media,
-        campgrounds: returnedCampgrounds.filter(campground => campground.ridbRecAreaId === recArea.RecAreaID)
-      })))
+      return RecArea.create(recAreaContent.map(recArea => {
+        return {
+          ridbRecAreaId: recArea.RecAreaID,
+          name: recArea.RecAreaName,
+          description: recArea.RecAreaDescription,
+          phone: recArea.RecAreaPhone,
+          email: recArea.RecAreaEmail,
+          address1: recArea.address1,
+          address2: recArea.address2,
+          website: recArea.website,
+          city: recArea.city,
+          state: recArea.state,
+          longitude: recArea.longitude,
+          latitude: recArea.latitude,
+          lastUpdated: recArea.lastUpdated,
+          media: recArea.media,
+          campgrounds: [...returnedCampgrounds.filter(campground => campground.ridbRecAreaId === recArea.RecAreaID)]
+        }
+      }))
     })
     .then(recAreas => console.log(`${recAreas.length} rec areas created. Time to get rickety-recked.`))
     .catch(err => console.log(err))
