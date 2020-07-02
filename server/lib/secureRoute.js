@@ -9,10 +9,7 @@ function secureRoute(req, res, next) {
   const rawToken = req.headers.authorization
 
   if (!rawToken) {
-    return res.status(401).send({
-      message:
-        'Unauthorized: no token user token attatched'
-    })
+    return res.status(401).send({ message: 'Unauthorized: no user token attatched' })
   }
 
   const token = rawToken.replace('Bearer', '')
@@ -24,7 +21,7 @@ function secureRoute(req, res, next) {
     User
       .findById(userId)
       .then(user => {
-        if (!user) return res.status(401).send({ message: 'Unauthized: user match error' })
+        if (!user) return res.status(401).send({ message: 'Unauthorized: user match error' })
 
         req.currentUser = user
 
