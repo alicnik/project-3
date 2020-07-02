@@ -73,6 +73,13 @@ mongoose.connect('mongodb://localhost/wildernessdb', {
           password: 'Ali4President',
           passwordConfirmation: 'Ali4President',
           isAdmin: true
+        },
+        {
+          username: 'rich',
+          email: 'richardbekoe@gmail.com',
+          password: 'Rich1',
+          passwordConfirmation: 'Rich1',
+          isAdmin: true
         }
       ])
     })

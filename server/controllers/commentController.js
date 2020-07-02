@@ -23,7 +23,7 @@ function editComment(req, res) {
     .then(review => {
       if (!review) return res.status(404).send({ message: 'Comment not found' })
       const comment = review.comments.id(req.params.commentId)
-      if (!review.user.equals(req.currentUser._id) && !req.currentUser.isAdmin) return res.status(401).send({ message: 'You can\'t edit someone else\'s comment' })
+      if (!review.user.equals(req.currentUser._id)) return res.status(401).send({ message: 'You can\'t edit someone else\'s comment' })
       comment.set(req.body)
       return review.save()
     })

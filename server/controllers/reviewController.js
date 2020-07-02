@@ -33,7 +33,7 @@ function editReview(req, res) {
     .findById(req.params.id)
     .then(review => {
       if (!review) return res.status(404).send({ message: 'Review not found' })
-      if (!review.user.equals(req.currentUser._id) && !req.currentUser.isAdmin) return res.status(401).send({ message: 'You can\'t edit someone else\'s review' })
+      if (!review.user.equals(req.currentUser._id)) return res.status(401).send({ message: 'You can\'t edit someone else\'s review' })
       review.set(req.body)
       return review.save()
     })
