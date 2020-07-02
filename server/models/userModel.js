@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
-
 const mongooseHidden = require('mongoose-hidden')
 const bcrypt = require('bcrypt')
 const mongooseUniqueValidator = require('mongoose-unique-validator')
+const masterKey = 'Wild2020'
 
-const schema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: {
     type: String,
@@ -32,16 +32,22 @@ const schema = new mongoose.Schema({
   timestamps: true
 })
 
-schema.plugin(mongooseHidden({ defaultHidden: { password: true } }))
-schema.plugin(mongooseUniqueValidator)
+userSchema.plugin(mongooseHidden({ defautHidden: { password: true } }))
+userSchema.plugin(mongooseUniqueValidator)
 
-schema
+userSchema
   .virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {
     this._passwordConfirmation = passwordConfirmation
   })
 
-schema
+userSchema
+  .virtual('adminKey')
+  .set(function setAdminKey(adminKey) {
+    this._adminKey = adminKey
+  })
+
+userSchema
   .pre('validate', function checkPassword(next) {
     if (this._passwordConfirmation !== this.password) {
       this.invalidate('passwordConfirmation', 'should match')
@@ -49,7 +55,17 @@ schema
     next()
   })
 
-schema
+userSchema
+  .pre('validate', function checkAdminKey(next) {
+    if (this._adminKey !== masterKey) {
+      this.admin = false
+    } else {
+      this.admin = true
+    }
+    next()
+  })
+
+userSchema
   .pre('save', function hashPassword(next) {
     console.log(this._passwordConfirmation)
     if (this.isModified('password')) {
@@ -58,8 +74,8 @@ schema
     next()
   })
 
-schema.methods.validatePassword = function validatePassword(password) {
+userSchema.methods.validatePassword = function validatePassword(password) {
   return bcrypt.compareSync(password, this.password)
 }
 
-module.exports = mongoose.model('User', schema) 
+module.exports = mongoose.model('User', userSchema) 
