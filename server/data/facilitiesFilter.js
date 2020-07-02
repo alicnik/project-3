@@ -29,7 +29,8 @@ const filteredFacilitiesWithAddresses = filteredFacilitiesData.map(facility => {
   return {
     ...facility,
     city: matchingFacility.City,
-    address: matchingFacility.FacilityStreetAddress1,
+    address1: matchingFacility.FacilityStreetAddress1,
+    address2: matchingFacility.FacilityStreetAddress2,
     state: matchingFacility.PostalCode
   }
 }).filter(facility => facility)
@@ -81,6 +82,4 @@ const finalFacilities = filteredFacilitiesWithAddressesAndMedia.map(facility => 
   }
 })
 
-console.log(finalFacilities.length)
-
-// fs.writeFile('./finalFacilities.json', JSON.stringify(finalFacilities), (err) => console.log(err))
+fs.writeFile('./finalFacilities.json', JSON.stringify(finalFacilities), (err) => console.log(err))

@@ -5,11 +5,10 @@ const campgroundSchema = new mongoose.Schema({
   ridbRecAreaId: { type: String },
   name: { type: String },
   description: { type: String },
-  directions: { type: String },
-  type: { type: String },
   phone: { type: String },
-  website: { type: String },
-  address: { type: String },
+  email: { type: String },
+  address1: { type: String },
+  address2: { type: String },
   city: { type: String },
   state: { type: String },
   accessible: { type: Boolean },
@@ -19,7 +18,7 @@ const campgroundSchema = new mongoose.Schema({
     name: String,
     value: String
   }],
-  entityMedia: [{
+  media: [{
     title: String,
     url: String
   }],

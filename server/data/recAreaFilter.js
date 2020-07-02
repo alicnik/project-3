@@ -46,7 +46,7 @@ const mediaData = fs.readFileSync('./archive/Media_API_v1.json')
 const mediaContent = JSON.parse(mediaData).RECDATA.filter(media => media.MediaType === 'Image')
 const recAreasWithAddressesAndMedia = recAreasWithAddresses.map(recArea => {
   const matchedMedia = mediaContent
-    .filter(media => media.EntityID === recArea.EntityID)
+    .filter(media => media.EntityID === recArea.RecAreaID)
     .map(media => ({
       title: media.Title,
       url: media.URL
@@ -57,5 +57,29 @@ const recAreasWithAddressesAndMedia = recAreasWithAddresses.map(recArea => {
   }
 }).filter(recArea => recArea)
 
+const linksData = fs.readFileSync('./archive/Links_API_v1.json')
+const linksContent = JSON.parse(linksData).RECDATA
+  .filter(link => arrayOfAllRecAreaIds.includes(link.EntityID) && link.LinkType === 'Official Web Site')
+const recAreasWithAddressesMediaAndWebsite = recAreasWithAddressesAndMedia.map(recArea => {
+  const matchedLink = linksContent.find(link => link.EntityID === recArea.RecAreaID)
+  if (!matchedLink) return
+  return {
+    ...recArea,
+    website: matchedLink.URL
+  }
+}).filter(recArea => recArea)
 
-fs.writeFile('finalRecAreaData.json', JSON.stringify(recAreasWithAddressesAndMedia), err => console.log(err) )
+const activitiesData = fs.readFileSync('./archive/EntityActivities_API_v1.json')
+const activitiesContent = JSON.parse(activitiesData).RECDATA
+.filter(activity => activity.ActivityDescription && activity.EntityType === 'Rec Area')
+const finalRecAreas = recAreasWithAddressesMediaAndWebsite.map(recArea => {
+  const matchedActivities = activitiesContent.filter(activity => activity.EntityID === recArea.RecAreaID)
+  .map(activity => activity.ActivityDescription)
+  if (!matchedActivities) return
+  return {
+    ...recArea,
+    keywords: matchedActivities
+  }
+}).filter(recArea => recArea)
+
+fs.writeFile('finalRecAreaData.json', JSON.stringify(finalRecAreas), err => console.log(err) )
