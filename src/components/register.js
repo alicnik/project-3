@@ -29,7 +29,6 @@ export const Register = () => {
   const onSubmit = values => {
     axios.post('/api/register', values)
       .then(() => {
-        console.log(values)
         history.push('/login')
       })
       .catch(err => {
