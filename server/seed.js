@@ -65,6 +65,8 @@ mongoose.connect('mongodb://localhost/wildernessdb', {
           email: 'alicnik@hotmail.com',
           password: 'Alicnik1',
           passwordConfirmation: 'Alicnik1',
+          firstName: 'Alex',
+          lastName: 'Nicholas',
           isAdmin: true
         },
         {
@@ -72,6 +74,8 @@ mongoose.connect('mongodb://localhost/wildernessdb', {
           email: 'ali_bhimani21@aol.com',
           password: 'Ali4President',
           passwordConfirmation: 'Ali4President',
+          firstName: 'Ali',
+          lastName: 'Bhimani',
           isAdmin: true
         },
         {
@@ -79,7 +83,18 @@ mongoose.connect('mongodb://localhost/wildernessdb', {
           email: 'richardbekoe@gmail.com',
           password: 'Rich1',
           passwordConfirmation: 'Rich1',
+          firstName: 'Richard',
+          lastName: 'Bekoe',
           isAdmin: true
+        },
+        {
+          username: 'doug',
+          email: 'doug@doug.com',
+          password: 'Douglas42',
+          passwordConfirmation: 'Douglas42',
+          firstName: 'Douglas',
+          lastName: 'Adams',
+          isAdmin: false
         }
       ])
     })
