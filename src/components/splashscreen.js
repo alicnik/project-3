@@ -11,5 +11,9 @@ export const Splashscreen = () => {
       <button>Log into the Wild</button>
     </Link>
     <Link to='/register'>Not registered? Click here.</Link>
+<<<<<<< HEAD
 </>
+=======
+  </>
+>>>>>>> development
 }
