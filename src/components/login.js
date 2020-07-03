@@ -19,8 +19,9 @@ const loginSchema = Yup.object().shape({
 export const Login = () => {
   const history = useHistory()
   console.log(history)
-  const { login, handleSubmit, errors, setError } = useForm({
-    resolver: yupResolver(loginSchema)
+  const { register, handleSubmit, errors, setError } = useForm({
+    resolver: yupResolver(loginSchema),
+    criteriaMode: 'all'
   })
   const onSubmit = values => {
     axios.post('/api/login', values)
@@ -29,11 +30,13 @@ export const Login = () => {
         history.push('/home')
       })
       .catch(err => {
+        console.log(err.response)
         const errorMessages = {
           username: 'Username not found. Please register',
           password: 'Incorrect password'
         }
         Object.keys(err.response.data.errors).forEach(errorField => {
+          console.log('line 38')
           setError(errorField, { message: `${errorMessages[errorField]}` })
         })
       })
@@ -43,10 +46,10 @@ export const Login = () => {
     <h2>Enter the Wilderness</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="username">Enter username</label><br></br>
-      <input id="username" type="text" name="username" autoComplete="off" ref={login} />
+      <input id="username" type="text" name="username" autoComplete="off" ref={register} />
       <p>{errors.username?.message}</p>
       <label htmlFor="password">Enter your password</label><br></br>
-      <input id="password" type="password" name="password" autoComplete="off" ref={login} />
+      <input id="password" type="password" name="password" autoComplete="off" ref={register} />
       <p>{errors.password?.message}</p>
 
       <button type="submit">Submit</button>
