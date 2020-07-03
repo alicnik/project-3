@@ -8,7 +8,7 @@ function register(req, res) {
     .then(user => {
       res.status(201).send(user)
     })
-    .catch(error => console.log(error))
+    .catch(error => res.status(400).send(error))
 }
 
 function login(req, res) {
@@ -24,7 +24,7 @@ function login(req, res) {
     .catch(error => res.status(403).send(error))
 }
 
-const getAllUsers = (req, res) =>User.find().then(users => res.status(200).send(users))
+const getAllUsers = (req, res) => User.find().then(users => res.status(200).send(users))
 
 module.exports = {
   register,
