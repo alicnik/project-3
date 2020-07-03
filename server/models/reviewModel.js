@@ -10,6 +10,7 @@ const commentSchema = new mongoose.Schema({
 const reviewSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.ObjectId, ref: 'User' },
   title: { type: String, required: true },
+  dateVisited: { type: String },
   rating: { type: Number, required: true },
   text: { type: String, required: true },
   recAreaRef: { type: mongoose.Schema.ObjectId, ref: 'RecArea' },
