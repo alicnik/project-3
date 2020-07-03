@@ -10,6 +10,6 @@ export const Splashscreen = () => {
     <Link to='/login'>
       <button>Log into the Wild</button>
     </Link>
-    <Link to='/home'>Not registered? Click here.</Link>
-</>
+    <Link to='/register'>Not registered? Click here.</Link>
+  </>
 }

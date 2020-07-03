@@ -19,7 +19,7 @@ const loginSchema = Yup.object().shape({
 export const Login = () => {
   const history = useHistory()
   console.log(history)
-  const { register, handleSubmit, errors } = useForm({
+  const { login, handleSubmit, errors, setError } = useForm({
     resolver: yupResolver(loginSchema)
   })
   const onSubmit = values => {
@@ -28,17 +28,25 @@ export const Login = () => {
         console.log(values)
         history.push('/home')
       })
-      .catch(err => console.log(err.response))
+      .catch(err => {
+        const errorMessages = {
+          username: 'Username not found. Please register',
+          password: 'Incorrect password'
+        }
+        Object.keys(err.response.data.errors).forEach(errorField => {
+          setError(errorField, { message: `${errorMessages[errorField]}` })
+        })
+      })
   }
 
   return <div className="login">
     <h2>Enter the Wilderness</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="username">Enter username</label><br></br>
-      <input id="username" type="text" name="username" autoComplete="off" ref={register} />
+      <input id="username" type="text" name="username" autoComplete="off" ref={login} />
       <p>{errors.username?.message}</p>
       <label htmlFor="password">Enter your password</label><br></br>
-      <input id="password" type="password" name="password" autoComplete="off" ref={register} />
+      <input id="password" type="password" name="password" autoComplete="off" ref={login} />
       <p>{errors.password?.message}</p>
 
       <button type="submit">Submit</button>
