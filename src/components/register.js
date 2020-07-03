@@ -22,21 +22,24 @@ const registerSchema = Yup.object().shape({
 
 export const Register = () => {
   const history = useHistory()
-  console.log(history)
-  const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(registerSchema)
+  const { register, handleSubmit, errors, setError } = useForm({
+    resolver: yupResolver(registerSchema),
+    criteriaMode: 'all'
   })
   const onSubmit = values => {
-    console.log('line 29')
     axios.post('/api/register', values)
       .then(() => {
         console.log(values)
         history.push('/login')
       })
       .catch(err => {
-        console.log(err.response)
-        const message = err.response.data.message
-        alert(message)
+        const errorMessages = {
+          username: 'Someone in the wild already has that username, please pick another.',
+          email: 'That email is already registered. Please log in.'
+        }
+        Object.keys(err.response.data.errors).forEach(errorField => {
+          setError(errorField, { message: `${errorMessages[errorField]}` })
+        })
       })
   }
 
@@ -44,7 +47,13 @@ export const Register = () => {
     <h2>Join the Wilderness</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="username">Choose a username</label><br></br>
-      <input id="username" type="text" name="username" autoComplete="off" ref={register} />
+      <input 
+        id="username" 
+        type="text" 
+        name="username" 
+        autoComplete="off" 
+        ref={register} 
+      />
       <p>{errors.username?.message}</p>
       <label htmlFor="email">Enter your email address</label><br></br>
       <input id="email" type="email" name="email" autoComplete="off" ref={register} />
