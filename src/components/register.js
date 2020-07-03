@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers'
 import * as Yup from 'yup'
@@ -71,6 +71,8 @@ export const Register = () => {
 
       <button type="submit">Submit</button>
     </form>
+
+    <Link to='/login'>Already got an account? Login here.</Link>
 
   </div>
 
