@@ -15,9 +15,13 @@ function login(req, res) {
   User
     .findOne({ $or: [{ email: req.body.email }, { username: req.body.username }] })
     .then(user => {
+<<<<<<< HEAD
       if (!user) return res.status(404).send({ message: 'User not found.' })
+=======
+      if (!user) return res.status(404).send({ username: { message: 'User not found.' } })
+>>>>>>> development
       if (!user.validatePassword(req.body.password)) {
-        return res.status(401).send({ message: 'Passwords do not match' })
+        return res.status(401).send({ password: { message: 'Passwords do not match' } })
       }
       const token = jsonwebtoken.sign({ sub: user._id }, secret, { expiresIn: '12h' })
       res.status(202).send({ message: `Welcome back to the Wilderness ${user.username}`, token })

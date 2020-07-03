@@ -7,26 +7,27 @@ import axios from 'axios'
 
 const loginSchema = Yup.object().shape({
   username: Yup.string()
-    .required('No username provided'),
-  password: Yup.string()
-    .required('Please enter a password')
-    .matches(
-      /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{8,})\S$/,
-      'Must Contain 8 Characters, one uppercase, one lowercase and one number'
-    )
+    .required('No username provided')
+  // password: Yup.string()
+  //   .required('Please enter a password')
+  //   .matches(
+  //     /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{8,})\S$/,
+  //     'Must Contain 8 Characters, one uppercase, one lowercase and one number'
+  //   )
 })
 
 export const Login = () => {
   const history = useHistory()
-  console.log(history)
   const { register, handleSubmit, errors, setError } = useForm({
     resolver: yupResolver(loginSchema),
     criteriaMode: 'all'
   })
+
   const onSubmit = values => {
+    console.log('line 26', values)
     axios.post('/api/login', values)
       .then(() => {
-        console.log(values)
+        console.log('line 30')
         history.push('/home')
       })
       .catch(err => {
@@ -35,8 +36,7 @@ export const Login = () => {
           username: 'Username not found. Please register',
           password: 'Incorrect password'
         }
-        Object.keys(err.response.data.errors).forEach(errorField => {
-          console.log('line 38')
+        Object.keys(err.response.data).forEach(errorField => {
           setError(errorField, { message: `${errorMessages[errorField]}` })
         })
       })
