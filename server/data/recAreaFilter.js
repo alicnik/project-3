@@ -1,6 +1,4 @@
 const fs = require('fs')
-const test = 'alex'
-
 
 const recAreaData = fs.readFileSync('./archive/RecAreas_API_v1.json')
 const recAreaContent = JSON.parse(recAreaData).RECDATA
