@@ -22,23 +22,27 @@ const registerSchema = Yup.object().shape({
 
 export const Register = () => {
   const history = useHistory()
-  console.log(history)
-  const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(registerSchema)
+  const { register, handleSubmit, errors, setError } = useForm({
+    resolver: yupResolver(registerSchema),
+    criteriaMode: 'all'
   })
   const onSubmit = values => {
-    console.log('line 29')
     axios.post('/api/register', values)
       .then(() => {
         console.log(values)
         history.push('/login')
       })
       .catch(err => {
-        console.log(err.response)
-        const message = err.response.data.message
-        alert(message)
+        const errorMessages = {
+          username: 'Someone in the wild already has that username, please pick another.',
+          email: 'That email is already registered. Please log in.'
+        }
+        Object.keys(err.response.data.errors).forEach(errorField => {
+          setError(errorField, { message: `${errorMessages[errorField]}` })
+        })
       })
   }
+
 
   return <div className="register">
     <h2>Join the Wilderness</h2>

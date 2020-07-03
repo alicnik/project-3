@@ -18,6 +18,8 @@ const userSchema = new mongoose.Schema({
     }
   },
   password: { type: String, required: true, match: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/ },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   showWishList: { type: Boolean },
   campgroundWishList: [{ type: mongoose.Schema.ObjectId, ref: 'Campground' }],
   showVisited: { type: Boolean },
