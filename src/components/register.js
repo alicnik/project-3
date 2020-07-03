@@ -17,7 +17,11 @@ const registerSchema = Yup.object().shape({
       'Must Contain 8 Characters, one uppercase, one lowercase and one number'
     ),
   passwordConfirmation: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+  firstName: Yup.string()
+    .required('Please enter your first name'),
+  lastName: Yup.string()
+    .required('Please enter your last name')
 })
 
 export const Register = () => {
@@ -29,7 +33,6 @@ export const Register = () => {
   const onSubmit = values => {
     axios.post('/api/register', values)
       .then(() => {
-        console.log(values)
         history.push('/login')
       })
       .catch(err => {
@@ -53,6 +56,12 @@ export const Register = () => {
       <label htmlFor="email">Enter your email address</label><br></br>
       <input id="email" type="email" name="email" autoComplete="off" ref={register} />
       <p>{errors.email?.message}</p>
+      <label htmlFor="firstName">Enter your first name</label><br></br>
+      <input id="firstName" type="text" name="firstName" autoComplete="off" ref={register} />
+      <p>{errors.firstName?.message}</p>
+      <label htmlFor="lastName">Enter your last name</label><br></br>
+      <input id="lastName" type="text" name="lastName" autoComplete="off" ref={register} />
+      <p>{errors.lastName?.message}</p>
       <label htmlFor="password">Choose a password</label><br></br>
       <input id="password" type="password" name="password" autoComplete="off" ref={register} />
       <p>{errors.password?.message}</p>
