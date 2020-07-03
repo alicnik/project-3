@@ -15,6 +15,7 @@ function login(req, res) {
   User
     .findOne({ $or: [{ email: req.body.email }, { username: req.body.username }] })
     .then(user => {
+      if (!user) return res.status(401).send({ message: 'User not found' })
       if (!user.validatePassword(req.body.password)) {
         return res.status(401).send({ message: 'Passwords do not match' })
       }

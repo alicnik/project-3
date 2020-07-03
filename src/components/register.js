@@ -43,17 +43,12 @@ export const Register = () => {
       })
   }
 
+
   return <div className="register">
     <h2>Join the Wilderness</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="username">Choose a username</label><br></br>
-      <input 
-        id="username" 
-        type="text" 
-        name="username" 
-        autoComplete="off" 
-        ref={register} 
-      />
+      <input id="username" type="text" name="username" autoComplete="off" ref={register} />
       <p>{errors.username?.message}</p>
       <label htmlFor="email">Enter your email address</label><br></br>
       <input id="email" type="email" name="email" autoComplete="off" ref={register} />
