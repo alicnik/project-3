@@ -6,6 +6,7 @@ import { Splashscreen } from './components/splashscreen.js'
 import { Login } from './components/login'
 import { PostReview } from './components/postReview'
 import { PostComment } from './components/postComment'
+import RecAreas from './components/recAreas'
 
 const App = () => {
   return <HashRouter>
@@ -16,6 +17,7 @@ const App = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/postreview" component={PostReview} />
         <Route exact path="/postcomment" component={PostComment} />
+        <Route exact path="/recareas" component={RecAreas} />
       </Switch>
     </main>
   </HashRouter>

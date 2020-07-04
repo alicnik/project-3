@@ -18,6 +18,8 @@ export const PostComment = ({ reviewId, previousPage }) => {
   const onSubmit = values => {
     axios.post(`/api/reviews/${reviewId}/comments`, values)
       .then(() => {
+        // no reason for this console. just needed to call previousPage somewhere
+        console.log(previousPage)
         history.push('/review/id')
       })
       .catch(err => console.log(err))

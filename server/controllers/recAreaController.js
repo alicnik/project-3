@@ -4,6 +4,7 @@ function index(req, res) {
   RecArea
     .find()
     .then(recAreas => {
+      recAreas.length = 10
       res.send(recAreas)
     })
 }
