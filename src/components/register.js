@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers'
 import * as Yup from 'yup'
@@ -47,7 +47,7 @@ export const Register = () => {
   }
 
 
-  return <div className="register">
+  return <section id="register">
     <h2>Join the Wilderness</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="username">Choose a username</label><br></br>
@@ -72,7 +72,9 @@ export const Register = () => {
       <button type="submit">Submit</button>
     </form>
 
-  </div>
+    <Link to='/login'>Already got an account? Login here.</Link>
+
+  </section>
 
 
 }
