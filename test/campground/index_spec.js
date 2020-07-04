@@ -1,4 +1,4 @@
-/* global describe, beforeEach, afterEach, it, expect, api */
+/* global describe, beforeEach, afterEach, it, api */
 
 const RecArea = require('../../server/models/recAreaModel')
 const Campground = require('../../server/models/campgroundModel')

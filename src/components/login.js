@@ -7,13 +7,13 @@ import axios from 'axios'
 
 const loginSchema = Yup.object().shape({
   username: Yup.string()
-    .required('No username provided')
-  // password: Yup.string()
-  //   .required('Please enter a password')
-  //   .matches(
-  //     /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{8,})\S$/,
-  //     'Must Contain 8 Characters, one uppercase, one lowercase and one number'
-  //   )
+    .required('No username provided'),
+  password: Yup.string()
+    .required('Please enter a password')
+    .matches(
+      /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{8,})\S$/,
+      'Must Contain 8 Characters, one uppercase, one lowercase and one number'
+    )
 })
 
 export const Login = () => {

@@ -8,6 +8,7 @@ const recAreaSchema = new mongoose.Schema({
   address1: { type: String },
   address2: { type: String },
   website: { type: String },
+  avgRating: { type: Number },
   city: { type: String },
   state: { type: String },
   longitude: { type: Number },

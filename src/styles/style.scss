@@ -1,3 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400&display=swap");
+
+:root {
+  --color-brown: #6f4c15;
+  --color-yellow: #f0d92a;
+  --color-inky-blue: #0a1e1f;
+  --color-pink: #ef3d6d;
+  --color-orange: #fa5210;
+  --color-forest-green: #285d43;
+  --wilderness-font: "Amatic SC", cursive;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  height: 100vh;
+}
+
 #register {
   margin-top: 100px;
   display: flex;
@@ -10,4 +30,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100vh;
+
+  .hero {
+    width: 90vw;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url("../assets/hero-img.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    h1 {
+      font-family: var(--wilderness-font);
+      color: white;
+      font-size: 6rem;
+      text-align: center;
+    }
+  }
+
+  button {
+    min-width: 15rem;
+    border: none;
+    padding: 1.2rem 2rem;
+    background-color: var(--color-orange);
+    border-radius: 25px;
+    color: white;
+    text-transform: uppercase;
+    font-family: sans-serif;
+  }
 }

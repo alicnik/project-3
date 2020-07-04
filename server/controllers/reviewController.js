@@ -11,6 +11,9 @@ function findSiteAndCreateReview(siteCollection, siteId, review, req, res) {
         .create(review)
         .then(review => {
           site.reviews.push(review)
+          site.avgRating = site.reviews.reduce((total, review, i, array) => {
+            if (review.rating) return (review.rating / array.length) + total
+          }, 0)
           site.save()
           res.status(201).send({ message: 'Review successfully posted.' })
         })

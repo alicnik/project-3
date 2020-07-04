@@ -32,7 +32,7 @@ export const PostComment = ({ reviewId, previousPage }) => {
 
       <button type="submit">Submit</button>
       {/* Change this cancel button link later using previous page*/}
-      <Link to='/previousPage' ><button>Cancel</button></Link>
+      <Link to={`/${previousPage}`} ><button>Cancel</button></Link>
     </form>
   </div>
 }

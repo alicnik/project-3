@@ -2,7 +2,7 @@ import React from 'react'
 import Ratings from 'react-ratings-declarative'
 
 // rating prop will be state in parent postreview?
-export const StarRating = ({ rating, setRating }) => {
+export const StarRating = ({ rating, setRating = f => f }) => {
 
   return (
     <Ratings

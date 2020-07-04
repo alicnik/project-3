@@ -9,6 +9,7 @@ const campgroundSchema = new mongoose.Schema({
   email: { type: String },
   address1: { type: String },
   address2: { type: String },
+  avgRating: { type: Number },
   city: { type: String },
   state: { type: String },
   accessible: { type: Boolean },
