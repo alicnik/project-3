@@ -1,15 +1,15 @@
 import React from 'react'
 import { Switch, Route, HashRouter } from 'react-router-dom'
 
-import { UserProvider } from './components/context'
-import { Register } from './components/register'
-import { Splashscreen } from './components/splashscreen.js'
-import { Login } from './components/login'
-import { Home } from './components/home'
-import { PostReview } from './components/postReview'
-import { PostComment } from './components/postComment'
-import { RecAreas } from './components/recAreas'
-import { Campgrounds } from './components/campgrounds'
+import { UserProvider } from './components/Context'
+import { Register } from './components/Register'
+import { Splashscreen } from './components/Splashscreen.js'
+import { Login } from './components/Login'
+import { Home } from './components/Home'
+import { PostReview } from './components/PostReview'
+import { PostComment } from './components/PostComment'
+import { RecAreas } from './components/RecAreas'
+import { Campgrounds } from './components/Campgrounds'
 
 const App = () => {
   return (

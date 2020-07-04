@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 // import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-const RecAreas = () => {
+export const RecAreas = () => {
   const [recAreasData, updateRecAreasData] = useState([])
 
   useEffect(() => {
@@ -26,6 +26,3 @@ const RecAreas = () => {
     })}
   </section>
 }
-
-export default RecAreas
-
