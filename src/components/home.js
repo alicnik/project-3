@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { UserContext } from './context'
+import { UserContext } from './Context'
 import { Link } from 'react-router-dom'
 
 export const Home = () => {
@@ -9,9 +9,11 @@ export const Home = () => {
   return (
     <section id="homepage">
       <div className="hero">
-        <h1>Welcome <br/><em>to the</em><br/> Wilderness</h1>
+        <h1>Welcome<br/><em>to the</em><br/>Wilderness</h1>
       </div>
-      <button>Browse Rec Areas</button>
+      <Link to='/recareas'>
+        <button>Browse Rec Areas</button>
+      </Link>
       <button>Inspiration</button>
       {currentUser.isLoggedIn ? 
         <Link to='/account'>

@@ -1,15 +1,17 @@
 import React from 'react'
 import { Switch, Route, HashRouter } from 'react-router-dom'
 
-import { UserProvider } from './components/context'
-import { Register } from './components/register'
-import { Splashscreen } from './components/splashscreen.js'
-import { Login } from './components/login'
-import { Home } from './components/home'
-import { PostReview } from './components/postReview'
-import { PostComment } from './components/postComment'
-import { RecAreas } from './components/recAreas'
-import { Campgrounds } from './components/campgrounds'
+import { UserProvider } from './components/Context'
+import { Register } from './components/Register'
+import { Splashscreen } from './components/Splashscreen'
+import { Login } from './components/Login'
+import { Home } from './components/Home'
+import { PostReview } from './components/PostReview'
+import { PostComment } from './components/PostComment'
+import { RecAreas } from './components/RecAreas'
+import { Campgrounds } from './components/Campgrounds'
+import { SingleRecArea } from './components/SingleRecArea'
+import { SingleCampground } from './components/SingleCampground'
 
 const App = () => {
   return (
@@ -25,6 +27,9 @@ const App = () => {
             <Route exact path="/postcomment" component={PostComment} />
             <Route exact path="/recareas" component={RecAreas} />
             <Route exact path="/campgrounds" component={Campgrounds} />
+            <Route exact path="/campgrounds/:id" component={SingleCampground}/>
+            <Route exact path='/recareas/:id' component={SingleRecArea} />
+            <Route path='/recareas/:id/campgrounds' component={Campgrounds} />
           </Switch>
         </main>
       </UserProvider>
