@@ -37,8 +37,6 @@ export const PostReview = ({ siteCollection, siteId }) => {
       .catch(err => console.log(err.response))
   }
 
-  // when did they visit - date
-
   return <>
    <section id="post-review" >
      <form onSubmit={handleSubmit(onSubmit)}>
@@ -56,15 +54,4 @@ export const PostReview = ({ siteCollection, siteId }) => {
      section >
   </>
 
-
-
 }
-
-/* title text area
-
-Star rating
-
-when did you visit? input
-Review textarea html tag
-
-Submit button*/
