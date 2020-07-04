@@ -13,6 +13,10 @@ function getOneSpot(req, res) {
   RecArea
     .findById(req.params.id)
     .populate('reviews')
+    .populate({
+      path: 'reviews',
+      populate: { path: 'user' }
+    })
     .populate('campgrounds')
     .then(recArea => {
       if (!recArea) return res.status(404).send({ message: 'Rec Area not found' })

@@ -24,6 +24,7 @@ mongoose.connect('mongodb://localhost/wildernessdb', {
         email: facility.FacilityEmail,
         address1: facility.address1,
         address2: facility.address2,
+        avgRating: 0,
         city: facility.city,
         state: facility.state,
         accessible: facility.accessible,
@@ -47,6 +48,7 @@ mongoose.connect('mongodb://localhost/wildernessdb', {
           address1: recArea.address1,
           address2: recArea.address2,
           website: recArea.website,
+          avgRating: 0,
           city: recArea.city,
           state: recArea.state,
           longitude: recArea.longitude,
@@ -63,8 +65,8 @@ mongoose.connect('mongodb://localhost/wildernessdb', {
         {
           username: 'alicnik',
           email: 'alicnik@hotmail.com',
-          password: 'Alicnik1',
-          passwordConfirmation: 'Alicnik1',
+          password: 'Alicnik123',
+          passwordConfirmation: 'Alicnik123',
           firstName: 'Alex',
           lastName: 'Nicholas',
           isAdmin: true

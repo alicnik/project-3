@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from 'react'
-// import { Link } from 'react-router-dom'
-import axios from 'axios'
+import { Link } from 'react-router-dom'
 
-export const Campgrounds = () => {
-  const [campgroundsData, updateCampgroundData] = useState([])
+export const Campgrounds = (props) => {
 
-  useEffect(() => {
-    axios.get('/api/campgrounds')
-      .then(axiosResp => {
-        updateCampgroundData(axiosResp.data)
-      })
-  }, [])
+  const campgroundsData = props.location.state?.campgroundsData
+
+  if (!campgroundsData) return <h1>No campgrounds!</h1>
 
   return <section id="browse">
     <h1>Campgrounds</h1>
     {campgroundsData.map((campground, index) => {
-      console.log(campground)
-      return <section key={index} id="tile">
-        <h3>{campground.name}</h3>
-        <h5>{campground.city}, {campground.state}</h5>
-        <img src={campground.media[0].url} alt={campground.name} />
-        {/* Star rating from database */}
-        <p>Rating</p>
-
-      </section>
+      return (
+        <Link to={`/campgrounds/${campground._id}`} key={index}>
+          <article id="tile">
+            <h2>{campground.name}</h2>
+            <h3>{campground.city}, {campground.state}</h3>
+            <img src={campground.media[0].url} alt={campground.name} />
+            {/* Star rating from database */}
+            <p>Rating</p>
+          </article>
+        </Link>
+      )
     })}
 
 

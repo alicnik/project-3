@@ -24,14 +24,12 @@ export const Login = () => {
   })
 
   const onSubmit = values => {
-    console.log('line 26', values)
     axios.post('/api/login', values)
-      .then(() => {
-        console.log('line 30')
+      .then(response => {
+        localStorage.setItem('token', response.data.token)
         history.push('/home')
       })
       .catch(err => {
-        console.log(err.response)
         const errorMessages = {
           username: 'Username not found. Please register',
           password: 'Incorrect password'
@@ -51,13 +49,8 @@ export const Login = () => {
       <label htmlFor="password">Enter your password</label><br></br>
       <input id="password" type="password" name="password" autoComplete="off" ref={register} />
       <p>{errors.password?.message}</p>
-
       <button type="submit">Submit</button>
     </form>
-
     <Link to='/register'>Not got an account? Register here.</Link>
-
   </section>
-
-
 }
