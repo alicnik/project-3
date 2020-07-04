@@ -42,7 +42,7 @@ export const Login = () => {
       })
   }
 
-  return <div className="login">
+  return <section id="login">
     <h2>Enter the Wilderness</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="username">Enter username</label><br></br>
@@ -57,7 +57,7 @@ export const Login = () => {
 
     <Link to='/register'>Not got an account? Register here.</Link>
 
-  </div>
+  </section>
 
 
 }

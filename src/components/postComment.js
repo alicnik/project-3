@@ -31,7 +31,7 @@ export const PostComment = ({ reviewId, previousPage }) => {
       <p>{errors.comment?.message}</p>
 
       <button type="submit">Submit</button>
-      {/* Change this cancel button link later */}
+      {/* Change this cancel button link later using previous page*/}
       <Link to='/previousPage' ><button>Cancel</button></Link>
     </form>
   </div>

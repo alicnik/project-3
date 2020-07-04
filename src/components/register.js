@@ -47,7 +47,7 @@ export const Register = () => {
   }
 
 
-  return <div className="register">
+  return <section id="register">
     <h2>Join the Wilderness</h2>
     <form onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="username">Choose a username</label><br></br>
@@ -74,7 +74,7 @@ export const Register = () => {
 
     <Link to='/login'>Already got an account? Login here.</Link>
 
-  </div>
+  </section>
 
 
 }
