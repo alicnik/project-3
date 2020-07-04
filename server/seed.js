@@ -51,8 +51,8 @@ mongoose.connect('mongodb://localhost/wildernessdb', {
           avgRating: 0,
           city: recArea.city,
           state: recArea.state,
-          longitude: recArea.longitude,
-          latitude: recArea.latitude,
+          longitude: recArea.RecAreaLongitude,
+          latitude: recArea.RecAreaLatitude,
           lastUpdated: recArea.lastUpdated,
           media: recArea.media,
           campgrounds: [...returnedCampgrounds.filter(campground => campground.ridbRecAreaId === recArea.RecAreaID)]

@@ -65,3 +65,16 @@ body {
     font-family: sans-serif;
   }
 }
+
+#hotels {
+  article.hotel-tile {
+    display: flex;
+
+    img {
+      margin: 2rem;
+    }
+
+    .hotel-info {
+    }
+  }
+}
