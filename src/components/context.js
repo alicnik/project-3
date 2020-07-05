@@ -11,8 +11,16 @@ export const UserProvider = ({ children }) => {
     username: ''
   })
 
+  const logIn = (token) => {
+    localStorage.setItem('token', token)
+    setCurrentUser({
+      ...currentUser,
+      isLoggedIn: true
+    })
+  }
+
   return (
-    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+    <UserContext.Provider value={{ currentUser, setCurrentUser, logIn }}>
       {children}
     </UserContext.Provider>
   )

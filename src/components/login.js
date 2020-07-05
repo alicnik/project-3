@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers'
 import * as Yup from 'yup'
 import axios from 'axios'
+import { UserContext } from './Context'
 
 const loginSchema = Yup.object().shape({
   username: Yup.string()
@@ -17,6 +18,8 @@ const loginSchema = Yup.object().shape({
 })
 
 export const Login = () => {
+
+  const { logIn } = useContext(UserContext)
   const history = useHistory()
   const { register, handleSubmit, errors, setError } = useForm({
     resolver: yupResolver(loginSchema),
@@ -26,7 +29,7 @@ export const Login = () => {
   const onSubmit = values => {
     axios.post('/api/login', values)
       .then(response => {
-        localStorage.setItem('token', response.data.token)
+        logIn(response.data.token)
         history.push('/home')
       })
       .catch(err => {
