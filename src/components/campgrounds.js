@@ -65,7 +65,7 @@ export const Campgrounds = (props) => {
           </Link>
         )
       })}
-    </section >
+    </section>
   )
 
 }
