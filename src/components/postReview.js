@@ -18,19 +18,20 @@ const reviewSchema = Yup.object().shape({
 // <PostReview siteCollection={magic involving splitting up the current url path} siteId={SOME MAGIC TO FIND THE CURRENT ID} />
 // const [, siteCollection, siteId] = useHistory().path.match(/\/api\/(\w+)\/(\w+)\//)
 
-export const PostReview = ({ siteCollection, siteId }) => {
+export const PostReview = (props) => {
   const [rating, setRating] = useState()
+  const { siteCollection, siteId } = props.location.state
   const history = useHistory()
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(reviewSchema),
     criteriaMode: 'all'
   })
-  const sitePage = `/api/${siteCollection}/${siteId}/reviews`
+  const sitePage = `/${siteCollection}/${siteId}`
 
   const onSubmit = values => {
     values.rating = rating
-    console.log(values)
-    axios.post(sitePage, values)
+    const token = localStorage.getItem('token')
+    axios.post(`/api${sitePage}/reviews`, values, { headers: { Authorization: `Bearer ${token}` } })
       .then(() => {
         history.push(sitePage)
       })
