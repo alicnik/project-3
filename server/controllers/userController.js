@@ -47,18 +47,18 @@ function getSingleUser(req, res) {
     .populate('recAreaReviews')
     .populate('campgroundReviews')
     .populate('campgroundWishList')
+    .populate('recAreaWishList')
     .populate('camproundsVisited')
+    .populate('recAreasVisited')
     .then(user => {
       if (!user) return res.status(404).send({ username: { message: 'User not found.' } })
-      if (!user.validatePassword(req.body.password)) {
-        return res.status(401).send({ password: { message: 'Passwords do not match' } })
-      }
       res.status(200).send(user)
     })
-    .catch(error => res.status(400).send(error))
+    .catch(error => console.log(error))
 }
 
 function editUserProfile(req, res) {
+  console.log(req.body)
   User
     .findById(req.params.id)
     .then(user => {
@@ -68,7 +68,10 @@ function editUserProfile(req, res) {
       return user.save()
     })
     .then(updatedUser => res.status(201).send(updatedUser))
-    .catch(error => res.status(400).send(error))
+    .catch(error => {
+      console.log(error)
+      res.status(400).send(error)
+    })
 }
 
 const getAllUsers = (req, res) => User.find().then(users => res.status(200).send(users))

@@ -42,10 +42,10 @@ const recAreasWithAddresses = recAreaContent.map(recArea => {
 }).filter(recArea => recArea)
 
 const mediaData = fs.readFileSync('./archive/Media_API_v1.json')
-const mediaContent = JSON.parse(mediaData).RECDATA.filter(media => media.MediaType === 'Image')
+const mediaContent = JSON.parse(mediaData).RECDATA.filter(media => media.MediaType === 'Image' && media.URL)
 const recAreasWithAddressesAndMedia = recAreasWithAddresses.map(recArea => {
   const matchedMedia = mediaContent
-    .filter(media => media.EntityID === recArea.RecAreaID)
+    .filter(media => (media.EntityID === recArea.RecAreaID))
     .map(media => ({
       title: media.Title,
       url: media.URL

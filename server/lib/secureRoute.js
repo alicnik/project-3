@@ -30,7 +30,10 @@ function secureRoute(req, res, next) {
 
         next()
       })
-      .catch(() => res.status(401).send({ message: 'Unauthorized' }))
+      .catch(err => {
+        console.log(err)
+        res.status(401).send({ message: 'Unauthorized' })
+      })
   })
 }
 

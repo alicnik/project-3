@@ -13,11 +13,18 @@ import { Campgrounds } from './components/Campgrounds'
 import { SingleRecArea } from './components/SingleRecArea'
 import { SingleCampground } from './components/SingleCampground'
 import { MyAccount } from './components/MyAccount'
+import { NavBar } from './components/NavBar'
+import { ScrollToTop } from './components/ScrollToTop'
+import { Settings } from './components/Settings'
 
 const App = () => {
   return (
     <HashRouter>
+      <ScrollToTop />
       <UserProvider>
+        <header>
+          <NavBar />
+        </header>
         <main>
           <Switch>
             <Route exact path='/' component={Splashscreen} />
@@ -28,10 +35,11 @@ const App = () => {
             <Route exact path="/postcomment" component={PostComment} />
             <Route exact path="/recareas" component={RecAreas} />
             <Route exact path="/campgrounds" component={Campgrounds} />
-            <Route exact path="/campgrounds/:id" component={SingleCampground}/>
+            <Route exact path="/campgrounds/:id" component={SingleCampground} />
             <Route exact path='/recareas/:id' component={SingleRecArea} />
-            <Route path='/recareas/:id/campgrounds' component={Campgrounds} />
-            <Route path='/account' component={MyAccount} />
+            <Route exact path='/recareas/:id/campgrounds' component={Campgrounds} />
+            <Route exact path='/account' component={MyAccount} />
+            <Route exact path='/account/settings' component={Settings} />
           </Switch>
         </main>
       </UserProvider>
