@@ -26,7 +26,17 @@ function login(req, res) {
         return res.status(401).send({ password: { message: 'Passwords do not match' } })
       }
       const token = jsonwebtoken.sign({ sub: user._id }, secret, { expiresIn: '12h' })
-      res.status(202).send({ message: `Welcome back to the Wilderness ${user.username}`, token })
+      res.status(202).send({ 
+        id: user._id,
+        username: user.username, 
+        firstName: user.firstName, 
+        showWishList: user.showWishList,
+        showVisited: user.showVisited,
+        avatar: user.avatar,
+        isAdmin: user.isAdmin,
+        isVIP: user.isVIP,
+        bio: user.bio,
+        token })
     })
     .catch(error => res.status(403).send(error))
 }
@@ -34,7 +44,10 @@ function login(req, res) {
 function getSingleUser(req, res) {
   User
     .findById(req.params.id)
-    .populate('reviews')
+    .populate('recAreaReviews')
+    .populate('campgroundReviews')
+    .populate('campgroundWishList')
+    .populate('camproundsVisited')
     .then(user => {
       if (!user) return res.status(404).send({ username: { message: 'User not found.' } })
       if (!user.validatePassword(req.body.password)) {

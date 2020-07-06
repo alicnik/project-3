@@ -11,12 +11,9 @@ export const UserProvider = ({ children }) => {
     username: ''
   })
 
-  const logIn = (token) => {
-    localStorage.setItem('token', token)
-    setCurrentUser({
-      ...currentUser,
-      isLoggedIn: true
-    })
+  const logIn = (data) => {
+    localStorage.setItem('token', data.token)
+    setCurrentUser({ ...data, isLoggedIn: true })
   }
 
   return (

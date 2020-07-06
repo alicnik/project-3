@@ -12,6 +12,7 @@ import { RecAreas } from './components/RecAreas'
 import { Campgrounds } from './components/Campgrounds'
 import { SingleRecArea } from './components/SingleRecArea'
 import { SingleCampground } from './components/SingleCampground'
+import { MyAccount } from './components/MyAccount'
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
             <Route exact path="/campgrounds/:id" component={SingleCampground}/>
             <Route exact path='/recareas/:id' component={SingleRecArea} />
             <Route path='/recareas/:id/campgrounds' component={Campgrounds} />
+            <Route path='/account' component={MyAccount} />
           </Switch>
         </main>
       </UserProvider>
