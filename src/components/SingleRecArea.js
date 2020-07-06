@@ -35,11 +35,11 @@ export const SingleRecArea = (props) => {
         <div className='accordion-container'>
           <article className="description">
             <h2>Description</h2>
-            {recArea.description}
+            <p dangerouslySetInnerHTML={{ __html: recArea.description }}></p>
           </article>
           <Link to={{
             pathname: `/recareas/${recAreaId}/campgrounds`,
-            state: { campgroundsData: recArea.campgrounds }
+            state: { campgroundsData: recArea.campgrounds, longitude: recArea.longitude, latitude: recArea.latitude }
           }}>
             <button>Find Campsites</button>
           </Link>
