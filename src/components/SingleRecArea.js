@@ -21,7 +21,7 @@ export const SingleRecArea = (props) => {
         <h1>{recArea.name}</h1>
         {recArea.reviews.length >= 1 ? 
           <p>Rating: {recArea.avgRating} ({recArea.reviews.length})</p> : 
-          <p>No reviews yet. Have you been here? 
+          <p>No reviews yet. Have you been here? &nbsp;
             <Link to={{ 
               pathname: '/postreview', 
               state: { siteCollection: 'recareas', siteId: recAreaId } 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { RatingIcons } from './RatingIcons'
 
 export const RecAreas = () => {
   const [recAreasData, updateRecAreasData] = useState([])
@@ -30,7 +31,7 @@ export const RecAreas = () => {
                 <h2>{recArea.name}</h2>
                 <h3>{recArea.city}, {recArea.state}</h3>
                 <img src={recArea.media[0].url} alt={recArea.name} />
-                {/* placeholder for star rating */}
+                <RatingIcons rating={recArea.avgRating} numOfReviews={recArea.reviews.length} />
                 <p>Rating</p>
               </article>
             </Link>

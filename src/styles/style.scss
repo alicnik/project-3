@@ -98,5 +98,24 @@ body {
   }
   li {
     margin: 0 10px;
+#single-campground {
+  .rec-area-info {
+    .review-header {
+      display: flex;
+      align-items: center;
+    }
+    .campground-attributes {
+      .single-attribute {
+        display: flex;
+        align-items: center;
+      }
+    }
+    .contact {
+      .phone,
+      .email {
+        display: flex;
+        align-items: center;
+      }
+    }
   }
 }
