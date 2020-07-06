@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom'
 import Axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock as checkInTime } from '@fortawesome/free-regular-svg-icons'
-import { faDog as petsAllowed, faClock as checkOutTime } from '@fortawesome/free-solid-svg-icons'
+import { faDog as petsAllowed, faClock as checkOutTime, faPhone, faAt } from '@fortawesome/free-solid-svg-icons'
 
 export const SingleCampground = () => {
   const [campground, setCampground] = useState()
@@ -19,8 +19,7 @@ export const SingleCampground = () => {
   if (!campground) return <h1>Loading...</h1>
 
   return (
-    <section>
-      <FontAwesomeIcon icon={attributeIcons['checkInTime']} />
+    <section id='single-campground'>
       <div className="rec-area-info">
         <h1>{campground.name}</h1>
         {campground.reviews.length >= 1 ? 
@@ -41,8 +40,8 @@ export const SingleCampground = () => {
               <div key={i} className='single-attribute'>
                 <FontAwesomeIcon  icon={attributeIcons[attribute.name]} color='green' />
                 <p>
-                {attribute.description}: {attribute.value === "true" ? 'Yes' : 
-                attribute.value === "false" ? 'No': attribute.value}
+                  {attribute.description}: {attribute.value === 'true' ? 'Yes' : 
+                    attribute.value === 'false' ? 'No' : attribute.value}
                 </p>
               </div>
             )
@@ -55,6 +54,19 @@ export const SingleCampground = () => {
             <p dangerouslySetInnerHTML={{ __html: campground.description }}></p>
           </article>
         </div>
+        <address className="contact">
+          <h2>Contact Details</h2>
+          {campground.phone && 
+          <div className="phone">
+            <FontAwesomeIcon  icon={faPhone} color='green' />
+            <p>Tel: {campground.phone}</p>
+          </div>}
+          {campground.email && 
+          <div className="email">
+            <FontAwesomeIcon  icon={faAt} color='green' />
+            <p>Email: {campground.email}</p>
+          </div>}
+        </address>
         <div className="reviews">
           <h2>Reviews</h2>
         </div>

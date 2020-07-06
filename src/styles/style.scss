@@ -78,3 +78,21 @@ body {
     }
   }
 }
+
+#single-campground {
+  .rec-area-info {
+    .campground-attributes {
+      .single-attribute {
+        display: flex;
+        align-items: center;
+      }
+    }
+    .contact {
+      .phone,
+      .email {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
