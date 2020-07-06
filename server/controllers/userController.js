@@ -58,7 +58,7 @@ function getSingleUser(req, res) {
 }
 
 function editUserProfile(req, res) {
-  console.log(req.body)
+  console.log('req.body: ', req.body)
   User
     .findById(req.params.id)
     .then(user => {
