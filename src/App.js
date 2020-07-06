@@ -12,6 +12,7 @@ import { RecAreas } from './components/RecAreas'
 import { Campgrounds } from './components/Campgrounds'
 import { SingleRecArea } from './components/SingleRecArea'
 import { SingleCampground } from './components/SingleCampground'
+import { RecAreaMap } from './components/RecAreaMap'
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
             <Route exact path="/campgrounds/:id" component={SingleCampground} />
             <Route exact path='/recareas/:id' component={SingleRecArea} />
             <Route path='/recareas/:id/campgrounds' component={Campgrounds} />
+            <Route path='/recareamap' component={RecAreaMap} />
           </Switch>
         </main>
       </UserProvider>

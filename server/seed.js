@@ -28,8 +28,8 @@ mongoose.connect('mongodb://localhost/wildernessdb', {
         city: facility.city,
         state: facility.state,
         accessible: facility.accessible,
-        longitude: facility.longitude,
-        latitude: facility.latitude,
+        longitude: facility.FacilityLongitude,
+        latitude: facility.FacilityLatitude,
         attributes: [...facility.attributes],
         media: [...facility.entityMedia]
       })))
