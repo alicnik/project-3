@@ -14,6 +14,10 @@ import { SingleRecArea } from './components/SingleRecArea'
 import { SingleCampground } from './components/SingleCampground'
 import { MyAccount } from './components/MyAccount'
 import { RecAreaMap } from './components/RecAreaMap'
+<<<<<<< HEAD
+=======
+import { CampgroundMap } from './components/CampgroundMap'
+>>>>>>> development
 import { NavBar } from './components/NavBar'
 import { ScrollToTop } from './components/ScrollToTop'
 import { Settings } from './components/Settings'
@@ -43,6 +47,10 @@ const App = () => {
             <Route exact path='/account/settings' component={Settings} />
             <Route path='/recareas/:id/campgrounds' component={Campgrounds} />
             <Route path='/recareamap' component={RecAreaMap} />
+<<<<<<< HEAD
+=======
+            <Route path='/campgroundmap' component={CampgroundMap} />
+>>>>>>> development
           </Switch>
         </main>
       </UserProvider>
