@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { RatingIcons } from './RatingIcons'
 import { testData } from './helpers'
 import Axios from 'axios'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 export const Campgrounds = (props) => {
 
@@ -33,7 +34,7 @@ export const Campgrounds = (props) => {
   useEffect(() => {
     setHotelsData(testData)
   }, [])
-  
+
   if (campgroundsData?.length === 0) {
     if (!hotelsData.length) return <h1>Loading...</h1>
     return (
@@ -41,12 +42,12 @@ export const Campgrounds = (props) => {
         <h1>No campgrounds! How about a hotel instead?</h1>
         {hotelsData.map((hotel, i) => (
           <article key={i} className="hotel-tile">
-            <img src={hotel.photo.images.medium.url} alt={hotel.name}/>
+            <img src={hotel.photo.images.medium.url} alt={hotel.name} />
             <div className="hotel-info">
               <h2>{hotel.name}</h2>
               <p className="location">{hotel.location_string}</p>
               <p className="ranking">{hotel.ranking}</p>
-              <RatingIcons iconStyle='circle' color='green' rating={Number(hotel.rating)} numOfReviews={Number(hotel.num_reviews)}/>
+              <RatingIcons iconStyle='circle' color='green' rating={Number(hotel.rating)} numOfReviews={Number(hotel.num_reviews)} />
               <p className="price">Price: {hotel.price}</p>
               <a href={`https://www.tripadvisor.co.uk/Search?q=${hotel.name.replace(/\W+/g, '%20')}`} target='_blank' rel='noreferrer'>
                 <button>Find out more</button>
@@ -63,19 +64,31 @@ export const Campgrounds = (props) => {
   return (
     <section id="browse">
       <h1>Campgrounds</h1>
-      {campgroundsData.map((campground, index) => {
-        return (
-          <Link to={`/campgrounds/${campground._id}`} key={index}>
-            <article id="tile">
-              <h2>{campground.name}</h2>
-              <h3>{campground.city}, {campground.state}</h3>
-              <img src={campground.media[0].url} alt={campground.name} />
-              {/* Star rating from database */}
-              <p>Rating</p>
-            </article>
-          </Link>
-        )
-      })}
+      <Tabs>
+        <TabList>
+          <Tab>List</Tab>
+          <Tab>Map</Tab>
+        </TabList>
+        <TabPanel>
+          {campgroundsData.map((campground, index) => {
+            return (
+              <Link to={`/campgrounds/${campground._id}`} key={index}>
+                <article id="tile">
+                  <h2>{campground.name}</h2>
+                  <h3>{campground.city}, {campground.state}</h3>
+                  <img src={campground.media[0].url} alt={campground.name} />
+                  <RatingIcons iconStyle='star' color='orange' rating={Number(campground.avgRating)} numOfReviews={Number(campground.reviews.length)} />
+                  <p>Rating</p>
+                </article>
+              </Link>
+            )
+          })}
+        </TabPanel>
+        <TabPanel>
+          <h2>Map View</h2>
+        </TabPanel>
+      </Tabs>
+
     </section>
   )
 
