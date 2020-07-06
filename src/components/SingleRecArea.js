@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 // import StarRating from 'react-ratings-declarative'
 import Axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { Favourite } from './Favourite'
+import { UserContext } from './Context'
+import { Visited } from './Visited'
 
 export const SingleRecArea = (props) => {
 
   const [recArea, setRecArea] = useState()
+  const { currentUser } = useContext(UserContext)
   const recAreaId = props.location.state?.recAreaId || props.location.pathname.match(/\/(\w+)$/)[1]
 
   useEffect(() => {
@@ -20,6 +24,7 @@ export const SingleRecArea = (props) => {
     <section>
       <div className="rec-area-info">
         <h1>{recArea.name}</h1>
+        {currentUser.isLoggedIn && <><Favourite /><Visited /></>}
         {recArea.reviews.length >= 1 ?
           <p>Rating: {recArea.avgRating} ({recArea.reviews.length})</p> :
           <p>No reviews yet. Have you been here? &nbsp;

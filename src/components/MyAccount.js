@@ -7,21 +7,32 @@ import { SiteList } from './SiteList'
 
 export const MyAccount = () => {
 
-  const { currentUser, setListDisplay } = useContext(UserContext)
+  const { currentUser, setListDisplayPreferences } = useContext(UserContext)
   const [userDetails, setUserDetails] = useState()
+  const [editingBio, setEditingBio] = useState(false)
+  const [bio, setBio] = useState('')
 
   useEffect(() => {
     Axios.get(`/api/users/${currentUser.id}`)
       .then(response => {
         setUserDetails(response.data)
-        setListDisplay(response.data)
+        setListDisplayPreferences(response.data)
       })
   }, [])
+
+  function handleClick(e) {
+    e.preventDefault()
+    const token = localStorage.getItem('token')
+    Axios.put(`/api/users/${currentUser.id}`, { bio }, { headers: { Authorization: `Bearer ${token}` } })
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
+  }
 
   if (!userDetails) return <h1>Loading...</h1>
   
   return (
     <section className="my-account">
+      <Link to='/account/settings'>Settings</Link>
       <h1>My Account</h1>
       <h2>{userDetails.firstName} {userDetails.lastName}</h2>
       <img src={userDetails.avatar} alt="user avatar"/>
@@ -29,22 +40,29 @@ export const MyAccount = () => {
       <h3>My bio:</h3>
       {userDetails.bio ?
         <p>{userDetails.bio}</p> :
-        <p>No bio yet, would you <Link to='/account/settings'>like to add one</Link>?</p>
+        <p>No bio yet...<Link onClick={() => setEditingBio(true)}>add one</Link></p>
       }
-
+      {editingBio && <form>
+        <label htmlFor="edit-bio">Edit your bio here</label>
+        <textarea id="edit-bio" name="bio" value={bio} onChange={(e) => setBio(e.target.value)}></textarea>
+        <button onClick={handleClick}>Save</button>
+      </form>}
       {/* TABS */}
-      <h3>Places I want to go:</h3>
-      {(userDetails.recAreaWishList.length || userDetails.campgroundWishList.length) ?
-        <div className="wish-list">
-          <div className="rec-area-wish-list">
-            {userDetails.recAreaWishList.map((recArea, i) => <SiteList key={i} site={recArea} />)}
-          </div>
-          <div className="campground-wish-list">
-            {userDetails.campgroundWishList.map((campground, i) => <SiteList key={i} site={campground} />)}
-          </div>
-        </div> :
-        <p>You haven&apos;t put any places on your wish list yet. Just click on the heart to add a recreational area or campground to your list.</p>
-      }
+      {currentUser.showWishList && <>
+        <h3>Places I want to go:</h3>
+        {(userDetails.recAreaWishList.length || userDetails.campgroundWishList.length) ?
+          <div className="wish-list">
+            <div className="rec-area-wish-list">
+              {userDetails.recAreaWishList.map((recArea, i) => <SiteList key={i} site={recArea} />)}
+            </div>
+            <div className="campground-wish-list">
+              {userDetails.campgroundWishList.map((campground, i) => <SiteList key={i} site={campground} />)}
+            </div>
+          </div> :
+          <p>You haven&apos;t put any places on your wish list yet. Just click on the heart to add a recreational area or campground to your list.</p>
+        }
+      </>}
+      {currentUser.showVisited && <>
       <h3>Places I&apos;ve been:</h3>
       {(userDetails.recAreasVisited.length || userDetails.campgroundsVisited.length) ?
         <div className="visited">
@@ -57,7 +75,7 @@ export const MyAccount = () => {
         </div> :
         <p>You haven&apos;t marked any places as visited yet. Just click on the tick to add a recreational area or campground to your list of visited places.</p>
       }
-
+      </>}
       <h3>My reviews:</h3>
       {(userDetails.recAreaReviews.length || userDetails.campgroundReviews.length) ?
         <div className="my-reviews">

@@ -53,6 +53,7 @@ userSchema
 
 userSchema
   .pre('validate', function checkPassword(next) {
+    if (this._id) return next()
     if (this._passwordConfirmation !== this.password) {
       this.invalidate('passwordConfirmation', 'should match')
     }
