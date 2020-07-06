@@ -12,7 +12,11 @@ import { RecAreas } from './components/RecAreas'
 import { Campgrounds } from './components/Campgrounds'
 import { SingleRecArea } from './components/SingleRecArea'
 import { SingleCampground } from './components/SingleCampground'
+<<<<<<< HEAD
 import { MyAccount } from './components/MyAccount'
+=======
+import { RecAreaMap } from './components/RecAreaMap'
+>>>>>>> development
 import { NavBar } from './components/NavBar'
 import { ScrollToTop } from './components/ScrollToTop'
 import { Settings } from './components/Settings'
@@ -37,9 +41,14 @@ const App = () => {
             <Route exact path="/campgrounds" component={Campgrounds} />
             <Route exact path="/campgrounds/:id" component={SingleCampground} />
             <Route exact path='/recareas/:id' component={SingleRecArea} />
+<<<<<<< HEAD
             <Route exact path='/recareas/:id/campgrounds' component={Campgrounds} />
             <Route exact path='/account' component={MyAccount} />
             <Route exact path='/account/settings' component={Settings} />
+=======
+            <Route path='/recareas/:id/campgrounds' component={Campgrounds} />
+            <Route path='/recareamap' component={RecAreaMap} />
+>>>>>>> development
           </Switch>
         </main>
       </UserProvider>
