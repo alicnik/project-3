@@ -1,7 +1,6 @@
 const Review = require('../models/reviewModel')
 const Campground = require('../models/campgroundModel')
 const RecArea = require('../models/recAreaModel')
-const User = require('../models/userModel')
 
 function findSiteAndCreateReview(siteCollection, siteId, review, req, res) {
   siteCollection
@@ -11,9 +10,10 @@ function findSiteAndCreateReview(siteCollection, siteId, review, req, res) {
         .create(review)
         .then(review => {
           site.reviews.push(review)
-          site.avgRating = site.reviews.reduce((total, review, i, array) => {
+          const avgRatingFloat = site.reviews.reduce((total, review, i, array) => {
             if (review.rating) return (review.rating / array.length) + total
           }, 0)
+          site.avgRating = avgRatingFloat.roundHalf()
           site.save()
           res.status(201).send({ message: 'Review successfully posted.' })
         })

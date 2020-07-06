@@ -24,6 +24,7 @@ function getOneSpot(req, res) {
     })
 }
 
+
 module.exports = {
   index,
   getOneSpot

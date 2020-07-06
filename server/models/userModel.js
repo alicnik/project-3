@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
   campgroundWishList: [{ type: mongoose.Schema.ObjectId, ref: 'Campground' }],
   showVisited: { type: Boolean },
   campgroundsVisited: [{ type: mongoose.Schema.ObjectId, ref: 'Campground' }],
-  avatarPhoto: { type: String },
+  avatar: { type: String },
   isAdmin: { type: Boolean },
   isVIP: { type: Boolean },
   bio: { type: String },
