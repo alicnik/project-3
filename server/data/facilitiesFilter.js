@@ -2,7 +2,16 @@ const fs = require('fs')
 
 const fullFacilitiesData = fs.readFileSync('./archive/Facilities_API_v1.json')
 const fullFacilitiesContent = JSON.parse(fullFacilitiesData).RECDATA
-  .filter(facility => facility.FacilityID)
+  .filter(facility => {
+    return (
+      facility.FacilityID &&
+      facility.FacilityLongitude &&
+      facility.FacilityLatitude &&
+      facility.FacilityName &&
+      facility.FacilityDescription &&
+      (facility.FacilityPhone || facility.FacilityEmail)
+    )
+  })
   .map(facility => ({
     FacilityID: facility.FacilityID,
     ParentRecAreaID: facility.ParentRecAreaID,
@@ -61,15 +70,15 @@ const finalFacilities = filteredFacilitiesWithAddressesAndMedia.map(facility => 
     .reduce((finalAttributes, attr, ind, array) => {
       if (array.some(attribute => attribute.name === 'Pets Allowed' && attribute.value === 'Yes')) {
         const firstPetsIndex = finalAttributes.findIndex(attribute => attribute.name === 'petsAllowed')
-        firstPetsIndex === -1 && finalAttributes.push({ name: 'petsAllowed', value: true })
+        firstPetsIndex === -1 && finalAttributes.push({ name: 'petsAllowed', value: true, description: 'Pets allowed' })
       }
       const checkInTime = array.find(attribute => attribute.name === 'Checkin Time')
       if (checkInTime && finalAttributes.findIndex(attribute => attribute.name === 'checkInTime') === -1) {
-        finalAttributes.push({ name: 'checkInTime', value: checkInTime.value })
+        finalAttributes.push({ name: 'checkInTime', value: checkInTime.value , description: 'Check-in time' })
       }
       const checkOutTime = array.find(attribute => attribute.name === 'Checkout Time')
       if (checkOutTime && finalAttributes.findIndex(attribute => attribute.name === 'checkOutTime') === -1) {
-        finalAttributes.push({ name: 'checkOutTime', value: checkOutTime.value })
+        finalAttributes.push({ name: 'checkOutTime', value: checkOutTime.value, description: 'Check-out time' })
       }
       return finalAttributes
     }, [])
@@ -79,5 +88,7 @@ const finalFacilities = filteredFacilitiesWithAddressesAndMedia.map(facility => 
     attributes: matchingAttributes
   }
 })
+
+console.log(finalFacilities.length, ' campgrounds filtered.')
 
 fs.writeFile('./finalFacilities.json', JSON.stringify(finalFacilities), (err) => console.log(err))

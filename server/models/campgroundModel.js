@@ -17,7 +17,8 @@ const campgroundSchema = new mongoose.Schema({
   latitude: { type: Number },
   attributes: [{
     name: String,
-    value: String
+    value: String,
+    description: String
   }],
   media: [{
     title: String,

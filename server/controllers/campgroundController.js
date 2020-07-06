@@ -1,4 +1,5 @@
 const Campground = require('../models/campgroundModel')
+const RecArea = require('../models/recAreaModel')
 
 
 function index(req, res) {
@@ -19,7 +20,19 @@ function getOneSpot(req, res) {
     })
 }
 
+function campgroundsByRecArea(req, res) {
+  RecArea.findById(req.params.id).then(recArea => {
+    Campground
+      .find({ ridbRecAreaId: recArea.ridbRecAreaId })
+      .then(campgrounds => res.send(campgrounds))
+      .catch(err => res.status(400).send(err))
+  })
+    .catch(err => console.log(err))
+}
+
+
 module.exports = {
   index,
-  getOneSpot
+  getOneSpot,
+  campgroundsByRecArea
 }

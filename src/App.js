@@ -13,11 +13,15 @@ import { Campgrounds } from './components/Campgrounds'
 import { SingleRecArea } from './components/SingleRecArea'
 import { SingleCampground } from './components/SingleCampground'
 import { RecAreaMap } from './components/RecAreaMap'
+import { NavBar } from './components/NavBar'
+import { ScrollToTop } from './components/ScrollToTop'
 
 const App = () => {
   return (
     <HashRouter>
+      <ScrollToTop />
       <UserProvider>
+        <NavBar />
         <main>
           <Switch>
             <Route exact path='/' component={Splashscreen} />
