@@ -81,6 +81,10 @@ body {
 
 #single-campground {
   .rec-area-info {
+    .review-header {
+      display: flex;
+      align-items: center;
+    }
     .campground-attributes {
       .single-attribute {
         display: flex;

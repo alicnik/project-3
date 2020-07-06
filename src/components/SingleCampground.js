@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import Axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClock as checkInTime } from '@fortawesome/free-regular-svg-icons'
+import { faClock as checkInTime, faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 import { faDog as petsAllowed, faClock as checkOutTime, faPhone, faAt } from '@fortawesome/free-solid-svg-icons'
 
 export const SingleCampground = () => {
@@ -22,15 +22,20 @@ export const SingleCampground = () => {
     <section id='single-campground'>
       <div className="rec-area-info">
         <h1>{campground.name}</h1>
-        {campground.reviews.length >= 1 ? 
-          <p>Rating: {campground.avgRating} ({campground.reviews.length})</p> : 
-          <p>No reviews yet. Have you been here? &nbsp;
-            <Link to={{ 
-              pathname: '/postreview', 
-              state: { siteCollection: 'campgrounds', siteId: campgroundId } 
-            }}>Leave a review.</Link>
-          </p>
-        }
+        <div className="review-header">
+          {campground.reviews.length >= 1 ? 
+            <p>Rating: {campground.avgRating} ({campground.reviews.length})</p> : 
+            <>
+            <FontAwesomeIcon icon={faQuestionCircle} color='green' />
+            <p>No reviews yet. Have you been here? &nbsp;
+              <Link to={{ 
+                pathname: '/postreview', 
+                state: { siteCollection: 'campgrounds', siteId: campgroundId } 
+              }}>Leave a review.</Link>
+            </p>
+            </>
+          }
+        </div>
         <div className="carousel-container">
           {campground.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
         </div>
