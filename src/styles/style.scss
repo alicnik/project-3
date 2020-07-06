@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400&display=swap");
+@import url('../../node_modules/react-tabs/style/react-tabs.css');
 
 :root {
   --color-brown: #6f4c15;
@@ -76,5 +77,26 @@ body {
 
     .hotel-info {
     }
+  }
+}
+
+// flex-start not working? #logo still on right hand side of navbar
+#navbar {
+  margin: 20px;
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    #logo {
+      justify-self: flex-start;
+    }
+    #nav-logged-in {
+      display: flex;
+    }
+    #nav-logged-out {
+      display: flex;
+    }
+  }
+  li {
+    margin: 0 10px;
   }
 }

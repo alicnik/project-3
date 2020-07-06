@@ -7,7 +7,7 @@ export const UserContext = createContext()
 export const UserProvider = ({ children }) => {
 
   const [currentUser, setCurrentUser] = useState({
-    isLoggedIn: false,
+    isLoggedIn: !!localStorage.getItem('token'),
     username: ''
   })
 
@@ -19,8 +19,16 @@ export const UserProvider = ({ children }) => {
     })
   }
 
+  const logOut = () => {
+    localStorage.removeItem('token')
+    setCurrentUser({
+      ...currentUser,
+      isLoggedIn: false
+    })
+  }
+
   return (
-    <UserContext.Provider value={{ currentUser, setCurrentUser, logIn }}>
+    <UserContext.Provider value={{ currentUser, setCurrentUser, logIn, logOut }}>
       {children}
     </UserContext.Provider>
   )
