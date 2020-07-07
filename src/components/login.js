@@ -29,7 +29,7 @@ export const Login = () => {
   const onSubmit = values => {
     axios.post('/api/login', values)
       .then(response => {
-        logIn(response.data.token)
+        logIn(response.data)
         history.push('/home')
       })
       .catch(err => {

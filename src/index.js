@@ -9,9 +9,5 @@ Array.prototype.randomElement = function() {
   return this[Math.floor(Math.random() * this.length)]
 }
 
-Number.prototype.roundToHalf = function() {
-  return Math.round(this * 2) / 2
-}
-
 ReactDOM.render(<App />, document.getElementById('root'))
 

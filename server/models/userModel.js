@@ -22,8 +22,10 @@ const userSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   showWishList: { type: Boolean },
   campgroundWishList: [{ type: mongoose.Schema.ObjectId, ref: 'Campground' }],
+  recAreaWishList: [{ type: mongoose.Schema.ObjectId, ref: 'RecArea' }],
   showVisited: { type: Boolean },
   campgroundsVisited: [{ type: mongoose.Schema.ObjectId, ref: 'Campground' }],
+  recAreasVisited: [{ type: mongoose.Schema.ObjectId, ref: 'RecArea' }],
   avatar: { type: String },
   isAdmin: { type: Boolean },
   isVIP: { type: Boolean },
@@ -51,6 +53,7 @@ userSchema
 
 userSchema
   .pre('validate', function checkPassword(next) {
+    if (this._id) return next()
     if (this._passwordConfirmation !== this.password) {
       this.invalidate('passwordConfirmation', 'should match')
     }

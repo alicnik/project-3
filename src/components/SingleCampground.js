@@ -7,6 +7,7 @@ import { faDog as petsAllowed, faClock as checkOutTime, faPhone, faAt } from '@f
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 export const SingleCampground = () => {
+  
   const [campground, setCampground] = useState()
   const { pathname } = useLocation()
   const campgroundId = pathname.match(/campgrounds\/(\w+)$/)[1]

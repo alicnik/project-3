@@ -26,7 +26,21 @@ function login(req, res) {
         return res.status(401).send({ password: { message: 'Passwords do not match' } })
       }
       const token = jsonwebtoken.sign({ sub: user._id }, secret, { expiresIn: '12h' })
-      res.status(202).send({ message: `Welcome back to the Wilderness ${user.username}`, token })
+      res.status(202).send({ 
+        id: user._id,
+        username: user.username, 
+        firstName: user.firstName, 
+        showWishList: user.showWishList,
+        showVisited: user.showVisited,
+        avatar: user.avatar,
+        isAdmin: user.isAdmin,
+        isVIP: user.isVIP,
+        bio: user.bio,
+        campgroundWishList: user.campgroundWishList,
+        recAreaWishList: user.recAreaWishList,
+        campgroundsVisited: user.campgroundsVisited,
+        recAreasVisited: user.recAreasVisited,
+        token })
     })
     .catch(error => res.status(403).send(error))
 }
@@ -34,28 +48,46 @@ function login(req, res) {
 function getSingleUser(req, res) {
   User
     .findById(req.params.id)
-    .populate('reviews')
+    .populate('recAreaReviews')
+    .populate('campgroundReviews')
+    .populate('campgroundWishList')
+    .populate('recAreaWishList')
+    .populate('camproundsVisited')
+    .populate('recAreasVisited')
     .then(user => {
       if (!user) return res.status(404).send({ username: { message: 'User not found.' } })
-      if (!user.validatePassword(req.body.password)) {
-        return res.status(401).send({ password: { message: 'Passwords do not match' } })
-      }
       res.status(200).send(user)
     })
-    .catch(error => res.status(400).send(error))
+    .catch(error => console.log(error))
 }
 
 function editUserProfile(req, res) {
+  // console.log('req.body: ', req.body)
   User
     .findById(req.params.id)
     .then(user => {
       if (!user) return res.status(404).send({ message: 'User not found' })
       if (!user._id.equals(req.currentUser._id)) return res.status(401).send({ message: 'You can\'t edit someone else\'s profile' })
+      const modelArrays = ['recAreaWishList', 'campgroundWishList', 'recAreasVisited', 'campgroundsVisited']
+      for (const key in req.body) {
+        if (modelArrays.includes(key)) {
+          if (!user[key].includes(req.body[key])) continue
+          user[key].pull(req.body[key])
+          delete req.body[key]
+        }
+      }
       user.set(req.body)
-      return user.save()
+      user.save()
+      return user
     })
-    .then(updatedUser => res.status(201).send(updatedUser))
-    .catch(error => res.status(400).send(error))
+    .then(updatedUser => {
+      console.log('line 71', updatedUser)
+      res.status(201).send(updatedUser)
+    })
+    .catch(error => {
+      // console.log(error)
+      res.status(400).send(error)
+    })
 }
 
 const getAllUsers = (req, res) => User.find().then(users => res.status(200).send(users))

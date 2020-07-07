@@ -93,6 +93,3 @@ export const Campgrounds = (props) => {
   )
 
 }
-
-
-

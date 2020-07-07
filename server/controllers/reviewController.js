@@ -5,6 +5,10 @@ Number.prototype.roundToHalf = function () {
   return Math.round(this * 2) / 2
 }
 
+Number.prototype.roundToHalf = function() {
+  return Math.round(this * 2) / 2
+}
+
 function findSiteAndCreateReview(siteCollection, siteId, review, req, res) {
   siteCollection
     .findById(siteId)
@@ -20,7 +24,7 @@ function findSiteAndCreateReview(siteCollection, siteId, review, req, res) {
           site.save()
           res.status(201).send({ message: 'Review successfully posted.' })
         })
-        .catch(err => res.status(400).send(err))
+        .catch(err => console.log(err))
     })
     .catch(err => res.status(400).send(err))
 }

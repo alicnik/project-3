@@ -44,6 +44,4 @@ export const RecAreas = () => {
       </TabPanel>
     </Tabs>
   </section>
-
 }
-

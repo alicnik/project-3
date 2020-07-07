@@ -59,6 +59,6 @@ router.route('/users')
   
 router.route('/users/:id')
   .get(userController.getSingleUser)
-  .put(userController.editUserProfile)
+  .put(secureRoute, userController.editUserProfile)
 
 module.exports = router

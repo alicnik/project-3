@@ -45,7 +45,11 @@ const filteredFacilitiesWithAddresses = filteredFacilitiesData.map(facility => {
 
 const fullMediaData = fs.readFileSync('./archive/Media_API_v1.json')
 const fullMediaContent = JSON.parse(fullMediaData).RECDATA
-const filteredMediaContent = fullMediaContent.filter(media => media.MediaType === 'Image' && media.EntityType === 'Asset')
+const filteredMediaContent = fullMediaContent.filter(media => (
+  media.MediaType === 'Image' && 
+  media.EntityType === 'Asset' &&
+  media.URL
+))
 const filteredFacilitiesWithAddressesAndMedia = filteredFacilitiesWithAddresses.map(facility => {
   const matchingFacility = filteredMediaContent.find(media => media.EntityID === facility.FacilityID)
   if (!matchingFacility) return
