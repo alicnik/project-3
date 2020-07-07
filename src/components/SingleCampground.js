@@ -9,12 +9,9 @@ import { Carousel } from 'react-responsive-carousel'
 import { ReviewListItem } from './ReviewList'
 import { PostReviewButton } from './PostReviewButton'
 import { StarRating } from './StarRating'
-<<<<<<< HEAD
 import { RatingIcons } from './RatingIcons'
 import { UserContext } from './Context'
-=======
 import loadingGif from '../assets/loading.gif'
->>>>>>> development
 
 export const SingleCampground = () => {
 
@@ -49,15 +46,10 @@ export const SingleCampground = () => {
         <div className="review-header">
           {campground.reviews.length >= 1 ?
             <>
-<<<<<<< HEAD
             {currentUser.isLoggedIn ? 
               <StarRating rating={campground.avgRating} setRating={reviewViaStarRating}/> :
               <RatingIcons rating={campground.avgRating} showNumOfReviews={false}/>}
             <p>Rating: {campground.avgRating} ({campground.reviews.length})</p> 
-=======
-              <StarRating rating={campground.avgRating} setRating={reviewViaStarRating} />
-              <p>Rating: {campground.avgRating} ({campground.reviews.length})</p>
->>>>>>> development
             </>
             :
             <>

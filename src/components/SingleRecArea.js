@@ -11,11 +11,8 @@ import { PostReviewButton } from './PostReviewButton'
 import { StarRating } from './StarRating'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
-<<<<<<< HEAD
 import { RatingIcons } from './RatingIcons'
-=======
 import loadingGif from '../assets/loading.gif'
->>>>>>> development
 
 export const SingleRecArea = (props) => {
 
@@ -50,15 +47,10 @@ export const SingleRecArea = (props) => {
 
         {recArea.reviews.length >= 1 ?
           <>
-<<<<<<< HEAD
           {currentUser.isLoggedIn ? 
             <StarRating rating={recArea.avgRating} setRating={reviewViaStarRating}/> :
             <RatingIcons rating={recArea.avgRating} showNumOfReviews={false}/>}
           <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
-=======
-            <StarRating rating={recArea.avgRating} setRating={reviewViaStarRating} />
-            <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
->>>>>>> development
           </> :
           <>
             <FontAwesomeIcon icon={faQuestionCircle} color='green' />
@@ -70,12 +62,7 @@ export const SingleRecArea = (props) => {
             </p>
           </>
         }
-<<<<<<< HEAD
         {currentUser.isLoggedIn && <> <Favourite /> <Visited /> </>}
-=======
-        {/* Accepted both changes but made page funny */}
-        {/* {currentUser.isLoggedIn && <><Favourite /><Visited /></>} */}
->>>>>>> development
         <div className="carousel-container">
           <Carousel>
             {recArea.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
