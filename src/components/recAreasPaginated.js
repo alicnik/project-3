@@ -5,17 +5,33 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { RatingIcons } from './RatingIcons'
 import { RecAreaMap } from './RecAreaMap'
 import loadingGif from '../assets/loading.gif'
+import { states } from './helpers'
 
 export const RecAreasPaginated = () => {
   const [recAreasData, updateRecAreasData] = useState([])
+  const [query, setQuery] = useState({})
 
   useEffect(() => {
-    axios.get('/api/recareas')
+    axios.get('/api/recareas', { params: query })
       .then(axiosResp => {
         console.log(axiosResp)
         updateRecAreasData(axiosResp.data.docs)
       })
-  }, [])
+  }, [query])
+
+  function handleChange(e) {
+    e.persist()
+    if (e.target.value === '') {
+      const newQuery = { ...query }
+      delete newQuery[e.target.id]
+      return setQuery(newQuery)
+    }
+    setQuery({
+      ...query,
+      state: e.target.value
+    })
+  }
+
 
   if (!recAreasData.length)
     return <div className="loading-container">
@@ -26,6 +42,12 @@ export const RecAreasPaginated = () => {
 
   return <section id="browse">
     <h1>Rec Areas</h1>
+
+    <select name="state" id="state" value={query.state} onChange={handleChange}>
+      <option value="">Any</option>
+      {states.sort().map((state, i) => <option key={i} value={state}>{state}</option>)}
+    </select>
+
 
     <Tabs>
       <TabList>

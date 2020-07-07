@@ -1,13 +1,11 @@
 const RecArea = require('../models/recAreaModel')
 
 function index(req, res) {
+  console.log(req.query)
+  console.log('Line 5')
   RecArea
-    .paginate({}, { offset: 30, limit: 10 })
+    .paginate(req.query, { offset: 0, limit: 10 })
     .then(recAreas => {
-<<<<<<< HEAD
-      // recAreas.length = 25
-=======
->>>>>>> development
       res.send(recAreas)
     })
     .catch(err => console.log(err))
