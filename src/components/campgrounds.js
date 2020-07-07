@@ -4,6 +4,7 @@ import { RatingIcons } from './RatingIcons'
 import { testData } from './helpers'
 import Axios from 'axios'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { CampgroundMap } from './CampgroundMap'
 
 export const Campgrounds = (props) => {
 
@@ -86,6 +87,7 @@ export const Campgrounds = (props) => {
         </TabPanel>
         <TabPanel>
           <h2>Map View</h2>
+          <CampgroundMap />
         </TabPanel>
       </Tabs>
 

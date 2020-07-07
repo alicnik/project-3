@@ -22,8 +22,8 @@ export const RecAreaMap = () => {
   const [viewPort, setViewPort] = useState({
 
 
-    height: '100vh',
-    width: '100vw',
+    height: '80vh',
+    width: '80vw',
     zoom: 3,
     latitude: 37.2761451,
     longitude: -104.6494972
@@ -35,36 +35,40 @@ export const RecAreaMap = () => {
 
   //! can change API token and  mapbox account
 
-  return <MapGL
+  return <section id="map-container">
+    <MapGL
+      className="rec-map"
+      mapboxApiAccessToken={'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'}
 
-    mapboxApiAccessToken={'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'}
+      {...viewPort}
 
-    {...viewPort}
+      onViewportChange={(viewPort) => setViewPort(viewPort)}>
 
-    onViewportChange={(viewPort) => setViewPort(viewPort)}>
+      {recAreasData.map(recArea => {
+        return <Marker
+          key={recArea._id}
+          latitude={recArea.latitude}
+          longitude={recArea.longitude}
+        >
+          <div>
 
-    {recAreasData.map(recArea => {
-      return <Marker
-        key={recArea._id}
-        latitude={recArea.latitude}
-        longitude={recArea.longitude}
-      >
-        <div>
+            <span><small>{recArea.name}</small></span> <br></br>
+      🚩
 
-          <span><small>{recArea.name}</small></span> <br></br>
-          🚩
+            {/* <span>{recArea.name}</span>
+      <span>{recArea.city}, {recArea.state}</span>
+      <span>src={recArea.media[0].url}</span> */}
 
-          {/* <span>{recArea.name}</span>
-          <span>{recArea.city}, {recArea.state}</span>
-          <span>src={recArea.media[0].url}</span> */}
+          </div>
 
-        </div>
+        </Marker>
 
-      </Marker>
+      })}
 
-    })}
+    </MapGL>
+  </section>
 
-  </MapGL>
+
 }
 
 // ? two components into one page; rather than adding another route

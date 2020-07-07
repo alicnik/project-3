@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { RatingIcons } from './RatingIcons'
+import { RecAreaMap } from './RecAreaMap'
 
 export const RecAreas = () => {
   const [recAreasData, updateRecAreasData] = useState([])
@@ -41,6 +42,7 @@ export const RecAreas = () => {
       </TabPanel>
       <TabPanel>
         <h2>Map View</h2>
+        <RecAreaMap />
       </TabPanel>
     </Tabs>
   </section>
