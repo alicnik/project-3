@@ -2,9 +2,9 @@ const RecArea = require('../models/recAreaModel')
 
 function index(req, res) {
   RecArea
-    .find()
+    .paginate({}, { offset: 30, limit: 10 })
     .then(recAreas => {
-      recAreas.length = 25
+      // recAreas.length = 25
       res.send(recAreas)
     })
 }
