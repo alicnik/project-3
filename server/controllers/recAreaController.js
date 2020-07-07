@@ -4,10 +4,6 @@ function index(req, res) {
   RecArea
     .paginate({}, { offset: 30, limit: 10 })
     .then(recAreas => {
-<<<<<<< HEAD
-      // recAreas.length = 25
-=======
->>>>>>> development
       res.send(recAreas)
     })
     .catch(err => console.log(err))
