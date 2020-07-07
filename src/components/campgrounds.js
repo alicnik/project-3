@@ -5,6 +5,7 @@ import { testData } from './helpers'
 import Axios from 'axios'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { CampgroundMap } from './CampgroundMap'
+import loadingGif from '../assets/loading.gif'
 
 export const Campgrounds = (props) => {
 
@@ -38,7 +39,10 @@ export const Campgrounds = (props) => {
   }, [])
 
   if (campgroundsData?.length === 0) {
-    if (!hotelsData.length) return <h1>Loading...</h1>
+    if (!hotelsData.length) return <div className="loading-container">
+      <img className="loading" src={loadingGif} alt="loading" />
+      <h2>Loading...</h2>
+    </div>
     return (
       <section id="hotels">
         <h1>No campgrounds! How about a hotel instead?</h1>
@@ -78,7 +82,7 @@ export const Campgrounds = (props) => {
                 <article id="tile">
                   <h2>{campground.name}</h2>
                   <h3>{campground.city}, {campground.state}</h3>
-                  <img src={campground.media[0].url} alt={campground.name} />
+                  <img className="preview-img" src={campground.media[0].url} alt={campground.name} />
                   <RatingIcons iconStyle='star' color='orange' rating={Number(campground.avgRating)} numOfReviews={Number(campground.reviews.length)} />
                   <p>Rating</p>
                 </article>

@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from 'react'
 import Axios from 'axios'
 import { UserContext } from './Context'
 import { Link } from 'react-router-dom'
-import { ReviewList } from './ReviewList'
+import { ReviewListItem } from './ReviewList'
 import { SiteList } from './SiteList'
 
 export const MyAccount = () => {
@@ -24,7 +24,15 @@ export const MyAccount = () => {
     e.preventDefault()
     const token = localStorage.getItem('token')
     Axios.put(`/api/users/${currentUser.id}`, { bio }, { headers: { Authorization: `Bearer ${token}` } })
-      .then(response => console.log(response))
+      .then(response => {
+        setUserDetails({
+          ...userDetails,
+          bio: response.data.bio
+        })
+        setEditingBio(false)
+      }
+      )
+      
       .catch(error => console.log(error))
   }
 
@@ -39,8 +47,12 @@ export const MyAccount = () => {
       <Link to='account/settings'><p>Change avatar</p></Link>
       <h3>My bio:</h3>
       {userDetails.bio ?
-        <p>{userDetails.bio}</p> :
-        <p>No bio yet...<Link onClick={() => setEditingBio(true)}>add one</Link></p>
+        <>
+        <p>{userDetails.bio}</p>
+        <span onClick={() => setEditingBio(true)}>Edit bio</span>
+        </>
+        :
+        <p>No bio yet...<span onClick={() => setEditingBio(true)}>add one</span></p>
       }
       {editingBio && <form>
         <label htmlFor="edit-bio">Edit your bio here</label>
@@ -80,17 +92,14 @@ export const MyAccount = () => {
       {(userDetails.recAreaReviews.length || userDetails.campgroundReviews.length) ?
         <div className="my-reviews">
           <div className="rec-area-reviews">
-            {userDetails.recAreaReviews.map((review, i) => <ReviewList key ={i} review={review} displayName={false} />)}
+            {userDetails.recAreaReviews.map((review, i) => <ReviewListItem key ={i} review={review} displayName={false} enableComments={false} displayAvatar={false}/>)}
           </div>
           <div className="campground-reviews">
-            {userDetails.campgroundReviews.map((review, i) => <ReviewList key ={i} review={review} displayName={false} />)}
+            {userDetails.campgroundReviews.map((review, i) => <ReviewListItem key ={i} review={review} displayName={false} enableComments={false} displayAvatar={false}/>)}
           </div>
         </div> :
         <p>You haven&apos;t left any reviews yet. Why not add one for somewhere you&apos;ve been?</p>
       }
-
-
-
     </section>
   )
 }

@@ -8,7 +8,7 @@ export const StarRating = ({ rating, setRating = f => f }) => {
     <Ratings
       rating={rating}
       changeRating={setRating}
-      widgetRatedColors="gold"
+      widgetRatedColors="orange"
     >
       <Ratings.Widget />
       <Ratings.Widget />

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import { UserContext } from './Context'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle as emptyTick } from '@fortawesome/free-regular-svg-icons'
@@ -13,15 +13,19 @@ export const Visited = () => {
   const [hasVisited, setHasVisited] = useState(currentUser.campgroundsVisited?.includes(siteId) || currentUser.recAreasVisited?.includes(siteId))
   const { pathname } = useLocation()
   const collection = pathname.includes('recareas') ? 'recAreasVisited' : 'campgroundsVisited'
+  const visitedHasChanged = useRef(false)
+
 
   useEffect(() => {
+    if (!visitedHasChanged.current) return
     const token = localStorage.getItem('token')
     Axios.put(`/api/users/${currentUser.id}`, { [collection]: siteId }, { headers: { Authorization: `Bearer ${token}` } })
-      .then(response => console.log(response))
+      .then(() => visitedHasChanged.current = false)
       .catch(err => console.log(err))
   })
 
   const handleClick = () => {
+    visitedHasChanged.current = true
     setHasVisited(previous => !previous)
     updateVisited(collection, siteId)
   }

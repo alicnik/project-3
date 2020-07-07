@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400&display=swap");
 @import url("../../node_modules/react-tabs/style/react-tabs.css");
+@import url("../../node_modules/react-responsive-carousel/lib/styles/carousel.css");
 :root {
     --color-brown: #6f4c15;
     --color-yellow: #f0d92a;
@@ -12,6 +13,28 @@
 
 img {
     max-width: 100%;
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    height: 90vh;
+    justify-content: center;
+    align-items: center;
+    .loading {
+        width: 250px;
+        border-radius: 50%;
+        border: 10px solid black;
+    }
+}
+
+.preview-img {
+    width: 500px;
+}
+
+.carousel-container {
+    width: 60vw;
 }
 
 body {

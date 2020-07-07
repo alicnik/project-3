@@ -54,6 +54,14 @@ function getSingleUser(req, res) {
     .populate('recAreaWishList')
     .populate('camproundsVisited')
     .populate('recAreasVisited')
+    .populate({
+      path: 'recAreaReviews',
+      populate: { path: 'recAreaRef' }
+    })
+    .populate({
+      path: 'campgroundReviews',
+      populate: { path: 'campgroundRef' }
+    })
     .then(user => {
       if (!user) return res.status(404).send({ username: { message: 'User not found.' } })
       res.status(200).send(user)
@@ -71,8 +79,11 @@ function editUserProfile(req, res) {
       const modelArrays = ['recAreaWishList', 'campgroundWishList', 'recAreasVisited', 'campgroundsVisited']
       for (const key in req.body) {
         if (modelArrays.includes(key)) {
-          if (!user[key].includes(req.body[key])) continue
-          user[key].pull(req.body[key])
+          if (user[key].includes(req.body[key])) {
+            user[key].pull(req.body[key])
+          } else {
+            user[key].push(req.body[key])
+          }
           delete req.body[key]
         }
       }
@@ -81,7 +92,7 @@ function editUserProfile(req, res) {
       return user
     })
     .then(updatedUser => {
-      console.log('line 71', updatedUser)
+      // console.log('line 71', updatedUser)
       res.status(201).send(updatedUser)
     })
     .catch(error => {

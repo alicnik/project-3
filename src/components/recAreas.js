@@ -4,19 +4,46 @@ import axios from 'axios'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { RatingIcons } from './RatingIcons'
 import { RecAreaMap } from './RecAreaMap'
+import loadingGif from '../assets/loading.gif'
+import { states } from './helpers'
 
 export const RecAreas = () => {
   const [recAreasData, updateRecAreasData] = useState([])
+  const [query, setQuery] = useState({})
+  const [chosenState, setChosenState] = useState('AK')
 
   useEffect(() => {
-    axios.get('/api/recareas')
+    axios.get(`/api/recareas/states/${chosenState}`)
       .then(axiosResp => {
+        console.log(axiosResp)
         updateRecAreasData(axiosResp.data)
       })
-  }, [])
+  }, [chosenState])
+
+  function handleChange(e) {
+    setChosenState(e.target.value)
+    setQuery({
+      ...query,
+      state: e.target.value
+    })
+  }
+
+
+
+  if (!recAreasData.length)
+    return <div className="loading-container">
+      <img className="loading" src={loadingGif} alt="loading" />
+      <h2>Loading...</h2>
+    </div>
+
 
   return <section id="browse">
     <h1>Rec Areas</h1>
+
+    <select name="state" id="state" value={query.state} onChange={handleChange}>
+      {states.sort().map((state, i) => <option key={i} value={state}>{state}</option>)}
+    </select>
+
     <Tabs>
       <TabList>
         <Tab>List</Tab>
@@ -31,9 +58,8 @@ export const RecAreas = () => {
               <article className="tile">
                 <h2>{recArea.name}</h2>
                 <h3>{recArea.city}, {recArea.state}</h3>
-                <img src={recArea.media[0].url} alt={recArea.name} />
+                <img className="preview-img" src={recArea.media[0].url} alt={recArea.name} />
                 <RatingIcons rating={recArea.avgRating} numOfReviews={recArea.reviews.length} />
-                <p>Rating</p>
               </article>
             </Link>
           )
