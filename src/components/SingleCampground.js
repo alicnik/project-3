@@ -5,9 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock as checkInTime, faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 import { faDog as petsAllowed, faClock as checkOutTime, faPhone, faAt } from '@fortawesome/free-solid-svg-icons'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { Carousel } from 'react-responsive-carousel'
 
 export const SingleCampground = () => {
-  
+
   const [campground, setCampground] = useState()
   const { pathname } = useLocation()
   const campgroundId = pathname.match(/campgrounds\/(\w+)$/)[1]
@@ -38,8 +39,11 @@ export const SingleCampground = () => {
             </>
           }
         </div>
+
         <div className="carousel-container">
-          {campground.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
+          <Carousel>
+            {campground.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
+          </Carousel>
         </div>
         <div className="campground-attributes">
           {campground.attributes.map((attribute, i) => {

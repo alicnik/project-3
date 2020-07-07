@@ -77,7 +77,7 @@ export const Campgrounds = (props) => {
                 <article id="tile">
                   <h2>{campground.name}</h2>
                   <h3>{campground.city}, {campground.state}</h3>
-                  <img src={campground.media[0].url} alt={campground.name} />
+                  <img className="preview-img" src={campground.media[0].url} alt={campground.name} />
                   <RatingIcons iconStyle='star' color='orange' rating={Number(campground.avgRating)} numOfReviews={Number(campground.reviews.length)} />
                   <p>Rating</p>
                 </article>

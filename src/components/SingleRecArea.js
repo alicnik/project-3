@@ -6,6 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { Favourite } from './Favourite'
 import { UserContext } from './Context'
 import { Visited } from './Visited'
+import { Carousel } from 'react-responsive-carousel'
 
 export const SingleRecArea = (props) => {
 
@@ -34,9 +35,13 @@ export const SingleRecArea = (props) => {
             }}>Leave a review.</Link>
           </p>
         }
+
         <div className="carousel-container">
-          {recArea.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
+          <Carousel>
+            {recArea.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
+          </Carousel>
         </div>
+
         <Tabs>
           <TabList>
             <Tab>Info</Tab>
