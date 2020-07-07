@@ -33,6 +33,7 @@ export const Campgrounds = (props) => {
     //   .then(response => setHotelsData(response.data.data))
   }, [])
 
+
   useEffect(() => {
     setHotelsData(testData)
   }, [])

@@ -6,7 +6,7 @@ function index(req, res) {
   Campground
     .find()
     .then(campgrounds => {
-      campgrounds.length = 25
+      // campgrounds.length = 25
       res.send(campgrounds)
     })
 }
