@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 // import { yupResolver } from '@hookform/resolvers'
 import * as Yup from 'yup'
 import axios from 'axios'
-import { StarRating } from './starRating'
+import { StarRating } from './StarRating'
 import { yupResolver } from '@hookform/resolvers'
 
 
@@ -19,7 +19,7 @@ const reviewSchema = Yup.object().shape({
 // const [, siteCollection, siteId] = useHistory().path.match(/\/api\/(\w+)\/(\w+)\//)
 
 export const PostReview = (props) => {
-  const [rating, setRating] = useState()
+  const [rating, setRating] = useState(props.location.state?.rating)
   const { siteCollection, siteId } = props.location.state
   const history = useHistory()
   const { register, handleSubmit, errors } = useForm({

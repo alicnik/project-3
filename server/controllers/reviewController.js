@@ -1,6 +1,7 @@
 const Review = require('../models/reviewModel')
 const Campground = require('../models/campgroundModel')
 const RecArea = require('../models/recAreaModel')
+const User = require('../models/userModel')
 
 Number.prototype.roundToHalf = function() {
   return Math.round(this * 2) / 2
@@ -9,17 +10,29 @@ Number.prototype.roundToHalf = function() {
 function findSiteAndCreateReview(siteCollection, siteId, review, req, res) {
   siteCollection
     .findById(siteId)
+    .populate('reviews')
     .then(site => {
       Review
         .create(review)
         .then(review => {
           site.reviews.push(review)
           const avgRatingFloat = site.reviews.reduce((total, review, i, array) => {
-            if (review.rating) return (review.rating / array.length) + total
+            return total + (review.rating / array.length)
           }, 0)
           site.avgRating = avgRatingFloat.roundToHalf()
           site.save()
           res.status(201).send({ message: 'Review successfully posted.' })
+          return review
+        })
+        .then(review => {
+          User
+            .findById(review.user)
+            .then(user => {
+              const reviewCollection = siteCollection === Campground ? 'campgroundReviews' : 'recAreaReviews'
+              user[reviewCollection].push(review)
+              return user.save()
+            })
+            .then(user => console.log(user))
         })
         .catch(err => console.log(err))
     })

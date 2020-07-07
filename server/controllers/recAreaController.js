@@ -17,6 +17,17 @@ function getOneSpot(req, res) {
       path: 'reviews',
       populate: { path: 'user' }
     })
+    .populate({
+      path: 'reviews',
+      populate: { path: 'comments' }
+    })
+    .populate({
+      path: 'reviews',
+      populate: {
+        path: 'comments',
+        populate: 'user'
+      }
+    })
     .populate('campgrounds')
     .then(recArea => {
       if (!recArea) return res.status(404).send({ message: 'Rec Area not found' })
