@@ -55,7 +55,7 @@ export const RecAreas = () => {
       </TabPanel>
       <TabPanel>
         <h2>Map View</h2>
-        {/* <RecAreaMap /> */}
+        <RecAreaMap />
       </TabPanel>
     </Tabs>
   </section>

@@ -6,21 +6,21 @@ import * as Yup from 'yup'
 import axios from 'axios'
 
 const commentSchema = Yup.object().shape({
-  comment: Yup.string()
+  text: Yup.string()
     .required('*This field is required')
 })
 
-export const PostComment = ({ reviewId, previousPage }) => {
+export const PostComment = (props) => {
   const history = useHistory()
+  const { reviewId, previousPage } = props.location.state
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(commentSchema)
   })
   const onSubmit = values => {
-    axios.post(`/api/reviews/${reviewId}/comments`, values)
+    const token = localStorage.getItem('token')
+    axios.post(`/api/reviews/${reviewId}/comments`, values, { headers: { Authorization: `Bearer ${token}` } })
       .then(() => {
-        // no reason for this console. just needed to call previousPage somewhere
-        console.log(previousPage)
-        history.push('/review/id')
+        history.push(previousPage)
       })
       .catch(err => console.log(err))
   }
@@ -28,8 +28,8 @@ export const PostComment = ({ reviewId, previousPage }) => {
   return <div className="post-comment">
     <h4>Add comment</h4>
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="comment"></label><br></br>
-      <textarea ref={register} />
+      <label htmlFor="text"></label><br></br>
+      <textarea name='text' ref={register} />
       <p>{errors.comment?.message}</p>
 
       <button type="submit">Submit</button>

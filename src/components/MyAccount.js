@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from 'react'
 import Axios from 'axios'
 import { UserContext } from './Context'
 import { Link } from 'react-router-dom'
-import { ReviewList } from './ReviewList'
+import { ReviewListItem } from './ReviewList'
 import { SiteList } from './SiteList'
 
 export const MyAccount = () => {
@@ -80,17 +80,14 @@ export const MyAccount = () => {
       {(userDetails.recAreaReviews.length || userDetails.campgroundReviews.length) ?
         <div className="my-reviews">
           <div className="rec-area-reviews">
-            {userDetails.recAreaReviews.map((review, i) => <ReviewList key ={i} review={review} displayName={false} />)}
+            {userDetails.recAreaReviews.map((review, i) => <ReviewListItem key ={i} review={review} displayName={false} enableComments={false} displayAvatar={false}/>)}
           </div>
           <div className="campground-reviews">
-            {userDetails.campgroundReviews.map((review, i) => <ReviewList key ={i} review={review} displayName={false} />)}
+            {userDetails.campgroundReviews.map((review, i) => <ReviewListItem key ={i} review={review} displayName={false} enableComments={false} displayAvatar={false}/>)}
           </div>
         </div> :
         <p>You haven&apos;t left any reviews yet. Why not add one for somewhere you&apos;ve been?</p>
       }
-
-
-
     </section>
   )
 }

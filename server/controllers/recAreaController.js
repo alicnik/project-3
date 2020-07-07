@@ -4,7 +4,7 @@ function index(req, res) {
   RecArea
     .find()
     .then(recAreas => {
-      // recAreas.length = 10
+      recAreas.length = 10
       res.send(recAreas)
     })
 }
@@ -16,6 +16,17 @@ function getOneSpot(req, res) {
     .populate({
       path: 'reviews',
       populate: { path: 'user' }
+    })
+    .populate({
+      path: 'reviews',
+      populate: { path: 'comments' }
+    })
+    .populate({
+      path: 'reviews',
+      populate: {
+        path: 'comments',
+        populate: 'user'
+      }
     })
     .populate('campgrounds')
     .then(recArea => {

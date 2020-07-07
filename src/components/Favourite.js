@@ -19,7 +19,7 @@ export const Favourite = () => {
     Axios.put(`/api/users/${currentUser.id}`, { [collection]: siteId }, { headers: { Authorization: `Bearer ${token}` } })
       .then(response => console.log(response))
       .catch(err => console.log(err))
-  })
+  }, [isFavourite])
 
   const handleClick = () => {
     setIsFavourite(previous => !previous)

@@ -12,7 +12,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 
-export const RatingIcons = ({ iconStyle = 'star', color = 'yellow', num = 5, rating, numOfReviews }) => {
+export const RatingIcons = ({ 
+  iconStyle = 'star', 
+  color = 'orange', 
+  num = 5, 
+  rating, 
+  showNumOfReviews = true, 
+  numOfReviews 
+}) => {
 
   const icons = {
     star: { empty: emptyStar, half: halfStar, whole: wholeStar },
@@ -29,7 +36,7 @@ export const RatingIcons = ({ iconStyle = 'star', color = 'yellow', num = 5, rat
           color={color}
         />
       ))}
-      <span>{numOfReviews} reviews</span>
+      {showNumOfReviews && <span>{numOfReviews} reviews</span>}
     </div>
   )
 }
