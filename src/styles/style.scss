@@ -16,6 +16,20 @@ img {
   max-width: 100%;
 }
 
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  height: 90vh;
+  justify-content: center;
+  align-items: center;
+  .loading {
+    width: 250px;
+    border-radius: 50%;
+  }
+}
+
+
 .preview-img {
   width: 500px;
 }

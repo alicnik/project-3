@@ -4,16 +4,29 @@ import axios from 'axios'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { RatingIcons } from './RatingIcons'
 import { RecAreaMap } from './RecAreaMap'
+import loadingGif from '../assets/loading.gif'
 
 export const RecAreas = () => {
   const [recAreasData, updateRecAreasData] = useState([])
+  const [loading, setLoading] = useState(true)
+  // const [currentPage, setCurrentPage] = useState(1)
+  // const [recAreasPerPage, setRecAreasPerPage] = useState(10)
 
   useEffect(() => {
+
     axios.get('/api/recareas')
       .then(axiosResp => {
         updateRecAreasData(axiosResp.data)
+        setLoading(previous => !previous)
       })
   }, [])
+
+  if (!recAreasData.length)
+    return <div className="loading-container">
+      <img className="loading" src={loadingGif} alt="loading" />
+      <h2>Loading...</h2>
+    </div>
+
 
   return <section id="browse">
     <h1>Rec Areas</h1>
@@ -42,7 +55,7 @@ export const RecAreas = () => {
       </TabPanel>
       <TabPanel>
         <h2>Map View</h2>
-        <RecAreaMap />
+        {/* <RecAreaMap /> */}
       </TabPanel>
     </Tabs>
   </section>
