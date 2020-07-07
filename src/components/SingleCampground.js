@@ -5,14 +5,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock as checkInTime, faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 import { faDog as petsAllowed, faClock as checkOutTime, faPhone, faAt, faCarSide } from '@fortawesome/free-solid-svg-icons'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { Carousel } from 'react-responsive-carousel'
 import { ReviewListItem } from './ReviewList'
 import { PostReviewButton } from './PostReviewButton'
 import { StarRating } from './StarRating'
+<<<<<<< HEAD
 import { RatingIcons } from './RatingIcons'
 import { UserContext } from './Context'
+=======
+import loadingGif from '../assets/loading.gif'
+>>>>>>> development
 
 export const SingleCampground = () => {
-  
+
   const [campground, setCampground] = useState()
   const { pathname } = useLocation()
   const campgroundId = pathname.match(/campgrounds\/(\w+)$/)[1]
@@ -32,7 +37,10 @@ export const SingleCampground = () => {
     })
   }
 
-  if (!campground) return <h1>Loading...</h1>
+  if (!campground) return <div className="loading-container">
+    <img className="loading" src={loadingGif} alt="loading" />
+    <h2>Loading...</h2>
+  </div>
 
   return (
     <section id='single-campground'>
@@ -41,10 +49,15 @@ export const SingleCampground = () => {
         <div className="review-header">
           {campground.reviews.length >= 1 ?
             <>
+<<<<<<< HEAD
             {currentUser.isLoggedIn ? 
               <StarRating rating={campground.avgRating} setRating={reviewViaStarRating}/> :
               <RatingIcons rating={campground.avgRating} showNumOfReviews={false}/>}
             <p>Rating: {campground.avgRating} ({campground.reviews.length})</p> 
+=======
+              <StarRating rating={campground.avgRating} setRating={reviewViaStarRating} />
+              <p>Rating: {campground.avgRating} ({campground.reviews.length})</p>
+>>>>>>> development
             </>
             :
             <>
@@ -58,8 +71,11 @@ export const SingleCampground = () => {
             </>
           }
         </div>
+
         <div className="carousel-container">
-          {campground.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
+          <Carousel>
+            {campground.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
+          </Carousel>
         </div>
         <div className="campground-attributes">
           {<>
@@ -108,12 +124,12 @@ export const SingleCampground = () => {
           <TabPanel>
             <div className="reviews">
               <h2>Reviews</h2>
-              <PostReviewButton/>
-              {campground.reviews.length ? 
-                campground.reviews.map((review, i) => <ReviewListItem 
-                  key={i} 
-                  review={review} 
-                  siteCollection = 'campgrounds'
+              <PostReviewButton />
+              {campground.reviews.length ?
+                campground.reviews.map((review, i) => <ReviewListItem
+                  key={i}
+                  review={review}
+                  siteCollection='campgrounds'
                 />) :
                 <p>No reviews yet. Have you been here? &nbsp;
                   <Link to={{

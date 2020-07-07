@@ -5,12 +5,17 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { Favourite } from './Favourite'
 import { UserContext } from './Context'
 import { Visited } from './Visited'
+import { Carousel } from 'react-responsive-carousel'
 import { ReviewListItem } from './ReviewList'
 import { PostReviewButton } from './PostReviewButton'
 import { StarRating } from './StarRating'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
+<<<<<<< HEAD
 import { RatingIcons } from './RatingIcons'
+=======
+import loadingGif from '../assets/loading.gif'
+>>>>>>> development
 
 export const SingleRecArea = (props) => {
 
@@ -25,42 +30,58 @@ export const SingleRecArea = (props) => {
     Axios.get(`/api/recareas/${recAreaId}`)
       .then(response => setRecArea(response.data))
   }, [recAreaId])
-  
+
   function reviewViaStarRating(e) {
     history.push({
       pathname: '/postreview',
       state: { siteCollection, siteId, rating: e }
     })
   }
-  
-  if (!recArea) return <h1>Loading...</h1>
+
+  if (!recArea) return <div className="loading-container">
+    <img className="loading" src={loadingGif} alt="loading" />
+    <h2>Loading...</h2>
+  </div>
 
   return (
     <section>
       <div className="rec-area-info">
         <h1>{recArea.name}</h1>
-        
+
         {recArea.reviews.length >= 1 ?
           <>
+<<<<<<< HEAD
           {currentUser.isLoggedIn ? 
             <StarRating rating={recArea.avgRating} setRating={reviewViaStarRating}/> :
             <RatingIcons rating={recArea.avgRating} showNumOfReviews={false}/>}
           <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
+=======
+            <StarRating rating={recArea.avgRating} setRating={reviewViaStarRating} />
+            <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
+>>>>>>> development
           </> :
           <>
-          <FontAwesomeIcon icon={faQuestionCircle} color='green' />
-          <p>No reviews yet. Have you been here? &nbsp;
-            <Link to={{
-              pathname: '/postreview',
-              state: { siteCollection: 'recareas', siteId: recAreaId }
-            }}>Leave a review.</Link>
-          </p>
+            <FontAwesomeIcon icon={faQuestionCircle} color='green' />
+            <p>No reviews yet. Have you been here? &nbsp;
+              <Link to={{
+                pathname: '/postreview',
+                state: { siteCollection: 'recareas', siteId: recAreaId }
+              }}>Leave a review.</Link>
+            </p>
           </>
         }
+<<<<<<< HEAD
         {currentUser.isLoggedIn && <> <Favourite /> <Visited /> </>}
+=======
+        {/* Accepted both changes but made page funny */}
+        {/* {currentUser.isLoggedIn && <><Favourite /><Visited /></>} */}
+>>>>>>> development
         <div className="carousel-container">
-          {recArea.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
+          <Carousel>
+            {recArea.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
+          </Carousel>
         </div>
+
         <Tabs>
           <TabList>
             <Tab>Info</Tab>
@@ -83,12 +104,12 @@ export const SingleRecArea = (props) => {
           <TabPanel>
             <div className="reviews">
               <h2>Reviews</h2>
-              <PostReviewButton/>
-              {recArea.reviews.length ? 
-                recArea.reviews.map((review, i) => <ReviewListItem 
-                  key={i} 
-                  review={review} 
-                  siteCollection = 'recareas'
+              <PostReviewButton />
+              {recArea.reviews.length ?
+                recArea.reviews.map((review, i) => <ReviewListItem
+                  key={i}
+                  review={review}
+                  siteCollection='recareas'
                 />) :
                 <p>No reviews yet. Have you been here? &nbsp;
                   <Link to={{
