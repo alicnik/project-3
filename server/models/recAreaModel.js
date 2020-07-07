@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const recAreaSchema = new mongoose.Schema({
   name: { type: String },
@@ -22,6 +23,8 @@ const recAreaSchema = new mongoose.Schema({
   }],
   campgrounds: [{ type: mongoose.Schema.ObjectId, ref: 'Campground' }]
 })
+
+recAreaSchema.plugin(mongoosePaginate)
 
 module.exports = mongoose.model('RecArea', recAreaSchema)
 

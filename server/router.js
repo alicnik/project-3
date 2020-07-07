@@ -26,6 +26,9 @@ router.route('/recareas')
 router.route('/recareas/:id')
   .get(recAreaController.getOneSpot)
 
+router.route('/recareas/states/:state')
+  .get(recAreaController.getByState)
+
 router.route('/recareas/:id/campgrounds')
   .get(campgroundController.campgroundsByRecArea)
 

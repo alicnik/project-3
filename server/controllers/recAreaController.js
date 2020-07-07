@@ -2,11 +2,19 @@ const RecArea = require('../models/recAreaModel')
 
 function index(req, res) {
   RecArea
-    .find()
+    .paginate()
     .then(recAreas => {
       recAreas.length = 10
       res.send(recAreas)
     })
+}
+
+function getByState(req, res) {
+  console.log(req.params.state)
+  RecArea
+    .find({ state: req.params.state })
+    .then(recAreas => res.status(200).send(recAreas))
+    .catch(err => console.log(err))
 }
 
 function getOneSpot(req, res) {
@@ -38,5 +46,6 @@ function getOneSpot(req, res) {
 
 module.exports = {
   index,
-  getOneSpot
+  getOneSpot,
+  getByState
 }

@@ -5,21 +5,30 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { RatingIcons } from './RatingIcons'
 import { RecAreaMap } from './RecAreaMap'
 import loadingGif from '../assets/loading.gif'
+import { states } from './helpers'
 
 export const RecAreas = () => {
   const [recAreasData, updateRecAreasData] = useState([])
-  const [loading, setLoading] = useState(true)
-  // const [currentPage, setCurrentPage] = useState(1)
-  // const [recAreasPerPage, setRecAreasPerPage] = useState(10)
+  const [query, setQuery] = useState({})
+  const [chosenState, setChosenState] = useState('AK')
 
   useEffect(() => {
-
-    axios.get('/api/recareas')
+    axios.get(`/api/recareas/states/${chosenState}`)
       .then(axiosResp => {
+        console.log(axiosResp)
         updateRecAreasData(axiosResp.data)
-        setLoading(previous => !previous)
       })
-  }, [])
+  }, [chosenState])
+
+  function handleChange(e) {
+    setChosenState(e.target.value)
+    setQuery({
+      ...query,
+      state: e.target.value
+    })
+  }
+
+
 
   if (!recAreasData.length)
     return <div className="loading-container">
@@ -30,6 +39,11 @@ export const RecAreas = () => {
 
   return <section id="browse">
     <h1>Rec Areas</h1>
+
+    <select name="state" id="state" value={query.state} onChange={handleChange}>
+      {states.sort().map((state, i) => <option key={i} value={state}>{state}</option>)}
+    </select>
+
     <Tabs>
       <TabList>
         <Tab>List</Tab>
