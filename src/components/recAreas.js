@@ -69,7 +69,7 @@ export const RecAreas = () => {
       <TabPanel>
         <h2>Map View</h2>
 
-        <RecAreaMap />
+        <RecAreaMap chosenState={chosenState}/>
       </TabPanel>
     </Tabs>
   </section>
