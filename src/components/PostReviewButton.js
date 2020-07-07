@@ -1,16 +1,28 @@
-import React from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { useLocation, Link, useHistory } from 'react-router-dom'
+import { UserContext } from './Context'
 
 export const PostReviewButton = () => {
 
   const [, siteCollection, siteId] = useLocation().pathname.match(/\/(\w+)\/(\w+)$/)
+  const { currentUser } = useContext(UserContext)
+  const history = useHistory()
 
-  return (
-    <Link to={{
+  function handleClick() {
+    history.push({
       pathname: '/postreview',
       state: { siteCollection, siteId }
-    }}>
-      <button>Post a review</button>
-    </Link>
+    })
+  }
+
+  return (
+    <button 
+      onClick={handleClick} 
+      disabled={!currentUser.isLoggedIn}
+      title={currentUser.isLoggedIn ? 'Post a review' : 'You must be logged in to post a review'}
+    >
+    Post a review
+    </button>
   )
+
 }

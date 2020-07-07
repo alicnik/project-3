@@ -33,7 +33,6 @@ export const RecAreas = () => {
                 <h3>{recArea.city}, {recArea.state}</h3>
                 <img src={recArea.media[0].url} alt={recArea.name} />
                 <RatingIcons rating={recArea.avgRating} numOfReviews={recArea.reviews.length} />
-                <p>Rating</p>
               </article>
             </Link>
           )

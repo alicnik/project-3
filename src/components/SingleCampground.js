@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import Axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,6 +8,8 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { ReviewListItem } from './ReviewList'
 import { PostReviewButton } from './PostReviewButton'
 import { StarRating } from './StarRating'
+import { RatingIcons } from './RatingIcons'
+import { UserContext } from './Context'
 
 export const SingleCampground = () => {
   
@@ -16,6 +18,7 @@ export const SingleCampground = () => {
   const campgroundId = pathname.match(/campgrounds\/(\w+)$/)[1]
   const attributeIcons = { petsAllowed, checkInTime, checkOutTime }
   const [, siteCollection, siteId] = useLocation().pathname.match(/\/(\w+)\/(\w+)$/)
+  const { currentUser } = useContext(UserContext)
 
   useEffect(() => {
     Axios.get(`/api/campgrounds/${campgroundId}`)
@@ -38,7 +41,9 @@ export const SingleCampground = () => {
         <div className="review-header">
           {campground.reviews.length >= 1 ?
             <>
-            <StarRating rating={campground.avgRating} setRating={reviewViaStarRating}/>
+            {currentUser.isLoggedIn ? 
+              <StarRating rating={campground.avgRating} setRating={reviewViaStarRating}/> :
+              <RatingIcons rating={campground.avgRating} showNumOfReviews={false}/>}
             <p>Rating: {campground.avgRating} ({campground.reviews.length})</p> 
             </>
             :

@@ -10,6 +10,7 @@ import { PostReviewButton } from './PostReviewButton'
 import { StarRating } from './StarRating'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
+import { RatingIcons } from './RatingIcons'
 
 export const SingleRecArea = (props) => {
 
@@ -18,6 +19,7 @@ export const SingleRecArea = (props) => {
   const recAreaId = props.location.state?.recAreaId || props.location.pathname.match(/\/(\w+)$/)[1]
   const [, siteCollection, siteId] = useLocation().pathname.match(/\/(\w+)\/(\w+)$/)
   const history = useHistory()
+
 
   useEffect(() => {
     Axios.get(`/api/recareas/${recAreaId}`)
@@ -40,7 +42,9 @@ export const SingleRecArea = (props) => {
         
         {recArea.reviews.length >= 1 ?
           <>
-          <StarRating rating={recArea.avgRating} setRating={reviewViaStarRating}/>
+          {currentUser.isLoggedIn ? 
+            <StarRating rating={recArea.avgRating} setRating={reviewViaStarRating}/> :
+            <RatingIcons rating={recArea.avgRating} showNumOfReviews={false}/>}
           <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
           </> :
           <>
@@ -53,7 +57,7 @@ export const SingleRecArea = (props) => {
           </p>
           </>
         }
-        {currentUser.isLoggedIn && <><Favourite /><Visited /></>}
+        {currentUser.isLoggedIn && <> <Favourite /> <Visited /> </>}
         <div className="carousel-container">
           {recArea.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
         </div>

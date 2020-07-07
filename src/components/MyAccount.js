@@ -24,7 +24,15 @@ export const MyAccount = () => {
     e.preventDefault()
     const token = localStorage.getItem('token')
     Axios.put(`/api/users/${currentUser.id}`, { bio }, { headers: { Authorization: `Bearer ${token}` } })
-      .then(response => console.log(response))
+      .then(response => {
+        setUserDetails({
+          ...userDetails,
+          bio: response.data.bio
+        })
+        setEditingBio(false)
+      }
+      )
+      
       .catch(error => console.log(error))
   }
 
@@ -39,8 +47,12 @@ export const MyAccount = () => {
       <Link to='account/settings'><p>Change avatar</p></Link>
       <h3>My bio:</h3>
       {userDetails.bio ?
-        <p>{userDetails.bio}</p> :
-        <p>No bio yet...<Link onClick={() => setEditingBio(true)}>add one</Link></p>
+        <>
+        <p>{userDetails.bio}</p>
+        <span onClick={() => setEditingBio(true)}>Edit bio</span>
+        </>
+        :
+        <p>No bio yet...<span onClick={() => setEditingBio(true)}>add one</span></p>
       }
       {editingBio && <form>
         <label htmlFor="edit-bio">Edit your bio here</label>

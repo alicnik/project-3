@@ -36,7 +36,7 @@ export const RatingIcons = ({
           color={color}
         />
       ))}
-      {showNumOfReviews && <span>{numOfReviews} reviews</span>}
+      {showNumOfReviews && <span>{numOfReviews} {numOfReviews === 1 ? 'review' : 'reviews'}</span>}
     </div>
   )
 }
