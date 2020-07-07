@@ -4,9 +4,9 @@ function index(req, res) {
   RecArea
     .find()
     .then(recAreas => {
-      recAreas.length = 25
       res.send(recAreas)
     })
+    .catch(err => console.log(err))
 }
 
 function getByState(req, res) {
