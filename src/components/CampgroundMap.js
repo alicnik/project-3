@@ -22,8 +22,8 @@ export const CampgroundMap = () => {
   const [viewPort, setViewPort] = useState({
 
 
-    height: '100vh',
-    width: '100vw',
+    height: '80vh',
+    width: '80vw',
     zoom: 3,
     latitude: 37.2761451,
     longitude: -104.6494972
@@ -35,36 +35,40 @@ export const CampgroundMap = () => {
 
   //! can change API token and  mapbox account
 
-  return <MapGL
+  return <section id="map-container">
+    <MapGL
 
-    mapboxApiAccessToken={'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'}
+      mapboxApiAccessToken={'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'}
 
-    {...viewPort}
+      {...viewPort}
 
-    onViewportChange={(viewPort) => setViewPort(viewPort)}>
+      onViewportChange={(viewPort) => setViewPort(viewPort)}>
 
-    {campgroundsData.map(campground => {
-      return <Marker
-        key={campground._id}
-        latitude={campground.latitude}
-        longitude={campground.longitude}
-      >
-        <div>
+      {campgroundsData.map(campground => {
+        return <Marker
+          key={campground._id}
+          latitude={campground.latitude}
+          longitude={campground.longitude}
+        >
+          <div>
 
-          <span><small>{campground.name}</small></span> <br></br>
-          🚩
+            <span><small>{campground.name}</small></span> <br></br>
+      🚩
 
-          {/* <span>{campground.name}</span>
-          <span>{campground.city}, {campground.state}</span>
-          <span>src={campground.media[0].url}</span> */}
+      {/* <span>{campground.name}</span>
+      <span>{campground.city}, {campground.state}</span>
+      <span>src={campground.media[0].url}</span> */}
 
-        </div>
+          </div>
 
-      </Marker>
+        </Marker>
 
-    })}
+      })}
 
-  </MapGL>
+    </MapGL>
+
+  </section>
+
 }
 
 // ? two components into one page; rather than adding another route
