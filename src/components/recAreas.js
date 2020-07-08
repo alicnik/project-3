@@ -33,7 +33,7 @@ export const RecAreas = () => {
 
 
   if (!recAreasData.length)
-    return <div className="loading-container">
+    return <div id="loading-container">
       <img className="loading" src={loadingGif} alt="loading" />
       <h2>Loading...</h2>
     </div>
@@ -59,9 +59,11 @@ export const RecAreas = () => {
             <Link to={{ pathname: `/recareas/${recArea._id}`, state: { recAreaId: recArea._id } }} key={index}>
               <article className="tile">
                 <h2>{recArea.name}</h2>
-                <h3>{recArea.city}, {recArea.state}</h3>
+                <div className="rating">
+                  <RatingIcons rating={recArea.avgRating} numOfReviews={recArea.reviews.length} />
+                </div>
                 <img className="preview-img" src={recArea.media[0].url} alt={recArea.name} />
-                <RatingIcons rating={recArea.avgRating} numOfReviews={recArea.reviews.length} />
+                <h3>{recArea.city}, {recArea.state}</h3>
               </article>
             </Link>
           )

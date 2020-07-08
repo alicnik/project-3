@@ -48,21 +48,21 @@ export const SingleRecArea = (props) => {
 
         <div className="review-header">
           {recArea.reviews.length >= 1 ?
-          <>
-          {currentUser.isLoggedIn ? 
-            <StarRating rating={recArea.avgRating} setRating={reviewViaStarRating}/> :
-            <RatingIcons rating={recArea.avgRating} showNumOfReviews={false}/>
-          }
-          <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
-          </> :
-          <>
-            <FontAwesomeIcon icon={faQuestionCircle} color='green' />
-            <p>No reviews yet.&nbsp;
-              <Link to={{
-                pathname: '/postreview',
-                state: { siteCollection: 'recareas', siteId: recAreaId }
-              }}>Leave a review.</Link>
-            </p>
+            <>
+              {currentUser.isLoggedIn ?
+                <StarRating rating={recArea.avgRating} setRating={reviewViaStarRating} /> :
+                <RatingIcons rating={recArea.avgRating} showNumOfReviews={false} />
+              }
+              <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
+            </> :
+            <>
+              <FontAwesomeIcon icon={faQuestionCircle} color='green' />
+              <p>No reviews yet.&nbsp;
+                <Link to={{
+                  pathname: '/postreview',
+                  state: { siteCollection: 'recareas', siteId: recAreaId }
+                }}>Leave a review.</Link>
+              </p>
           </>
           }
         </div>
