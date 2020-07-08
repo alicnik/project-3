@@ -12,6 +12,8 @@ import { StarRating } from './StarRating'
 import { RatingIcons } from './RatingIcons'
 import { UserContext } from './Context'
 import loadingGif from '../assets/loading.gif'
+import { Favourite } from './Favourite'
+import { Visited } from './Visited'
 
 export const SingleCampground = () => {
 
@@ -34,14 +36,14 @@ export const SingleCampground = () => {
     })
   }
 
-  if (!campground) return <div className="loading-container">
+  if (!campground) return <div id="loading-container">
     <img className="loading" src={loadingGif} alt="loading" />
     <h2>Loading...</h2>
   </div>
 
   return (
-    <section id='single-campground'>
-      <div className="rec-area-info">
+    <section id='single-site' className="single-campground">
+      <div className="site-info campground-info">
         <h1>{campground.name}</h1>
         <div className="review-header">
           {campground.reviews.length >= 1 ?
@@ -54,7 +56,7 @@ export const SingleCampground = () => {
             :
             <>
               <FontAwesomeIcon icon={faQuestionCircle} color='green' />
-              <p>No reviews yet. Have you been here? &nbsp;
+              <p>No reviews yet.&nbsp;
                 <Link to={{
                   pathname: '/postreview',
                   state: { siteCollection: 'campgrounds', siteId: campgroundId }
@@ -63,9 +65,15 @@ export const SingleCampground = () => {
             </>
           }
         </div>
+        <div className="wish-list-visited-container">
+          {currentUser.isLoggedIn && <> 
+          <p>Add to wishlist</p> <Favourite />
+          <p>Mark as visited</p> <Visited /> </>
+          }
+        </div>
 
         <div className="carousel-container">
-          <Carousel>
+          <Carousel autoplay dynamicHeight showThumbs={false}>
             {campground.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
           </Carousel>
         </div>

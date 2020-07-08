@@ -13,14 +13,16 @@ export const NavBar = () => {
     <p id="logo"><Link to="/home">Logo</Link></p>
     <ul>
       <li><Link to="/recareas">Explore</Link></li>
-      {currentUser.isLoggedIn && <>
+      {currentUser.isLoggedIn ? 
+      <>
         <li><Link to="/account">My Account</Link></li>
-        <li onClick={logOut}><Link to="/">Logout</Link></li>
-      </>}
-      {!currentUser.isLoggedIn && <>
+        <li onClick={logOut}>Logout</li>
+      </> :
+      <>
         <li><Link to="/login">Login</Link></li>
         <li><Link to="/register">Register</Link></li>
-      </>}
+      </>
+      }
     </ul>
 
   </nav>
