@@ -39,7 +39,7 @@ export const Campgrounds = (props) => {
   }, [])
 
   if (campgroundsData?.length === 0) {
-    if (!hotelsData.length) return <div className="loading-container">
+    if (!hotelsData.length) return <div id="loading-container">
       <img className="loading" src={loadingGif} alt="loading" />
       <h2>Loading...</h2>
     </div>
