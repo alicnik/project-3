@@ -46,28 +46,22 @@ export const SingleRecArea = (props) => {
         <h1>{recArea.name}</h1>
         <div className="review-header">
           {recArea.reviews.length >= 1 ?
-          <>
-          {currentUser.isLoggedIn ? 
-            <StarRating rating={recArea.avgRating} setRating={reviewViaStarRating}/> :
-            <RatingIcons rating={recArea.avgRating} showNumOfReviews={false}/>
-          }
-          <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
-          </> :
-          <>
-            <FontAwesomeIcon icon={faQuestionCircle} color='green' />
-            <p>No reviews yet.&nbsp;
+            <>
+              {currentUser.isLoggedIn ?
+                <StarRating rating={recArea.avgRating} setRating={reviewViaStarRating} /> :
+                <RatingIcons rating={recArea.avgRating} showNumOfReviews={false} />
+              }
+              <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
+            </> :
+            <>
+              <FontAwesomeIcon icon={faQuestionCircle} color='green' />
+              <p>No reviews yet.&nbsp;
               <Link to={{
-                pathname: '/postreview',
-                state: { siteCollection: 'recareas', siteId: recAreaId }
-              }}>Leave a review.</Link>
-            </p>
-          </>
-          }
-        </div>
-        <div className="wish-list-visited-container" style={{ display: currentUser.isLoggedIn ? 'flex' : 'none' }}>
-          {currentUser.isLoggedIn && <> 
-          <p>Add to wishlist</p> <Favourite />
-          <p>Mark as visited</p> <Visited /> </>
+                  pathname: '/postreview',
+                  state: { siteCollection: 'recareas', siteId: recAreaId }
+                }}>Leave a review.</Link>
+              </p>
+            </>
           }
         </div>
         <div className="carousel-container">
@@ -75,6 +69,13 @@ export const SingleRecArea = (props) => {
             {recArea.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
           </Carousel>
         </div>
+        <div className="wish-list-visited-container" style={{ display: currentUser.isLoggedIn ? 'flex' : 'none' }}>
+          {currentUser.isLoggedIn && <>
+            <p>Add to wishlist</p> <Favourite />
+            <p>Mark as visited</p> <Visited /> </>
+          }
+        </div>
+
 
         <Tabs>
           <TabList>

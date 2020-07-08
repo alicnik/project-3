@@ -33,7 +33,7 @@ export const RecAreas = () => {
 
 
   if (!recAreasData.length)
-    return <div className="loading-container">
+    return <div id="loading-container">
       <img className="loading" src={loadingGif} alt="loading" />
       <h2>Loading...</h2>
     </div>

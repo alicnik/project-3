@@ -324,6 +324,10 @@ body {
   width: 100vw;
   display: flex;
   justify-content: center;
+  .markerButton {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+  }
 }
 
 .popoutRec {
