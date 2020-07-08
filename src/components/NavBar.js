@@ -1,10 +1,13 @@
 import React, { useContext } from 'react'
 import { UserContext } from './Context'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 export const NavBar = () => {
 
   const { currentUser, logOut } = useContext(UserContext)
+  const pathname = useLocation().pathname
+
+  if (pathname === '/') return null
 
   return <nav id="navbar" role="navigation" aria-label="main">
     <p id="logo"><Link to="/home">Logo</Link></p>
