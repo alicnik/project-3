@@ -43,11 +43,11 @@ export const RecAreaMap = ({ chosenState }) => {
 
   return (
     <section id="map-container">
-      <MapGL 
-        className="rec-map" 
-        mapboxApiAccessToken={'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'} 
-        {...viewPort} 
-        mapStyle="mapbox://styles/zchabek/ckcbrcts80cxf1ip9emnpyj48" 
+      <MapGL
+        className="rec-map"
+        mapboxApiAccessToken={'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'}
+        {...viewPort}
+        mapStyle="mapbox://styles/zchabek/ckcbrcts80cxf1ip9emnpyj48"
         onViewportChange={(viewPort) => setViewPort(viewPort)}
       >
         {recAreasData.map(recArea => {
@@ -58,19 +58,19 @@ export const RecAreaMap = ({ chosenState }) => {
           )
         })}
         {selectedRecArea ? (
-          <Popup 
-            closeOnClick={false} 
-            latitude={selectedRecArea.latitude} 
-            longitude={selectedRecArea.longitude} 
+          <Popup
+            closeOnClick={false}
+            latitude={selectedRecArea.latitude}
+            longitude={selectedRecArea.longitude}
             onClose={() => setSelectedRecArea(null)}
           >
             <Link to={`/recareas/${selectedRecArea._id}`}>
               <div>
                 <h3>{selectedRecArea.name}</h3>
-                <img 
+                <img
                   onClick={e => console.log(e)}
                   className="popoutRec"
-                  src={selectedRecArea.media[0].url} 
+                  src={selectedRecArea.media[0].url}
                   alt='rec area'
                 />
               </div>
