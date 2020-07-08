@@ -45,8 +45,6 @@ const App = () => {
               <Route exact path='/account' component={MyAccount} />
               <Route exact path='/account/settings' component={Settings} />
               <Route path='/recareas/:id/campgrounds' component={Campgrounds} />
-              <Route path='/recareamap' component={RecAreaMap} />
-              <Route path='/campgroundmap' component={CampgroundMap} />
               <Route path='/recareasp' component={RecAreasPaginated} />
             </Switch>
           </main>
