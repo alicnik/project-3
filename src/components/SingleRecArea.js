@@ -42,8 +42,10 @@ export const SingleRecArea = (props) => {
 
   return (
     <section id="single-site" className="single-rec-area">
+
       <div className="site-info rec-area-info">
         <h1>{recArea.name}</h1>
+
         <div className="review-header">
           {recArea.reviews.length >= 1 ?
           <>
@@ -64,23 +66,27 @@ export const SingleRecArea = (props) => {
           </>
           }
         </div>
+
+        <div className="carousel-container">
+          <Carousel autoplay dynamicHeight showThumbs={false}>
+            {recArea.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
+          </Carousel>
+        </div>
+        
         <div className="wish-list-visited-container" style={{ display: currentUser.isLoggedIn ? 'flex' : 'none' }}>
           {currentUser.isLoggedIn && <> 
           <p>Add to wishlist</p> <Favourite />
           <p>Mark as visited</p> <Visited /> </>
           }
         </div>
-        <div className="carousel-container">
-          <Carousel autoplay dynamicHeight showThumbs={false}>
-            {recArea.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
-          </Carousel>
-        </div>
 
         <Tabs>
+
           <TabList>
             <Tab>Info</Tab>
             <Tab>Reviews</Tab>
           </TabList>
+
           <TabPanel>
             <div className='accordion-container'>
               <article className="description">
@@ -95,24 +101,18 @@ export const SingleRecArea = (props) => {
               </Link>
             </div>
           </TabPanel>
+
           <TabPanel>
             <div className="reviews">
-              <h2>Reviews</h2>
-              <PostReviewButton />
               {recArea.reviews.length ?
                 recArea.reviews.map((review, i) => <ReviewListItem
                   key={i}
                   review={review}
                   siteCollection='recareas'
                 />) :
-                <p>No reviews yet. Have you been here? &nbsp;
-                  <Link to={{
-                    pathname: '/postreview',
-                    state: { siteCollection: 'recareas', siteId: recAreaId }
-                  }}>Leave a review.</Link>
-                </p>
-
+                <p>No reviews yet.</p>
               }
+              <PostReviewButton />
             </div>
           </TabPanel>
         </Tabs>
