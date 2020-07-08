@@ -1,88 +1,135 @@
 import React, { useState, useEffect } from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
-
-import MapGL, { Marker } from 'react-map-gl'
 import { useLocation } from 'react-router-dom'
+import MapGL, { Marker, Popup } from 'react-map-gl'
+
+
+// import MapGL, { Marker, Popup, WebMercatorViewport, FlyToInterpolator } from 'react-map-gl'
+
+//! can change API token and  mapbox account
 
 export const CampgroundMap = () => {
-  const [campgroundsData, updateCampgroundsData] = useState(
-    []
-  )
+  const [campgroundsData, updateCampgroundsData] = useState([])
+  const [selectedCampground, setSelectedCampground] = useState(null)
+  const [viewPort, setViewPort] = useState({
+    altitude: 1.5,
+    bearing: 0,
+    height: '80vh',
+    width: '80vw',
+    zoom: 7,
+    // maxPitch: 60,
+    // maxZoom: 24,
+    // minZoom: 0,
+    // pitch: 0,
+    latitude: 37.2761451,
+    longitude: -104.6494972
+
+    // for  fit bounds zoom = 3
+
+  })
+
+  // function calculateBounds(array) {
+  //   const values = array.reduce((bounds, location) => {
+  //     if (location.latitude > bounds.maxlat) bounds.maxlat = location.latitude
+  //     if (location.latitude < bounds.minlat) bounds.minlat = location.latitude
+  //     if (location.longitude > bounds.maxlon) bounds.maxlon = location.longitude
+  //     if (location.longitude < bounds.minlon) bounds.minlon = location.longitude
+  //     return bounds
+  //   }, { minlat: 90, maxlat: -90, minlon: 180, maxlon: -180 })
+  //   return [[values.minlon, values.minlat], [values.maxlon, values.maxlat]]
+  // }
 
   const [, recAreaId] = useLocation().pathname.match(/\/(\w+)\/(\w+)$/)
 
+  // change to zoomed in for campground props
+  // latitude: campgroundsData[0].latitude,
+  // longitude: campgroundsData[0].longitude
 
   useEffect(() => {
     axios.get(`/api/recareas/${recAreaId}/campgrounds`)
       .then(axiosResp => {
         updateCampgroundsData(axiosResp.data)
+        // const bounds = calculateBounds(axiosResp.data)
+
+        // const { longitude, latitude, zoom } = new WebMercatorViewport(viewPort).fitBounds(bounds, { padding: 60, offset: [0, -50] })
+
         setViewPort({
           ...viewPort,
           latitude: axiosResp.data[0].latitude,
           longitude: axiosResp.data[0].longitude
 
+          // longitude,
+          // latitude,
+          // zoom,
+          // transitionDuration: 3000,
+          // transitionInterpolator: new FlyToInterpolator()
+
         })
       })
+      .catch(err => console.log(err))
+  }, [recAreaId])
+
+
+  // !could change state for use effect after the click of a button?
+  //  ! could activate with with a set interval changing a boolean
+
+  useEffect(() => {
+    const listener = e => {
+      if (e.key === 'Escape') {
+        setSelectedCampground(null)
+      }
+    }
+
+    window.addEventListener('keydown', listener)
+    return () => window.removeEventListener('keydown', listener)
   }, [])
 
+  return (
+    <section id="map-container">
+      <MapGL
+        mapboxApiAccessToken={'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'}
+        {...viewPort}
+        mapStyle="mapbox://styles/zchabek/ckcbqjm986dug1kpuzi036e6q"
+        onViewportChange={(viewPort) => setViewPort(viewPort)}
+      >
+        {campgroundsData.map(campground => {
+          return (
+            <Marker
+              key={campground._id}
+              latitude={campground.latitude}
+              longitude={campground.longitude}
+            >
+              <button className="markerButton" onClick={() => setSelectedCampground(campground)}>⛺️</button>
 
-  // ! use the props on the page, instead of calling axios again
 
+            </Marker>
+          )
+        })}
 
-  const [viewPort, setViewPort] = useState({
+        {selectedCampground ? (
+          <Popup
+            closeOnClick={false}
+            latitude={selectedCampground.latitude}
+            longitude={selectedCampground.longitude}
+            onClose={() => setSelectedCampground(null)}
+          >
+            <Link to={`/campgrounds/${selectedCampground._id}`}>
+              <div>
+                <h3>{selectedCampground.name}</h3>
+                <img
+                  className="popoutCampground"
+                  src={selectedCampground.media[0].url}
+                  alt='campground'
+                />
+              </div>
+            </Link>
+          </Popup>
+        ) : null}
 
-
-    height: '80vh',
-    width: '80vw',
-    zoom: 8,
-    // change to zoomed in for campground props
-    // latitude: campgroundsData[0].latitude,
-    // longitude: campgroundsData[0].longitude
-
-    latitude: 37.2761451,
-    longitude: -104.6494972
-
-
-  })
-
-  // !change to longitude and latitude of camnpground area start view
-
-  //! can change API token and  mapbox account
-
-  return <section id="map-container">
-    <MapGL
-
-      mapboxApiAccessToken={'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'}
-
-      {...viewPort}
-      mapStyle="mapbox://styles/zchabek/ckcbqjm986dug1kpuzi036e6q"
-      onViewportChange={(viewPort) => setViewPort(viewPort)}>
-
-      {campgroundsData.map(campground => {
-        return <Marker
-          key={campground._id}
-          latitude={campground.latitude}
-          longitude={campground.longitude}
-        >
-          <div>
-
-            <span><small>{campground.name}</small></span> <br></br>
-            ⛺️
-
-      {/* <span>{campground.name}</span>
-      <span>{campground.city}, {campground.state}</span>
-      <span>src={campground.media[0].url}</span> */}
-
-          </div>
-
-        </Marker>
-
-      })}
-
-    </MapGL>
-
-  </section>
+      </MapGL>
+    </section>
+  )
 
 }
 

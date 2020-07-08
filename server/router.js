@@ -26,6 +26,9 @@ router.route('/recareas')
 router.route('/recareas/:id')
   .get(recAreaController.getOneSpot)
 
+router.route('/queries/')
+  .get(recAreaController.paginate)
+
 router.route('/recareas/states/:state')
   .get(recAreaController.getByState)
 

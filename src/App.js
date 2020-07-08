@@ -18,6 +18,7 @@ import { CampgroundMap } from './components/CampgroundMap'
 import { NavBar } from './components/NavBar'
 import { ScrollToTop } from './components/ScrollToTop'
 import { Settings } from './components/Settings'
+import { RecAreasPaginated } from './components/recAreasPaginated'
 
 const App = () => {
   return (
@@ -46,6 +47,7 @@ const App = () => {
               <Route path='/recareas/:id/campgrounds' component={Campgrounds} />
               <Route path='/recareamap' component={RecAreaMap} />
               <Route path='/campgroundmap' component={CampgroundMap} />
+              <Route path='/recareasp' component={RecAreasPaginated} />
             </Switch>
           </main>
         </ThemeProvider>

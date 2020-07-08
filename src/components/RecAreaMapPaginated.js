@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import MapGL, { Marker, Popup, WebMercatorViewport, FlyToInterpolator } from 'react-map-gl'
@@ -6,9 +6,10 @@ import MapGL, { Marker, Popup, WebMercatorViewport, FlyToInterpolator } from 're
 
 //! can change API token and  mapbox account
 
-export const RecAreaMap = ({ chosenState }) => {
+export const RecAreaMap = () => {
 
   const [recAreasData, updateRecAreasData] = useState([])
+  const [query, setQuery] = useState({})
   const [selectedRecArea, setSelectedRecArea] = useState(null)
   const [viewPort, setViewPort] = useState({
     altitude: 1.5,
@@ -32,17 +33,15 @@ export const RecAreaMap = ({ chosenState }) => {
       if (location.longitude < bounds.minlon) bounds.minlon = location.longitude
       return bounds
     }, { minlat: 90, maxlat: -90, minlon: 180, maxlon: -180 })
-    return [[values.minlon, values.minlat], [values.maxlon, values.maxlat]]
+    return [[values.minlon, values.minlat],[values.maxlon, values.maxlat]]
   }
 
   useEffect(() => {
-    axios.get(`/api/recareas/states/${chosenState}`)
+    axios.get('/api/recareas/')
       .then(axiosResp => {
         const recAreas = axiosResp.data
         updateRecAreasData(recAreas)
         const bounds = calculateBounds(recAreas)
-        console.log('Line 38', viewPort)
-        console.log('line 39', new WebMercatorViewport(viewPort))
         const { longitude, latitude, zoom } = new WebMercatorViewport(viewPort).fitBounds(bounds, { padding: 60, offset: [0, -50] })
         setViewPort({
           ...viewPort,
@@ -53,8 +52,7 @@ export const RecAreaMap = ({ chosenState }) => {
           transitionInterpolator: new FlyToInterpolator()
         })
       })
-      .catch(err => console.log(err))
-  }, [chosenState])
+  }, [query])
 
   useEffect(() => {
     const listener = e => {
@@ -68,11 +66,11 @@ export const RecAreaMap = ({ chosenState }) => {
 
   return (
     <section id="map-container">
-      <MapGL
-        className="rec-map"
-        mapboxApiAccessToken={'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'}
-        {...viewPort}
-        mapStyle="mapbox://styles/zchabek/ckcbrcts80cxf1ip9emnpyj48"
+      <MapGL 
+        className="rec-map" 
+        mapboxApiAccessToken={'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'} 
+        {...viewPort} 
+        mapStyle="mapbox://styles/zchabek/ckcbrcts80cxf1ip9emnpyj48" 
         onViewportChange={(viewPort) => setViewPort(viewPort)}
       >
         {recAreasData.map(recArea => {
@@ -83,18 +81,18 @@ export const RecAreaMap = ({ chosenState }) => {
           )
         })}
         {selectedRecArea ? (
-          <Popup
-            closeOnClick={false}
-            latitude={selectedRecArea.latitude}
-            longitude={selectedRecArea.longitude}
+          <Popup 
+            closeOnClick={false} 
+            latitude={selectedRecArea.latitude} 
+            longitude={selectedRecArea.longitude} 
             onClose={() => setSelectedRecArea(null)}
           >
             <Link to={`/recareas/${selectedRecArea._id}`}>
               <div>
                 <h3>{selectedRecArea.name}</h3>
-                <img
+                <img 
                   className="popoutRec"
-                  src={selectedRecArea.media[0].url}
+                  src={selectedRecArea.media[0].url} 
                   alt='rec area'
                 />
               </div>

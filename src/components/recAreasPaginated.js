@@ -3,34 +3,35 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { RatingIcons } from './RatingIcons'
-import { RecAreaMap } from './RecAreaMap'
+import { RecAreaMap } from './RecAreaMapPaginated'
 import loadingGif from '../assets/loading.gif'
 import { states } from './helpers'
 
-// TODO Provide an emoji icon for the areas which  have campgrounds ⛺️ or only hotels 🏨 
-
-export const RecAreas = () => {
+export const RecAreasPaginated = () => {
   const [recAreasData, updateRecAreasData] = useState([])
   const [query, setQuery] = useState({})
-  const [chosenState, setChosenState] = useState('AK')
 
   useEffect(() => {
-    axios.get(`/api/recareas/states/${chosenState}`)
+    axios.get('/api/queries/', { params: query })
       .then(axiosResp => {
         console.log(axiosResp)
-        updateRecAreasData(axiosResp.data)
+        updateRecAreasData(axiosResp.data.docs)
       })
-  }, [chosenState])
+      .catch(err => console.log(err))
+  }, [query])
 
   function handleChange(e) {
-    setChosenState(e.target.value)
+    e.persist()
+    if (e.target.value === '') {
+      const newQuery = { ...query }
+      delete newQuery[e.target.id]
+      return setQuery(newQuery)
+    }
     setQuery({
       ...query,
       state: e.target.value
     })
   }
-
-
 
   if (!recAreasData.length)
     return <div className="loading-container">
@@ -38,11 +39,11 @@ export const RecAreas = () => {
       <h2>Loading...</h2>
     </div>
 
-
   return <section id="browse">
     <h1>Rec Areas</h1>
 
     <select name="state" id="state" value={query.state} onChange={handleChange}>
+      <option value="">Any</option>
       {states.sort().map((state, i) => <option key={i} value={state}>{state}</option>)}
     </select>
 
@@ -71,7 +72,7 @@ export const RecAreas = () => {
       <TabPanel>
         <h2>Map View</h2>
 
-        <RecAreaMap chosenState={chosenState} />
+        <RecAreaMap />
       </TabPanel>
     </Tabs>
   </section>
