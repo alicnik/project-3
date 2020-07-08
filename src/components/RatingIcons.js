@@ -36,7 +36,7 @@ export const RatingIcons = ({
           color={color}
         />
       ))}
-      {showNumOfReviews && <span className="star-number">{numOfReviews} {numOfReviews === 1 ? 'review' : 'reviews'}</span>}
+      {showNumOfReviews && <span className="star-number">({numOfReviews} {numOfReviews === 1 ? 'review' : 'reviews'})</span>}
     </div>
   )
 }

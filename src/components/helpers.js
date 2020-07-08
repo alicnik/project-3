@@ -3,3 +3,6 @@ export const testData = [{ 'location_id': '223514','name': 'Comfort Inn & Suites
 
 
 export const states = ['AK','NM','OR','VA','CA','WA','ID','MT','SD','WY','UT','CO','AR','GA','NV','KY','LA','NC','SC','TN','TX','IL','OH','IN','MI','MN','MO','NH','PA','VT','WV','WI','AZ','ND','OK','HI','NJ','NY','FL','NE','MA','ME','MD','DE','AL','VI','PR','CT','DC','MP','IA','KS','RI','MS','GU','AS']
+
+export const dateFrom = (dateString) => new Date(dateString).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+export const timeFrom = (dateString) => new Date(dateString).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })

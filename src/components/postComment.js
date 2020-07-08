@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory, Link, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers'
 import * as Yup from 'yup'
@@ -13,6 +13,7 @@ const commentSchema = Yup.object().shape({
 export const PostComment = (props) => {
   const history = useHistory()
   const { reviewId, previousPage } = props.location.state
+  // const [, reviewId] = useLocation().pathname.match(/\/reviews\/(w+)\//)
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(commentSchema)
   })

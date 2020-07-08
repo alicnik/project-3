@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 // import { yupResolver } from '@hookform/resolvers'
 import * as Yup from 'yup'
@@ -7,26 +7,22 @@ import axios from 'axios'
 import { StarRating } from './StarRating'
 import { yupResolver } from '@hookform/resolvers'
 
-
 const reviewSchema = Yup.object().shape({
   title: Yup.string().required('Please provide a title'),
   dateVisited: Yup.string(),
   text: Yup.string().required('Please provide a review')
 })
 
-// Pass down whether it's a recArea or campground along with the ID in props, eg:
-// <PostReview siteCollection={magic involving splitting up the current url path} siteId={SOME MAGIC TO FIND THE CURRENT ID} />
-// const [, siteCollection, siteId] = useHistory().path.match(/\/api\/(\w+)\/(\w+)\//)
-
 export const PostReview = (props) => {
+
   const [rating, setRating] = useState(props.location.state?.rating)
-  const { siteCollection, siteId } = props.location.state
+  const [, siteCollection, siteId] = useLocation().pathname.match(/\/(\w+)\/(\w+)$/)
+  const sitePage = `/${siteCollection}/${siteId}`
   const history = useHistory()
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(reviewSchema),
     criteriaMode: 'all'
   })
-  const sitePage = `/${siteCollection}/${siteId}`
 
   const onSubmit = values => {
     values.rating = rating
@@ -40,6 +36,7 @@ export const PostReview = (props) => {
 
   return <>
    <section id="post-review" >
+     <h1>Submit a review</h1>
      <form onSubmit={handleSubmit(onSubmit)}>
        <label htmlFor="title">Write a title</label><br></br>
        <input type="text" id="title" name="title" autoComplete="off" ref={register} />
