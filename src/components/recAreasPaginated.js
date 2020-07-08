@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { RatingIcons } from './RatingIcons'
-import { RecAreaMap } from './RecAreaMap'
+import { RecAreaMap } from './RecAreaMapPaginated'
 import loadingGif from '../assets/loading.gif'
 import { states } from './helpers'
 
@@ -12,11 +12,12 @@ export const RecAreasPaginated = () => {
   const [query, setQuery] = useState({})
 
   useEffect(() => {
-    axios.get('/api/recareas', { params: query })
+    axios.get('/api/queries/', { params: query })
       .then(axiosResp => {
         console.log(axiosResp)
         updateRecAreasData(axiosResp.data.docs)
       })
+      .catch(err => console.log(err))
   }, [query])
 
   function handleChange(e) {
@@ -32,13 +33,11 @@ export const RecAreasPaginated = () => {
     })
   }
 
-
   if (!recAreasData.length)
     return <div className="loading-container">
       <img className="loading" src={loadingGif} alt="loading" />
       <h2>Loading...</h2>
     </div>
-
 
   return <section id="browse">
     <h1>Rec Areas</h1>
@@ -47,7 +46,6 @@ export const RecAreasPaginated = () => {
       <option value="">Any</option>
       {states.sort().map((state, i) => <option key={i} value={state}>{state}</option>)}
     </select>
-
 
     <Tabs>
       <TabList>

@@ -1,10 +1,15 @@
 const RecArea = require('../models/recAreaModel')
 
 function index(req, res) {
-  console.log(req.query)
-  console.log('Line 5')
   RecArea
-    .paginate(req.query, { offset: 0, limit: 10 })
+    .find()
+    .then(recAreas => res.status(200).send(recAreas))
+    .catch(err => console.log(err))
+}
+
+function paginate(req, res) {
+  RecArea
+    .paginate(req.query, { offset: 0, limit: 20 })
     .then(recAreas => {
       res.send(recAreas)
     })
@@ -48,6 +53,7 @@ function getOneSpot(req, res) {
 
 module.exports = {
   index,
+  paginate,
   getOneSpot,
   getByState
 }
