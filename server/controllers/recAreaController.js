@@ -11,6 +11,7 @@ function paginate(req, res) {
   RecArea
     .paginate(req.query, { offset: 0, limit: 20 })
     .then(recAreas => {
+      // recAreas.length = 25
       res.send(recAreas)
     })
     .catch(err => console.log(err))
