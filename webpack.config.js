@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   entry: './src/index.js',
@@ -13,7 +14,8 @@ module.exports = {
       { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.css$/, loader: ['style-loader', 'css-loader'] },
       { test: /\.s(a|c)ss$/, loader: ['style-loader', 'css-loader', 'sass-loader'] },
-      { test: /\.(png|jpe?g|svg|gif)$/i, loader: 'file-loader' }
+      { test: /\.(png|jpe?g|gif)$/i, loader: 'file-loader' },
+      { test: /\.svg$/, use: ['babel-loader', '@svgr/webpack'] }
     ]
   },
   devServer: {
@@ -31,6 +33,7 @@ module.exports = {
     }
   },
   plugins: [
+    new Dotenv(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/index.html',

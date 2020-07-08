@@ -14,6 +14,7 @@ export const UserProvider = ({ children }) => {
   })
 
   useEffect(() => {
+    if (!currentUser.isLoggedIn) return
     Axios.get(`/api/users/${currentUser.id}`)
       .then(response => setCurrentUser({
         ...response.data,

@@ -23,6 +23,7 @@ function getOneSpot(req, res) {
 
 function campgroundsByRecArea(req, res) {
   RecArea.findById(req.params.id).then(recArea => {
+    if (!recArea) return res.status(404).send({ message: 'Campground not found' })
     Campground
       .find({ ridbRecAreaId: recArea.ridbRecAreaId })
       .then(campgrounds => res.send(campgrounds))

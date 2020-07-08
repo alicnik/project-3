@@ -35,36 +35,43 @@ export const SingleRecArea = (props) => {
     })
   }
 
-  if (!recArea) return <div className="loading-container">
+  if (!recArea) return <div id="loading-container">
     <img className="loading" src={loadingGif} alt="loading" />
     <h2>Loading...</h2>
   </div>
 
   return (
-    <section>
-      <div className="rec-area-info">
+    <section id="single-site" className="single-rec-area">
+      <div className="site-info rec-area-info">
         <h1>{recArea.name}</h1>
-
-        {recArea.reviews.length >= 1 ?
+        <div className="review-header">
+          {recArea.reviews.length >= 1 ?
           <>
           {currentUser.isLoggedIn ? 
             <StarRating rating={recArea.avgRating} setRating={reviewViaStarRating}/> :
-            <RatingIcons rating={recArea.avgRating} showNumOfReviews={false}/>}
+            <RatingIcons rating={recArea.avgRating} showNumOfReviews={false}/>
+          }
           <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
           </> :
           <>
             <FontAwesomeIcon icon={faQuestionCircle} color='green' />
-            <p>No reviews yet. Have you been here? &nbsp;
+            <p>No reviews yet.&nbsp;
               <Link to={{
                 pathname: '/postreview',
                 state: { siteCollection: 'recareas', siteId: recAreaId }
               }}>Leave a review.</Link>
             </p>
           </>
-        }
-        {currentUser.isLoggedIn && <> <Favourite /> <Visited /> </>}
+          }
+        </div>
+        <div className="wish-list-visited-container" style={{ display: currentUser.isLoggedIn ? 'flex' : 'none' }}>
+          {currentUser.isLoggedIn && <> 
+          <p>Add to wishlist</p> <Favourite />
+          <p>Mark as visited</p> <Visited /> </>
+          }
+        </div>
         <div className="carousel-container">
-          <Carousel>
+          <Carousel autoplay dynamicHeight showThumbs={false}>
             {recArea.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
           </Carousel>
         </div>

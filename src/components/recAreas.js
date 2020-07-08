@@ -7,6 +7,8 @@ import { RecAreaMap } from './RecAreaMap'
 import loadingGif from '../assets/loading.gif'
 import { states } from './helpers'
 
+// TODO Provide an emoji icon for the areas which  have campgrounds ⛺️ or only hotels 🏨 
+
 export const RecAreas = () => {
   const [recAreasData, updateRecAreasData] = useState([])
   const [query, setQuery] = useState({})
@@ -69,7 +71,7 @@ export const RecAreas = () => {
       <TabPanel>
         <h2>Map View</h2>
 
-        <RecAreaMap chosenState={chosenState}/>
+        <RecAreaMap chosenState={chosenState} />
       </TabPanel>
     </Tabs>
   </section>

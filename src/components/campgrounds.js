@@ -28,7 +28,7 @@ export const Campgrounds = (props) => {
     // if (!(longitude && latitude)) return
     // Axios.get(`https://tripadvisor1.p.rapidapi.com/hotels/list-by-latlng?lang=en_US&limit=10&latitude=${latitude}&longitude=${longitude}`, { headers: { 
     //   'x-rapidapi-host': 'tripadvisor1.p.rapidapi.com', 
-    //   'x-rapidapi-key': 'b50bd94073msh2aef30ca2a2af07p1207f4jsne19499e10efe' } 
+    //   'x-rapidapi-key': process.env.TRIPADVISOR_API_KEY } 
     // })
     //   .then(response => setHotelsData(response.data.data))
   }, [])
