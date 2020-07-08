@@ -79,12 +79,11 @@ export const Campgrounds = (props) => {
           {campgroundsData.map((campground, index) => {
             return (
               <Link to={`/campgrounds/${campground._id}`} key={index}>
-                <article id="tile">
+                <article className="tile">
                   <h2>{campground.name}</h2>
-                  <h3>{campground.city}, {campground.state}</h3>
+                  <RatingIcons className="rating" iconStyle='star' color='orange' rating={Number(campground.avgRating)} numOfReviews={Number(campground.reviews.length)} />
                   <img className="preview-img" src={campground.media[0].url} alt={campground.name} />
-                  <RatingIcons iconStyle='star' color='orange' rating={Number(campground.avgRating)} numOfReviews={Number(campground.reviews.length)} />
-                  <p>Rating</p>
+                  <h3>{campground.city}, {campground.state}</h3>
                 </article>
               </Link>
             )
