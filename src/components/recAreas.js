@@ -42,9 +42,12 @@ export const RecAreas = () => {
   return <section id="browse">
     <h1>Rec Areas</h1>
 
-    <select name="state" id="state" value={query.state} onChange={handleChange}>
-      {states.sort().map((state, i) => <option key={i} value={state}>{state}</option>)}
-    </select>
+    <div className="sort-by-state">
+      <p>Sort by US state: </p>
+      <select name="state" id="state" value={query.state} onChange={handleChange}>
+        {states.sort().map((state, i) => <option key={i} value={state}>{state}</option>)}
+      </select>
+    </div>
 
     <Tabs>
       <TabList>

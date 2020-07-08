@@ -66,6 +66,10 @@ p {
 }
 
 #loading-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
   display: flex;
   flex-direction: column;
   width: 90vw;
@@ -187,17 +191,61 @@ body {
 }
 
 #hotels {
+  h1 {
+    font-family: var(--wilderness-font);
+    text-align: center;
+    margin: 1.6rem;
+    font-size: 2.6rem;
+  }
   article.hotel-tile {
     display: flex;
-    img {
-      margin: 2rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 1.6rem;
+    background-color: var(--color-off-white);
+    box-shadow: 3px 3px 10px 2px rgba(0, 0, 0, 0.4),
+        -3px -3px 10px 2px rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 0.2rem;
+    .hotel-info {
+      margin: 1rem;
     }
-    // .hotel-info {
-    // }
+    img {
+      max-width: 90%;
+    }
+    h2 {
+      margin: 1.2rem;
+      margin-top: 0.2rem;
+      font-family: var(--wilderness-font);
+      font-size: 2.3rem;
+    }
+    p {
+      margin: 1.2rem;
+    }
+    button {
+      @include global-button();
+    }
+    .star-number {
+      font-family: var(--body-font);
+      color: var(--color-forest-green);
+      text-decoration: underline;
+      font-size: 0.82rem;
+      margin-left: 0.4rem;
+    }
   }
 }
 
 #browse {
+  .sort-by-state {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    p {
+      padding-right: 0.25rem;
+    }
+  }
   h1 {
     font-family: var(--wilderness-font);
     text-align: center;
