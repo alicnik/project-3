@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const Router = require('./router')
 const { port, dbURI } = require('./config/environment')
 
+<<<<<<< HEAD
 mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -11,6 +12,18 @@ mongoose.connect(dbURI, {
 }, (err) => {
   err ? console.log(err) : console.log('Mongoose connected')
 })
+=======
+mongoose.connect(
+  dbURI,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  }, (err) => {
+    err ? console.log(err) : console.log('Mongoose connected')
+  }
+)
+>>>>>>> development
 
 const expressServer = express()
 
@@ -23,6 +36,6 @@ expressServer.use(bodyParser.json())
 
 expressServer.use('/api/', Router)
 
-expressServer.listen(port, () => console.log(`Running on port ${port}`))
+expressServer.listen(port)
 
 module.exports = expressServer

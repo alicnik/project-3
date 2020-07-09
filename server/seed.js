@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const User = require('./models/userModel')
 const RecArea = require('./models/recAreaModel')
 const Campground = require('./models/campgroundModel')
+const { dbURI } = require('./config/environment')
 const defaultAvatarArray = ['https://i.ibb.co/DfJ5PWc/avatar-1.png', 'https://i.ibb.co/HTq3qfD/avatar-2.png', 'https://i.ibb.co/x38pzNJ/avatar-3.png', 'https://i.ibb.co/Y8nck2y/avatar-4.png', 'https://i.ibb.co/WF9Mxwb/avatar-5.png', 'https://i.ibb.co/17LGhrB/avatar-6.png']
 
 const { dbURI } = require('./config/environment')
