@@ -12,6 +12,7 @@ export const ReviewListItem = ({ review, displayName = true, displayAvatar = tru
   return <article id="review-container">
 
     <header className="review-header">
+
       <div className="review-avatar">
         {displayAvatar ? 
           <img src={review.user.avatar} alt='user avatar' /> :
@@ -20,6 +21,9 @@ export const ReviewListItem = ({ review, displayName = true, displayAvatar = tru
             alt={review.recAreaRef?.name || review.campgroundRef?.name} 
           />
         }
+      </div>
+      <div className="review-meta-info">
+        {displayName && <p className="reviewer"><strong>{review.user.firstName} {review.user.lastName}</strong></p>}
         {displayAvatar || 
         review.recAreaRef ? 
           <Link to={`/recareas/${review.recAreaRef?._id}`}>
@@ -29,9 +33,6 @@ export const ReviewListItem = ({ review, displayName = true, displayAvatar = tru
             <h3>{review.campgroundRef?.name}</h3>
           </Link>
         }
-      </div>
-      <div className="review-meta-info">
-        {displayName && <p className="reviewer"><strong>{review.user.firstName} {review.user.lastName}</strong></p>}
         <p>{dateFrom(review.createdAt)}</p>
         <RatingIcons rating={review.rating} showNumOfReviews={false}/>
       </div>

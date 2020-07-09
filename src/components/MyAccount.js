@@ -60,7 +60,7 @@ export const MyAccount = () => {
           {editingBio && <form>
             <label htmlFor="edit-bio">Edit your bio here</label>
             <br></br>
-            <textarea id="edit-bio" name="bio" value={bio} onChange={(e) => setBio(e.target.value)}></textarea>
+            <textarea id="edit-bio" name="bio" value={bio} cols="30" rows="7" onChange={(e) => setBio(e.target.value)}></textarea>
             <br></br>
             <button onClick={handleClick}>Save</button>
           </form>}

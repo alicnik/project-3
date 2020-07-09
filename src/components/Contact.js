@@ -32,7 +32,7 @@ export const Contact = ({ site }) => {
       {site.website &&
       <div className="website">
         <FontAwesomeIcon icon={faGlobe} color="green" />
-        <p><a href={site.website}>{site.website}</a></p>
+        <p><a href={site.website}>Official website</a></p>
       </div>
       }
     </address>

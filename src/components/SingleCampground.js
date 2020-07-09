@@ -15,6 +15,7 @@ import loadingGif from '../assets/loading.gif'
 import { Favourite } from './Favourite'
 import { Visited } from './Visited'
 import { Contact } from './Contact'
+import { parseHtml } from './helpers'
 
 export const SingleCampground = () => {
 
@@ -112,7 +113,7 @@ export const SingleCampground = () => {
             <div className='accordion-container'>
               <article className="description">
                 <h2>Description</h2>
-                <p dangerouslySetInnerHTML={{ __html: campground.description }}></p>
+                {parseHtml(campground.description)}
               </article>
             </div>
             <Contact site={campground} />

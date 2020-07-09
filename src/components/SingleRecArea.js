@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { parseHtml } from './helpers'
+
 import Axios from 'axios'
 
 import { Carousel } from 'react-responsive-carousel'
@@ -18,6 +20,8 @@ import loadingGif from '../assets/loading.gif'
 import { Contact } from './Contact'
 
 export const SingleRecArea = (props) => {
+
+
 
   const [recArea, setRecArea] = useState()
   const { currentUser } = useContext(UserContext)
@@ -94,7 +98,8 @@ export const SingleRecArea = (props) => {
             <div className='accordion-container'>
               <article className="description">
                 <h2>Description</h2>
-                <p dangerouslySetInnerHTML={{ __html: recArea.description }}></p>
+                {/* <div dangerouslySetInnerHTML={{ __html: recArea.description }}></div> */}
+                {parseHtml(recArea.description)}
               </article>
               <Link to={{
                 pathname: `/recareas/${recAreaId}/campgrounds`,
