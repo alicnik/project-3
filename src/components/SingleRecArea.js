@@ -76,7 +76,7 @@ export const SingleRecArea = (props) => {
           </div>
 
           <div className="carousel-container">
-            <Carousel autoplay dynamicHeight showThumbs={false}>
+            <Carousel autoplay={true} showThumbs={false}>
               {recArea.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
             </Carousel>
           </div>
