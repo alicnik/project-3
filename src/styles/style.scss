@@ -102,7 +102,15 @@ body {
 #dark-mode {
   background-color: var(--color-inky-blue);
   color: var(--color-off-white);
-  #homepage {
+  #homepage,
+  #splashscreen,
+  #browse,
+  #register,
+  #login,
+  #hotels,
+  #single-site,
+  #settings,
+  #my-account {
     button {
       box-shadow: none;
     }
@@ -852,11 +860,6 @@ body {
       font-size: 7em;
     }
     .carousel-container {
-      max-width: 90vw;
-      margin: 50px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       .carousel.carousel-slider {
         margin: 0 auto;
         max-width: 1000px;
@@ -976,8 +979,7 @@ body {
 
   #single-site {
     .carousel-container {
-      max-width: 80vw;
-      margin: 50px;
+      width: 100%;
       display: flex;
       justify-content: center;
     }
@@ -990,7 +992,7 @@ body {
     .wish-list-visited-container {
       justify-content: center;
       p {
-        margin: 40px
+        margin: 0 40px
       }
     }
     #review-container {
@@ -1004,7 +1006,17 @@ body {
         }
       }
     }
+    li.slide {
+      background: none;
+      display: flex;
+      max-height: 600px;
+      align-items: center;
+      flex-direction: row;
+      flex-flow: initial;
+    }
   }
+  
+
   #hotels {
     .hotel-tiles {
       display: flex;
