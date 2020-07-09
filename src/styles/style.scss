@@ -860,11 +860,6 @@ body {
       font-size: 7em;
     }
     .carousel-container {
-      max-width: 90vw;
-      margin: 50px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       .carousel.carousel-slider {
         margin: 0 auto;
         max-width: 1000px;
@@ -984,10 +979,32 @@ body {
 
   #single-site {
     .carousel-container {
-      max-width: 80vw;
-      margin: 50px;
+      width: 100%;
       display: flex;
       justify-content: center;
+    }
+    .site-review-header {
+      justify-content: center;
+      p {
+        margin-left: 10px;
+      }
+    }
+    .wish-list-visited-container {
+      justify-content: center;
+      p {
+        margin: 0 40px
+      }
+    }
+    #review-container {
+      display: flex;
+      justify-content: center;
+      .review-avatar {
+        width: auto;
+        img {
+          width: 5rem;
+          height: 5rem;
+        }
+      }
     }
     li.slide {
       background: none;
@@ -998,19 +1015,18 @@ body {
       flex-flow: initial;
     }
   }
+  
 
   #hotels {
     .hotel-tiles {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-
       article.hotel-tile {
         width: 27vw;
       }
     }
   }
-
   #my-account {
     .my-reviews {
       #review-container {
@@ -1023,15 +1039,67 @@ body {
               width: 150px;
               height: 150px;
             }
-            .review-meta-info {
-              margin-left: 6vw;
-              h3 {
-                font-size: 2rem;
-              }
+          }
+          .review-meta-info {
+            margin-left: 6vw;
+            h3 {
+              font-size: 2rem;
             }
           }
         }
       }
     }
+    .account-tab-title {
+      margin-bottom: 0;
+    }
+    .wish-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      .site-list-item{
+        margin-top: 25px;
+        width: 27vh;
+        min-height: 300px;
+        h3 {
+          color: var(--color-forest-green);
+          text-decoration: underline;
+        }
+        img {
+          height: 200px;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+    .visited {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      .site-list-item{
+        margin-top: 25px;
+        width: 27vh;
+        min-height: 300px;
+        h3 {
+          color: var(--color-forest-green);
+          text-decoration: underline;
+        }
+        img {
+          height: 200px;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+
   }
+
+
+
+
+
+
+
+
+
 }
+
