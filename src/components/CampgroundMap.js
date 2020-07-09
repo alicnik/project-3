@@ -115,10 +115,10 @@ export const CampgroundMap = () => {
             onClose={() => setSelectedCampground(null)}
           >
             <Link to={`/campgrounds/${selectedCampground._id}`}>
-              <div>
+              <div className="popoutCampground">
                 <h3>{selectedCampground.name}</h3>
                 <img
-                  className="popoutCampground"
+
                   src={selectedCampground.media[0].url}
                   alt='campground'
                 />

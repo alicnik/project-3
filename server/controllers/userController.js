@@ -3,7 +3,7 @@ const jsonwebtoken = require('jsonwebtoken')
 const secret = 'campgrounds are the same as campsites and area 51 is a rec area but trump did not want you to know'
 const defaultAvatarArray = ['https://i.ibb.co/DfJ5PWc/avatar-1.png', 'https://i.ibb.co/HTq3qfD/avatar-2.png', 'https://i.ibb.co/x38pzNJ/avatar-3.png', 'https://i.ibb.co/Y8nck2y/avatar-4.png', 'https://i.ibb.co/WF9Mxwb/avatar-5.png', 'https://i.ibb.co/17LGhrB/avatar-6.png']
 
-Array.prototype.randomElement = function() {
+Array.prototype.randomElement = function () {
   return this[Math.floor(Math.random() * this.length)]
 }
 
@@ -26,10 +26,10 @@ function login(req, res) {
         return res.status(401).send({ password: { message: 'Passwords do not match' } })
       }
       const token = jsonwebtoken.sign({ sub: user._id }, secret, { expiresIn: '12h' })
-      res.status(202).send({ 
+      res.status(202).send({
         id: user._id,
-        username: user.username, 
-        firstName: user.firstName, 
+        username: user.username,
+        firstName: user.firstName,
         showWishList: user.showWishList,
         showVisited: user.showVisited,
         avatar: user.avatar,
@@ -40,11 +40,12 @@ function login(req, res) {
         recAreaWishList: user.recAreaWishList,
         campgroundsVisited: user.campgroundsVisited,
         recAreasVisited: user.recAreasVisited,
-        token })
+        token
+      })
     })
     .catch(error => res.status(403).send(error))
 }
-  
+
 function getSingleUser(req, res) {
   User
     .findById(req.params.id)
@@ -52,7 +53,7 @@ function getSingleUser(req, res) {
     .populate('campgroundReviews')
     .populate('campgroundWishList')
     .populate('recAreaWishList')
-    .populate('camproundsVisited')
+    .populate('campgroundsVisited')
     .populate('recAreasVisited')
     .populate({
       path: 'recAreaReviews',
