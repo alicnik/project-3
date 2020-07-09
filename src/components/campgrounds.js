@@ -79,20 +79,22 @@ export const Campgrounds = (props) => {
           <Tab>Map</Tab>
         </TabList>
         <TabPanel>
-          {campgroundsData.map((campground, index) => {
-            return (
-              <Link to={`/campgrounds/${campground._id}`} key={index}>
-                <article className="tile">
-                  <h2>{campground.name}</h2>
-                  <div className="rating">
-                    <RatingIcons className="rating" iconStyle='star' color='orange' rating={Number(campground.avgRating)} numOfReviews={Number(campground.reviews.length)} />
-                  </div>
-                  <img className="preview-img" src={campground.media[0].url} alt={campground.name} />
-                  <h3>{campground.city}, {campground.state}</h3>
-                </article>
-              </Link>
-            )
-          })}
+          <section id="all-tiles">
+            {campgroundsData.map((campground, index) => {
+              return (
+                <Link to={`/campgrounds/${campground._id}`} key={index}>
+                  <article className="tile">
+                    <h2>{campground.name}</h2>
+                    <div className="rating">
+                      <RatingIcons className="rating" iconStyle='star' color='orange' rating={Number(campground.avgRating)} numOfReviews={Number(campground.reviews.length)} />
+                    </div>
+                    <img className="preview-img" src={campground.media[0].url} alt={campground.name} />
+                    <h3>{campground.city}, {campground.state}</h3>
+                  </article>
+                </Link>
+              )
+            })}
+          </section>
         </TabPanel>
         <TabPanel>
           <CampgroundMap />

@@ -34,10 +34,10 @@ export const UserProvider = ({ children }) => {
 
   const logIn = (data) => {
     localStorage.setItem('token', data.token)
-    setCurrentUser({ 
+    setCurrentUser({
       ...data,
-      isLoggedIn: true, 
-      showWishList: data.showWishList ?? true, 
+      isLoggedIn: true,
+      showWishList: data.showWishList ?? true,
       showVisited: data.showVisited ?? true
     })
   }
@@ -46,7 +46,8 @@ export const UserProvider = ({ children }) => {
     localStorage.removeItem('token')
     setCurrentUser({
       ...currentUser,
-      isLoggedIn: false
+      isLoggedIn: false,
+      firstName: ''
     })
   }
 
@@ -60,8 +61,8 @@ export const UserProvider = ({ children }) => {
   const setListDisplayPreferences = (data) => {
     setCurrentUser({
       ...currentUser,
-      showWishList: data.showWishList ?? true, 
-      showVisited: data.showVisited ?? true 
+      showWishList: data.showWishList ?? true,
+      showVisited: data.showVisited ?? true
     })
   }
 
@@ -101,10 +102,10 @@ export const UserProvider = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider value={{ 
+    <UserContext.Provider value={{
       currentUser,
-      logIn, 
-      logOut, 
+      logIn,
+      logOut,
       updateWishList,
       updateVisited,
       toggleListDisplay, 

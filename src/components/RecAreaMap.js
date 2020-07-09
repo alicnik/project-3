@@ -93,10 +93,10 @@ export const RecAreaMap = ({ chosenState }) => {
             onClose={() => setSelectedRecArea(null)}
           >
             <Link to={`/recareas/${selectedRecArea._id}`}>
-              <div>
+              <div className="popoutRec">
                 <h3>{selectedRecArea.name}</h3>
                 <img
-                  className="popoutRec"
+
                   src={selectedRecArea.media[0].url}
                   alt='rec area'
                 />
