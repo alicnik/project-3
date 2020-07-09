@@ -68,7 +68,31 @@ export const timeFrom = (dateString) => new Date(dateString).toLocaleTimeString(
 
 
 import HtmlToReactParser from 'html-to-react'
+import ProcessNodeDefinitions from 'html-to-react/lib/process-node-definitions'
 
 const htmlParser = new HtmlToReactParser.Parser()
 
-export const parseHtml = (htmlInput) => htmlParser.parse(htmlInput)
+export const parseHtml = (htmlInput) => {
+
+  const isValidNode = () => true
+  const processNodeDefinitions = new ProcessNodeDefinitions()
+
+  const parsingInstructions = [
+    {
+      shouldProcessNode: function(node) {
+        return node.name && node.name === 'a' && node.attribs.href[0] === '/'
+      },
+      processNode: function (node) {
+        node.attribs = { href: '' }
+      }
+    },
+    {
+      shouldProcessNode: function(node) {
+        return true
+      },
+      processNode: processNodeDefinitions.processDefaultNode
+    }
+  ]
+
+  return htmlParser.parseWithInstructions(htmlInput, isValidNode, parsingInstructions)
+}

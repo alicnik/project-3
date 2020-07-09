@@ -23,7 +23,7 @@ export const RecAreaMap = ({ chosenState }) => {
     pitch: 0,
     transitionDuration: 3000,
     transitionInterruption: 1,
-    width: 300,
+    width: 1600,
     zoom: 5.538494375443473
   })
 
