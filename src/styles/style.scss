@@ -957,6 +957,15 @@ width: 80%;
     }
   }
 
+  #single-site {
+    .carousel-container {
+      max-width: 80vw;
+      margin: 50px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
 
 
 
