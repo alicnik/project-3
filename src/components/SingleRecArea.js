@@ -1,20 +1,27 @@
 import React, { useEffect, useState, useContext } from 'react'
-import Axios from 'axios'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { parseHtml } from './helpers'
+
+import Axios from 'axios'
+
+import { Carousel } from 'react-responsive-carousel'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
+
 import { Favourite } from './Favourite'
 import { UserContext } from './Context'
 import { Visited } from './Visited'
-import { Carousel } from 'react-responsive-carousel'
 import { ReviewListItem } from './ReviewList'
 import { PostReviewButton } from './PostReviewButton'
 import { StarRating } from './StarRating'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 import { RatingIcons } from './RatingIcons'
 import loadingGif from '../assets/loading.gif'
+import { Contact } from './Contact'
 
 export const SingleRecArea = (props) => {
+
+
 
   const [recArea, setRecArea] = useState()
   const { currentUser } = useContext(UserContext)
@@ -30,7 +37,7 @@ export const SingleRecArea = (props) => {
 
   function reviewViaStarRating(e) {
     history.push({
-      pathname: '/postreview',
+      pathname: `/${siteCollection}/${siteId}/postreview`,
       state: { siteCollection, siteId, rating: e }
     })
   }
@@ -46,7 +53,7 @@ export const SingleRecArea = (props) => {
       <div className="site-info rec-area-info">
         <h1>{recArea.name}</h1>
 
-        <div className="review-header">
+        <div className="site-review-header">
           {recArea.reviews.length >= 1 ?
             <>
               {currentUser.isLoggedIn ?
@@ -55,15 +62,15 @@ export const SingleRecArea = (props) => {
               }
               <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
             </> :
-            <>
+            <div className="no-reviews">
               <FontAwesomeIcon icon={faQuestionCircle} color='green' />
               <p>No reviews yet.&nbsp;
+                {currentUser.isLoggedIn &&
                 <Link to={{
-                  pathname: '/postreview',
+                  pathname: `/${siteCollection}/${siteId}/postreview`,
                   state: { siteCollection: 'recareas', siteId: recAreaId }
-                }}>Leave a review.</Link>
-              </p>
-          </>
+                }}> Leave a review.</Link>}</p>
+            </div>
           }
         </div>
 
@@ -91,15 +98,17 @@ export const SingleRecArea = (props) => {
             <div className='accordion-container'>
               <article className="description">
                 <h2>Description</h2>
-                <p dangerouslySetInnerHTML={{ __html: recArea.description }}></p>
+                {/* <div dangerouslySetInnerHTML={{ __html: recArea.description }}></div> */}
+                {parseHtml(recArea.description)}
               </article>
               <Link to={{
                 pathname: `/recareas/${recAreaId}/campgrounds`,
                 state: { campgroundsData: recArea.campgrounds, longitude: recArea.longitude, latitude: recArea.latitude }
               }}>
-                <button>Find Campsites</button>
+                {recArea.campgrounds.length ? <button>Find Campsites</button> : <button>Find Hotels</button>}
               </Link>
             </div>
+            <Contact site={recArea}/>
           </TabPanel>
 
           <TabPanel>
@@ -110,9 +119,10 @@ export const SingleRecArea = (props) => {
                   review={review}
                   siteCollection='recareas'
                 />) :
-                <p>No reviews yet.</p>
+                <p style={{ 'marginTop': '1rem' }}>No reviews yet.</p>
               }
               <PostReviewButton />
+              {!currentUser.isLoggedIn && <p className="post-review-button-note">You must be logged in to leave a review.</p>}
             </div>
           </TabPanel>
         </Tabs>

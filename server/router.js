@@ -41,6 +41,7 @@ router.route('/recareas/:siteId/reviews')
 // REVIEWS
 
 router.route('/reviews/:id')
+  .get(reviewController.getReview)
   .put(secureRoute, reviewController.editReview)
   .delete(secureRoute, reviewController.deleteReview)
 

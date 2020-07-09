@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers'
 import * as Yup from 'yup'
@@ -43,17 +43,18 @@ export const Login = () => {
       })
   }
 
-  return <section id="login">
-    <h2>Enter the Wilderness</h2>
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="username">Enter username</label><br></br>
-      <input id="username" type="text" name="username" autoComplete="off" ref={register} />
-      <p>{errors.username?.message}</p>
-      <label htmlFor="password">Enter your password</label><br></br>
-      <input id="password" type="password" name="password" autoComplete="off" ref={register} />
-      <p>{errors.password?.message}</p>
-      <button type="submit">Submit</button>
-    </form>
-    <Link to='/register'>Not got an account? Register here.</Link>
-  </section>
+  return (
+    <section id="login">
+      <h1>Enter the Wilderness</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="username">Enter username</label>
+        <input id="username" type="text" name="username" autoComplete="off" ref={register} />
+        <p>{errors.username?.message}</p>
+        <label htmlFor="password">Enter your password</label>
+        <input id="password" type="password" name="password" autoComplete="off" ref={register} />
+        <p>{errors.password?.message}</p>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  )
 }

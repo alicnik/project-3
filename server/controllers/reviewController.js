@@ -34,7 +34,7 @@ function findSiteAndCreateReview(siteCollection, siteId, review, req, res) {
             })
             .then(user => console.log(user))
         })
-        .catch(err => console.log(err))
+        .catch(err => res.status(400).send(err))
     })
     .catch(err => res.status(400).send(err))
 }
@@ -81,4 +81,11 @@ function readAllForUser(req, res) {
     .catch(err => console.log(err))
 }
 
-module.exports = { createReview, readAllForUser, editReview, deleteReview }
+function getReview (req, res) {
+  Review
+    .findById(req.params.id)
+    .then(review => res.status(200).send(review))
+    .catch(err => console.log(err))
+}
+
+module.exports = { createReview, readAllForUser, editReview, deleteReview, getReview }

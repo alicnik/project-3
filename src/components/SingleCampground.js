@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom'
 import Axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock as checkInTime, faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
-import { faDog as petsAllowed, faClock as checkOutTime, faPhone, faAt, faCarSide } from '@fortawesome/free-solid-svg-icons'
+import { faDog as petsAllowed, faClock as checkOutTime, faCarSide } from '@fortawesome/free-solid-svg-icons'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { Carousel } from 'react-responsive-carousel'
 import { ReviewListItem } from './ReviewList'
@@ -14,6 +14,8 @@ import { UserContext } from './Context'
 import loadingGif from '../assets/loading.gif'
 import { Favourite } from './Favourite'
 import { Visited } from './Visited'
+import { Contact } from './Contact'
+import { parseHtml } from './helpers'
 
 export const SingleCampground = () => {
 
@@ -31,7 +33,7 @@ export const SingleCampground = () => {
 
   function reviewViaStarRating(e) {
     history.push({
-      pathname: '/postreview',
+      pathname: `/${siteCollection}/${siteId}/postreview`,
       state: { siteCollection, siteId, rating: e }
     })
   }
@@ -43,9 +45,11 @@ export const SingleCampground = () => {
 
   return (
     <section id='single-site' className="single-campground">
+
       <div className="site-info campground-info">
         <h1>{campground.name}</h1>
-        <div className="review-header">
+
+        <div className="site-review-header">
           {campground.reviews.length >= 1 ?
             <>
             {currentUser.isLoggedIn ? 
@@ -54,33 +58,37 @@ export const SingleCampground = () => {
             <p>Rating: {campground.avgRating} ({campground.reviews.length})</p> 
             </>
             :
-            <>
+            <div className="no-reviews">
               <FontAwesomeIcon icon={faQuestionCircle} color='green' />
               <p>No reviews yet.&nbsp;
+                {currentUser.isLoggedIn &&
                 <Link to={{
-                  pathname: '/postreview',
+                  pathname: `/${siteCollection}/${siteId}/postreview`,
                   state: { siteCollection: 'campgrounds', siteId: campgroundId }
-                }}>Leave a review.</Link>
+                }}>Leave a review.</Link>}
               </p>
-            </>
+            </div>
           }
         </div>
-        <div className="wish-list-visited-container">
-          {currentUser.isLoggedIn && <> 
-          <p>Add to wishlist</p> <Favourite />
-          <p>Mark as visited</p> <Visited /> </>
-          }
-        </div>
+    
 
         <div className="carousel-container">
           <Carousel autoplay dynamicHeight showThumbs={false}>
             {campground.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
           </Carousel>
         </div>
+
+        <div className="wish-list-visited-container" style={{ display: currentUser.isLoggedIn ? 'flex' : 'none' }}>
+          {currentUser.isLoggedIn && <> 
+          <p>Add to wishlist</p> <Favourite />
+          <p>Mark as visited</p> <Visited /> </>
+          }
+        </div>
+
         <div className="campground-attributes">
           {<>
             <FontAwesomeIcon icon={faCarSide} color='green' />
-            <p>Accessible by car? {campground.accessible ? 'Yes' : 'No'}</p>
+            <p><strong>Accessible by car?</strong> {campground.accessible ? 'Yes' : 'No'}</p>
           </>
           }
           {campground.attributes.map((attribute, i) => {
@@ -88,13 +96,14 @@ export const SingleCampground = () => {
               <div key={i} className='single-attribute'>
                 <FontAwesomeIcon icon={attributeIcons[attribute.name]} color='green' />
                 <p>
-                  {attribute.description}: {attribute.value === 'true' ? 'Yes' :
+                  <strong>{attribute.description}</strong>: {attribute.value === 'true' ? 'Yes' :
                     attribute.value === 'false' ? 'No' : attribute.value}
                 </p>
               </div>
             )
           })}
         </div>
+
         <Tabs>
           <TabList>
             <Tab>Info</Tab>
@@ -104,41 +113,24 @@ export const SingleCampground = () => {
             <div className='accordion-container'>
               <article className="description">
                 <h2>Description</h2>
-                <p dangerouslySetInnerHTML={{ __html: campground.description }}></p>
+                {parseHtml(campground.description)}
               </article>
             </div>
-            <address className="contact">
-              <h2>Contact Details</h2>
-              {campground.phone &&
-                <div className="phone">
-                  <FontAwesomeIcon icon={faPhone} color='green' />
-                  <p>Tel: {campground.phone}</p>
-                </div>}
-              {campground.email &&
-                <div className="email">
-                  <FontAwesomeIcon icon={faAt} color='green' />
-                  <p>Email: {campground.email}</p>
-                </div>}
-            </address>
+            <Contact site={campground} />
           </TabPanel>
           <TabPanel>
             <div className="reviews">
-              <h2>Reviews</h2>
-              <PostReviewButton />
               {campground.reviews.length ?
                 campground.reviews.map((review, i) => <ReviewListItem
                   key={i}
                   review={review}
                   siteCollection='campgrounds'
                 />) :
-                <p>No reviews yet. Have you been here? &nbsp;
-                  <Link to={{
-                    pathname: '/postreview',
-                    state: { siteCollection: 'campgrounds', siteId: campgroundId }
-                  }}>Leave a review.</Link>
-                </p>
-
+                <p style={{ 'marginTop': '1rem' }}>No reviews yet.</p>
               }
+              <PostReviewButton />
+              {!currentUser.isLoggedIn && <p className="post-review-button-note">You must be logged in to leave a review.</p>}
+
             </div>
           </TabPanel>
         </Tabs>

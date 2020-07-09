@@ -20,7 +20,6 @@ export const Settings = () => {
   }
 
   return <section id="settings">
-    <h1>Settings</h1>
     <p>Dark mode</p>
     <label htmlFor="dark-mode">
       <input 

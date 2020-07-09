@@ -34,7 +34,8 @@ const App = () => {
               <Route exact path="/login" component={Login} />
               <Route exact path="/home" component={Home} />
               <Route exact path="/postreview" component={PostReview} />
-              <Route exact path="/postcomment" component={PostComment} />
+              <Route exact path="/:siteCollection/:siteId/postreview" component={PostReview} />
+              <Route exact path="/reviews/:id/postcomment" component={PostComment} />
               <Route exact path="/recareas" component={RecAreas} />
               <Route exact path="/campgrounds" component={Campgrounds} />
               <Route exact path="/campgrounds/:id" component={SingleCampground} />

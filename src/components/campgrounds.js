@@ -45,12 +45,12 @@ export const Campgrounds = (props) => {
     </div>
     return (
       <section id="hotels">
-        <h1>No campgrounds! How about a hotel instead?</h1>
+        <h1>No campgrounds!<br></br>How about a hotel instead?</h1>
         {hotelsData.map((hotel, i) => (
           <article key={i} className="hotel-tile">
-            <img src={hotel.photo.images.medium.url} alt={hotel.name} />
             <div className="hotel-info">
               <h2>{hotel.name}</h2>
+              <img src={hotel.photo.images.medium.url} alt={hotel.name} />
               <p className="location">{hotel.location_string}</p>
               <p className="ranking">{hotel.ranking}</p>
               <RatingIcons iconStyle='circle' color='green' rating={Number(hotel.rating)} numOfReviews={Number(hotel.num_reviews)} />
@@ -81,7 +81,9 @@ export const Campgrounds = (props) => {
               <Link to={`/campgrounds/${campground._id}`} key={index}>
                 <article className="tile">
                   <h2>{campground.name}</h2>
-                  <RatingIcons className="rating" iconStyle='star' color='orange' rating={Number(campground.avgRating)} numOfReviews={Number(campground.reviews.length)} />
+                  <div className="rating">
+                    <RatingIcons className="rating" iconStyle='star' color='orange' rating={Number(campground.avgRating)} numOfReviews={Number(campground.reviews.length)} />
+                  </div>
                   <img className="preview-img" src={campground.media[0].url} alt={campground.name} />
                   <h3>{campground.city}, {campground.state}</h3>
                 </article>
@@ -90,7 +92,6 @@ export const Campgrounds = (props) => {
           })}
         </TabPanel>
         <TabPanel>
-          <h2>Map View</h2>
           <CampgroundMap />
         </TabPanel>
       </Tabs>

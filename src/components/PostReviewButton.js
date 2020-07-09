@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useLocation, Link, useHistory } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import { UserContext } from './Context'
 
 export const PostReviewButton = () => {
@@ -10,7 +10,7 @@ export const PostReviewButton = () => {
 
   function handleClick() {
     history.push({
-      pathname: '/postreview',
+      pathname: `/${siteCollection}/${siteId}/postreview`,
       state: { siteCollection, siteId }
     })
   }

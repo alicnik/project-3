@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers'
 import * as Yup from 'yup'
@@ -25,11 +25,13 @@ const registerSchema = Yup.object().shape({
 })
 
 export const Register = () => {
+
   const history = useHistory()
   const { register, handleSubmit, errors, setError } = useForm({
     resolver: yupResolver(registerSchema),
     criteriaMode: 'all'
   })
+
   const onSubmit = values => {
     axios.post('/api/register', values)
       .then(() => {
@@ -46,35 +48,31 @@ export const Register = () => {
       })
   }
 
-
-  return <section id="register">
-    <h2>Join the Wilderness</h2>
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="username">Choose a username</label><br></br>
-      <input id="username" type="text" name="username" autoComplete="off" ref={register} />
-      <p>{errors.username?.message}</p>
-      <label htmlFor="email">Enter your email address</label><br></br>
-      <input id="email" type="email" name="email" autoComplete="off" ref={register} />
-      <p>{errors.email?.message}</p>
-      <label htmlFor="firstName">Enter your first name</label><br></br>
-      <input id="firstName" type="text" name="firstName" autoComplete="off" ref={register} />
-      <p>{errors.firstName?.message}</p>
-      <label htmlFor="lastName">Enter your last name</label><br></br>
-      <input id="lastName" type="text" name="lastName" autoComplete="off" ref={register} />
-      <p>{errors.lastName?.message}</p>
-      <label htmlFor="password">Choose a password</label><br></br>
-      <input id="password" type="password" name="password" autoComplete="off" ref={register} />
-      <p>{errors.password?.message}</p>
-      <label htmlFor="passswordConfirmation">Confirm your password</label><br></br>
-      <input id="passwordConfirmation" type="password" name="passwordConfirmation" autoComplete="off" ref={register} />
-      <p>{errors.passwordConfirmation?.message}</p>
-
-      <button type="submit">Submit</button>
-    </form>
-
-    <Link to='/login'>Already got an account? Login here.</Link>
-
-  </section>
-
+  return (
+    <section id="register">
+      <h1>Join the Wilderness</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="firstName">Enter your first name</label>
+        <input id="firstName" type="text" name="firstName" autoComplete="off" ref={register} />
+        <p>{errors.firstName?.message}</p>
+        <label htmlFor="lastName">Enter your last name</label>
+        <input id="lastName" type="text" name="lastName" autoComplete="off" ref={register} />
+        <p>{errors.lastName?.message}</p>
+        <label htmlFor="username">Choose a username</label>
+        <input id="username" type="text" name="username" autoComplete="off" ref={register} />
+        <p>{errors.username?.message}</p>
+        <label htmlFor="email">Enter your email address</label>
+        <input id="email" type="email" name="email" autoComplete="off" ref={register} />
+        <p>{errors.email?.message}</p>
+        <label htmlFor="password">Choose a password</label>
+        <input id="password" type="password" name="password" autoComplete="off" ref={register} />
+        <p>{errors.password?.message}</p>
+        <label htmlFor="passswordConfirmation">Confirm your password</label>
+        <input id="passwordConfirmation" type="password" name="passwordConfirmation" autoComplete="off" ref={register} />
+        <p>{errors.passwordConfirmation?.message}</p>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  )
 
 }
