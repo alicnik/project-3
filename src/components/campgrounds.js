@@ -92,7 +92,6 @@ export const Campgrounds = (props) => {
           })}
         </TabPanel>
         <TabPanel>
-          <h2>Map View</h2>
           <CampgroundMap />
         </TabPanel>
       </Tabs>

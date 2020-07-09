@@ -258,6 +258,8 @@ body {
   .sort-by-state {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     margin: 1rem;
     p {
       padding-right: 0.25rem;
@@ -652,11 +654,90 @@ body {
   }
 }
 
+#my-account {
+  div.react-tabs__tab-panel {
+    padding: 0.6rem;
+  }
+  .bio {
+    margin: 1.6rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--wilderness-font);
+    h1 {
+      font-size: 2.5rem;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-top: 0.5em;
+    }
+    h3 {
+      margin-bottom: 0.3rem;
+      font-size: 1.7rem;
+    }
+    .link {
+      font-family: var(--body-font);
+      font-size: 0.75rem;
+      color: var(--color-forest-green);
+      text-decoration: underline;
+    }
+    #edit-bio {
+      font-family: var(--body-font);
+    }
+    .bio-options {
+      font-family: var(--body-font);
+      .add-bio {
+        font-family: var(--body-font);
+        text-decoration: underline;
+        color: var(--color-forest-green);
+      }
+      button {
+        @include global-button();
+      }
+    }
+
+    img {
+      max-width: 50%;
+    }
+  }
+  .account-tab-title {
+    font-family: var(--wilderness-font);
+    text-align: center;
+    font-size: 2rem;
+  }
+}
+
+.site-list-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0.6rem;
+  background-color: var(--color-off-white);
+  box-shadow: 3px 3px 10px 2px rgba(0, 0, 0, 0.4),
+    -3px -3px 10px 2px rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding-top: 1.3rem;
+  padding: 1rem;
+  img {
+    max-width: 90%;
+    margin-top: 1rem;
+  }
+  h3 {
+    margin-top: 1rem;
+    margin-bottom: 0em;
+    font-family: var(--wilderness-font);
+    font-size: 2rem;
+  }
+}
+
 #map-container {
-  width: 100vw;
+  width: 90vw;
   display: flex;
   justify-content: center;
-
+  margin: 2rem 0;
   .markerButton {
     background-color: rgba(0, 0, 0, 0);
     border: none;
