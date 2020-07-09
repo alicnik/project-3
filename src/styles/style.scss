@@ -983,3 +983,14 @@ body {
     }
   }
 }
+
+#hotels {
+  .hotel-tiles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    article.hotel-tile {
+      width: 27vw;
+    }
+  }
+}

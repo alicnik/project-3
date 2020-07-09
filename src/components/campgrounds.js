@@ -48,21 +48,23 @@ export const Campgrounds = (props) => {
       <section id="hotels">
         <FadeIn>
           <h1>No campgrounds!<br></br>How about a hotel instead?</h1>
-          {hotelsData.map((hotel, i) => (
-            <article key={i} className="hotel-tile">
-              <div className="hotel-info">
-                <h2>{hotel.name}</h2>
-                <img src={hotel.photo.images.medium.url} alt={hotel.name} />
-                <p className="location">{hotel.location_string}</p>
-                <p className="ranking">{hotel.ranking}</p>
-                <RatingIcons iconStyle='circle' color='green' rating={Number(hotel.rating)} numOfReviews={Number(hotel.num_reviews)} />
-                <p className="price">Price: {hotel.price}</p>
-                <a href={`https://www.tripadvisor.co.uk/Search?q=${hotel.name.replace(/\W+/g, '%20')}`} target='_blank' rel='noreferrer'>
-                  <button>Find out more</button>
-                </a>
-              </div>
-            </article>
-          ))}
+          <div className="hotel-tiles">
+            {hotelsData.map((hotel, i) => (
+              <article key={i} className="hotel-tile">
+                <div className="hotel-info">
+                  <h2>{hotel.name}</h2>
+                  <img src={hotel.photo.images.medium.url} alt={hotel.name} />
+                  <p className="location">{hotel.location_string}</p>
+                  <p className="ranking">{hotel.ranking}</p>
+                  <RatingIcons iconStyle='circle' color='green' rating={Number(hotel.rating)} numOfReviews={Number(hotel.num_reviews)} />
+                  <p className="price">Price: {hotel.price}</p>
+                  <a href={`https://www.tripadvisor.co.uk/Search?q=${hotel.name.replace(/\W+/g, '%20')}`} target='_blank' rel='noreferrer'>
+                    <button>Find out more</button>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
         </FadeIn>
       </section>
     )

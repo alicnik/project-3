@@ -4,15 +4,6 @@ const bodyParser = require('body-parser')
 const Router = require('./router')
 const { port, dbURI } = require('./config/environment')
 
-<<<<<<< HEAD
-mongoose.connect(dbURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-}, (err) => {
-  err ? console.log(err) : console.log('Mongoose connected')
-})
-=======
 mongoose.connect(
   dbURI,
   {
@@ -23,7 +14,6 @@ mongoose.connect(
     err ? console.log(err) : console.log('Mongoose connected')
   }
 )
->>>>>>> development
 
 const expressServer = express()
 
