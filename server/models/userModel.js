@@ -20,18 +20,19 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true, match: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/ },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
+  avatar: { type: String },
+  bio: { type: String },
+  homeState: { type: mongoose.SchemaTypes.Mixed },
   showWishList: { type: Boolean },
+  showVisited: { type: Boolean },
   campgroundWishList: [{ type: mongoose.Schema.ObjectId, ref: 'Campground' }],
   recAreaWishList: [{ type: mongoose.Schema.ObjectId, ref: 'RecArea' }],
-  showVisited: { type: Boolean },
   campgroundsVisited: [{ type: mongoose.Schema.ObjectId, ref: 'Campground' }],
   recAreasVisited: [{ type: mongoose.Schema.ObjectId, ref: 'RecArea' }],
-  avatar: { type: String },
-  isAdmin: { type: Boolean },
-  isVIP: { type: Boolean },
-  bio: { type: String },
+  campgroundReviews: [{ type: mongoose.Schema.ObjectId, ref: 'Review' }],
   recAreaReviews: [{ type: mongoose.Schema.ObjectId, ref: 'Review' }],
-  campgroundReviews: [{ type: mongoose.Schema.ObjectId, ref: 'Review' }]
+  isAdmin: { type: Boolean },
+  isVIP: { type: Boolean }
 }, {
   timestamps: true
 })

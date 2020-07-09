@@ -52,7 +52,7 @@ function getSingleUser(req, res) {
     .populate('campgroundReviews')
     .populate('campgroundWishList')
     .populate('recAreaWishList')
-    .populate('camproundsVisited')
+    .populate('campgroundsVisited')
     .populate('recAreasVisited')
     .populate({
       path: 'recAreaReviews',
@@ -70,7 +70,6 @@ function getSingleUser(req, res) {
 }
 
 function editUserProfile(req, res) {
-  // console.log('req.body: ', req.body)
   User
     .findById(req.params.id)
     .then(user => {

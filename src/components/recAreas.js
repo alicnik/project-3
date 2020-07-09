@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
@@ -6,31 +6,37 @@ import { RatingIcons } from './RatingIcons'
 import { RecAreaMap } from './RecAreaMap'
 import loadingGif from '../assets/loading.gif'
 import { states } from './helpers'
+import Select from 'react-select'
+import { UserContext } from './Context'
+
 
 // TODO Provide an emoji icon for the areas which  have campgrounds ⛺️ or only hotels 🏨 
 
 export const RecAreas = () => {
+
+  const { currentUser } = useContext(UserContext)
   const [recAreasData, updateRecAreasData] = useState([])
   const [query, setQuery] = useState({})
-  const [chosenState, setChosenState] = useState('AK')
+  const [chosenState, setChosenState] = useState(currentUser.homeState || states[0])
+
+  // console.log('Line 22', currentUser)
 
   useEffect(() => {
-    axios.get(`/api/recareas/states/${chosenState}`)
+    axios.get(`/api/recareas/states/${chosenState.value}`)
       .then(axiosResp => {
-        console.log(axiosResp)
         updateRecAreasData(axiosResp.data)
       })
   }, [chosenState])
 
-  function handleChange(e) {
-    setChosenState(e.target.value)
+  function handleChange(selectedOption) {
+    setChosenState(selectedOption)
     setQuery({
       ...query,
-      state: e.target.value
+      state: selectedOption.value
     })
   }
 
-
+  const getFullStateName = (stateAbbreviation) => states.find(state => state.value === stateAbbreviation).label
 
   if (!recAreasData.length)
     return <div id="loading-container">
@@ -40,13 +46,22 @@ export const RecAreas = () => {
 
 
   return <section id="browse">
+
     <h1>Rec Areas</h1>
 
     <div className="sort-by-state">
       <p>Sort by US state: </p>
-      <select className="dropdown" name="state" id="state" value={query.state} onChange={handleChange}>
-        {Object.keys(states).sort().map((state, i) => <option key={i} value={state}>{states[state]}</option>)}
-      </select>
+      
+      <Select 
+        className="dropdown" 
+        name="state" 
+        id="state" 
+        defaultValue={chosenState}
+        onChange={handleChange} 
+        options={states}
+        isSearchable
+      />
+
     </div>
 
     <Tabs>
@@ -54,7 +69,6 @@ export const RecAreas = () => {
         <Tab>List</Tab>
         <Tab>Map</Tab>
       </TabList>
-
       <TabPanel>
 
         {recAreasData.map((recArea, index) => {
@@ -66,7 +80,7 @@ export const RecAreas = () => {
                   <RatingIcons rating={recArea.avgRating} numOfReviews={recArea.reviews.length} />
                 </div>
                 <img className="preview-img" src={recArea.media[0].url} alt={recArea.name} />
-                {recArea.city ? <h3>{recArea.city}, {recArea.state}</h3> : <h3>{states[recArea.state]}</h3>}
+                {recArea.city ? <h3>{recArea.city}, {recArea.state}</h3> : <h3>{getFullStateName(recArea.state)}</h3>}
               </article>
             </Link>
           )
@@ -77,5 +91,9 @@ export const RecAreas = () => {
         <RecAreaMap chosenState={chosenState} />
       </TabPanel>
     </Tabs>
+    
+
   </section>
 }
+
+

@@ -16,17 +16,21 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     if (!currentUser.isLoggedIn) return
     Axios.get(`/api/users/${currentUser.id}`)
-      .then(response => setCurrentUser({
-        ...response.data,
-        recAreaWishList: response.data.recAreaWishList.map(site => site._id),
-        campgroundWishList: response.data.campgroundWishList.map(site => site._id),
-        campgroundsVisited: response.data.campgroundsVisited.map(site => site._id),
-        recAreasVisited: response.data.recAreasVisited.map(site => site._id),
-        isLoggedIn: true,
-        id: response.data._id
-      }))
+      .then(response => {
+        setCurrentUser({
+          ...response.data,
+          isLoggedIn: true,
+          recAreaWishList: response.data.recAreaWishList.map(site => site._id),
+          campgroundWishList: response.data.campgroundWishList.map(site => site._id),
+          campgroundsVisited: response.data.campgroundsVisited.map(site => site._id),
+          recAreasVisited: response.data.recAreasVisited.map(site => site._id),
+          id: response.data._id
+        })
+        setListDisplayPreferences(response.data)
+        updateUserHomeState(response.data.homeState)
+      })
       .catch(err => console.log(err))
-  }, [currentUser.id])
+  }, [currentUser.isLoggedIn])
 
   const logIn = (data) => {
     localStorage.setItem('token', data.token)
@@ -89,6 +93,13 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  const updateUserHomeState = (state) => {
+    setCurrentUser({
+      ...currentUser,
+      homeState: state
+    })
+  }
+
   return (
     <UserContext.Provider value={{ 
       currentUser,
@@ -97,7 +108,8 @@ export const UserProvider = ({ children }) => {
       updateWishList,
       updateVisited,
       toggleListDisplay, 
-      setListDisplayPreferences 
+      updateUserHomeState,
+      setListDisplayPreferences
     }}>
       {children}
     </UserContext.Provider>

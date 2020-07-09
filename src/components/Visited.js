@@ -9,11 +9,11 @@ import Axios from 'axios'
 export const Visited = () => {
 
   const { currentUser, updateVisited } = useContext(UserContext)
+  const visitedHasChanged = useRef(false)
   const { id: siteId } = useParams()
-  const [hasVisited, setHasVisited] = useState(currentUser.campgroundsVisited?.includes(siteId) || currentUser.recAreasVisited?.includes(siteId))
   const { pathname } = useLocation()
   const collection = pathname.includes('recareas') ? 'recAreasVisited' : 'campgroundsVisited'
-  const visitedHasChanged = useRef(false)
+  const [hasVisited, setHasVisited] = useState(currentUser.campgroundsVisited?.includes(siteId) || currentUser.recAreasVisited?.includes(siteId))
 
 
   useEffect(() => {

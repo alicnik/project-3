@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers'
 import * as Yup from 'yup'
 import axios from 'axios'
 import { UserContext } from './Context'
+import FadeIn from 'react-fade-in'
 
 const loginSchema = Yup.object().shape({
   username: Yup.string()
@@ -45,16 +46,18 @@ export const Login = () => {
 
   return (
     <section id="login">
-      <h1>Enter the Wilderness</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="username">Enter username</label>
-        <input id="username" type="text" name="username" autoComplete="off" ref={register} />
-        <p>{errors.username?.message}</p>
-        <label htmlFor="password">Enter your password</label>
-        <input id="password" type="password" name="password" autoComplete="off" ref={register} />
-        <p>{errors.password?.message}</p>
-        <button type="submit">Submit</button>
-      </form>
+      <FadeIn>
+        <h1>Enter the Wilderness</h1>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="username">Enter username</label>
+          <input id="username" type="text" name="username" autoComplete="off" ref={register} />
+          <p>{errors.username?.message}</p>
+          <label htmlFor="password">Enter your password</label>
+          <input id="password" type="password" name="password" autoComplete="off" ref={register} />
+          <p>{errors.password?.message}</p>
+          <button type="submit">Submit</button>
+        </form>
+      </FadeIn>
     </section>
   )
 }

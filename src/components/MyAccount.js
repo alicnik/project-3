@@ -6,6 +6,7 @@ import { ReviewListItem } from './ReviewList'
 import { SiteList } from './SiteList'
 import { Settings } from './Settings'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import FadeIn from 'react-fade-in'
 
 export const MyAccount = () => {
 
@@ -42,45 +43,46 @@ export const MyAccount = () => {
 
   return (
     <section id="my-account">
-      <div className="bio">
-        <h1>My Account</h1>
-        <h2>{userDetails.firstName} {userDetails.lastName}</h2>
-        <img src={userDetails.avatar} alt="user avatar" />
-        <Link to='account/settings'><p className="link">Change avatar</p></Link>
-        <h3>My bio:</h3>
-        <div className="bio-options">
-          {userDetails.bio ?
+      <FadeIn>
+        <div className="bio">
+          <h1>My Account</h1>
+          <h2>{userDetails.firstName} {userDetails.lastName}</h2>
+          <img src={userDetails.avatar} alt="user avatar" />
+          <Link to='account/settings'><p className="link">Change avatar</p></Link>
+          <h3>My bio:</h3>
+          <div className="bio-options">
+            {userDetails.bio ?
             <>
               <p>{userDetails.bio}</p>
               <span className="link" onClick={() => setEditingBio(true)}>Edit bio</span>
             </>
-            :
-            <p>No bio yet...<span className="add-bio" onClick={() => setEditingBio(true)}>add one</span></p>
-          }
-          {editingBio && <form>
-            <label htmlFor="edit-bio">Edit your bio here</label>
-            <br></br>
-            <textarea id="edit-bio" name="bio" value={bio} cols="30" rows="7" onChange={(e) => setBio(e.target.value)}></textarea>
-            <br></br>
-            <button onClick={handleClick}>Save</button>
-          </form>}
+              :
+              <p>No bio yet...<span className="add-bio" onClick={() => setEditingBio(true)}>add one</span></p>
+            }
+            {editingBio && <form>
+              <label htmlFor="edit-bio">Edit your bio here</label>
+              <br></br>
+              <textarea id="edit-bio" name="bio" value={bio} cols="30" rows="7" onChange={(e) => setBio(e.target.value)}></textarea>
+              <br></br>
+              <button onClick={handleClick}>Save</button>
+            </form>}
+          </div>
         </div>
-      </div>
 
-      <Tabs>
-        <TabList>
-          <Tab>Locations</Tab>
-          <Tab>Reviews</Tab>
-          <Tab>Settings</Tab>
-        </TabList>
-        <TabPanel>
-          <Tabs>
-            <TabList>
-              <Tab>Wishlist</Tab>
-              <Tab>Visited</Tab>
-            </TabList>
-            <TabPanel>
-              {currentUser.showWishList ? 
+        <Tabs>
+          <TabList>
+            <Tab>Locations</Tab>
+            <Tab>Reviews</Tab>
+            <Tab>Settings</Tab>
+          </TabList>
+          <TabPanel>
+            <Tabs>
+              <TabList>
+                <Tab>Wishlist</Tab>
+                <Tab>Visited</Tab>
+              </TabList>
+              <TabPanel>
+                {currentUser.showWishList ? 
               <>
                 <h3 className="account-tab-title">Places I want to go:</h3>
                 {(userDetails.recAreaWishList.length || userDetails.campgroundWishList.length) ?
@@ -95,11 +97,11 @@ export const MyAccount = () => {
                   <p>You haven&apos;t put any places on your wish list yet. Just click on the heart to add a recreational area or campground to your list.</p>
                 }
               </> :
-                <p>Turn on &lsquo;Show wish list&lsquo; in settings if you want to see anything here!</p>
-              }
-            </TabPanel>
-            <TabPanel>
-              {currentUser.showVisited ? 
+                  <p>Turn on &lsquo;Show wish list&lsquo; in settings if you want to see anything here!</p>
+                }
+              </TabPanel>
+              <TabPanel>
+                {currentUser.showVisited ? 
               <>
                 <h3 className="account-tab-title">Places I&apos;ve been:</h3>
                 {(userDetails.recAreasVisited.length || userDetails.campgroundsVisited.length) ?
@@ -114,30 +116,30 @@ export const MyAccount = () => {
                   <p>You haven&apos;t marked any places as visited yet. Just click on the tick to add a recreational area or campground to your list of visited places.</p>
                 }
               </> :
-                <p>Turn on &lsquo;Show visited locations&lsquo; in settings if you want to see anything here!</p>
-              }
-            </TabPanel>
-          </Tabs>
-        </TabPanel>
-        <TabPanel>
-          <h3>My reviews:</h3>
-          {(userDetails.recAreaReviews.length || userDetails.campgroundReviews.length) ?
-            <div className="my-reviews">
-              <div className="rec-area-reviews">
-                {userDetails.recAreaReviews.map((review, i) => <ReviewListItem key={i} review={review} displayName={false} enableComments={false} displayAvatar={false} />)}
-              </div>
-              <div className="campground-reviews">
-                {userDetails.campgroundReviews.map((review, i) => <ReviewListItem key={i} review={review} displayName={false} enableComments={false} displayAvatar={false} />)}
-              </div>
-            </div> :
-            <p>You haven&apos;t left any reviews yet. Why not add one for somewhere you&apos;ve been?</p>
-          }
-        </TabPanel>
-        <TabPanel>
-          <Settings />
-        </TabPanel>
-      </Tabs>
-
+                  <p>Turn on &lsquo;Show visited locations&lsquo; in settings if you want to see anything here!</p>
+                }
+              </TabPanel>
+            </Tabs>
+          </TabPanel>
+          <TabPanel>
+            <h3>My reviews:</h3>
+            {(userDetails.recAreaReviews.length || userDetails.campgroundReviews.length) ?
+              <div className="my-reviews">
+                <div className="rec-area-reviews">
+                  {userDetails.recAreaReviews.map((review, i) => <ReviewListItem key={i} review={review} displayName={false} enableComments={false} displayAvatar={false} />)}
+                </div>
+                <div className="campground-reviews">
+                  {userDetails.campgroundReviews.map((review, i) => <ReviewListItem key={i} review={review} displayName={false} enableComments={false} displayAvatar={false} />)}
+                </div>
+              </div> :
+              <p>You haven&apos;t left any reviews yet. Why not add one for somewhere you&apos;ve been?</p>
+            }
+          </TabPanel>
+          <TabPanel>
+            <Settings />
+          </TabPanel>
+        </Tabs>
+      </FadeIn>
     </section>
   )
 }

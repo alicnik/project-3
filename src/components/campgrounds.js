@@ -6,6 +6,7 @@ import Axios from 'axios'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { CampgroundMap } from './CampgroundMap'
 import loadingGif from '../assets/loading.gif'
+import FadeIn from 'react-fade-in'
 
 export const Campgrounds = (props) => {
 
@@ -45,22 +46,24 @@ export const Campgrounds = (props) => {
     </div>
     return (
       <section id="hotels">
-        <h1>No campgrounds!<br></br>How about a hotel instead?</h1>
-        {hotelsData.map((hotel, i) => (
-          <article key={i} className="hotel-tile">
-            <div className="hotel-info">
-              <h2>{hotel.name}</h2>
-              <img src={hotel.photo.images.medium.url} alt={hotel.name} />
-              <p className="location">{hotel.location_string}</p>
-              <p className="ranking">{hotel.ranking}</p>
-              <RatingIcons iconStyle='circle' color='green' rating={Number(hotel.rating)} numOfReviews={Number(hotel.num_reviews)} />
-              <p className="price">Price: {hotel.price}</p>
-              <a href={`https://www.tripadvisor.co.uk/Search?q=${hotel.name.replace(/\W+/g, '%20')}`} target='_blank' rel='noreferrer'>
-                <button>Find out more</button>
-              </a>
-            </div>
-          </article>
-        ))}
+        <FadeIn>
+          <h1>No campgrounds!<br></br>How about a hotel instead?</h1>
+          {hotelsData.map((hotel, i) => (
+            <article key={i} className="hotel-tile">
+              <div className="hotel-info">
+                <h2>{hotel.name}</h2>
+                <img src={hotel.photo.images.medium.url} alt={hotel.name} />
+                <p className="location">{hotel.location_string}</p>
+                <p className="ranking">{hotel.ranking}</p>
+                <RatingIcons iconStyle='circle' color='green' rating={Number(hotel.rating)} numOfReviews={Number(hotel.num_reviews)} />
+                <p className="price">Price: {hotel.price}</p>
+                <a href={`https://www.tripadvisor.co.uk/Search?q=${hotel.name.replace(/\W+/g, '%20')}`} target='_blank' rel='noreferrer'>
+                  <button>Find out more</button>
+                </a>
+              </div>
+            </article>
+          ))}
+        </FadeIn>
       </section>
     )
   }

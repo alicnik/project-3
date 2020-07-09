@@ -149,6 +149,10 @@ body {
     flex-direction: column;
     align-items: center;
 
+    div {
+      text-align: center;
+    }
+
     label {
       margin-bottom: 0.3rem;
     }
@@ -259,12 +263,13 @@ body {
   .sort-by-state {
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
-    margin: 1rem;
+    margin: 1rem auto;
+    max-width: 11rem;
 
     p {
       padding-right: 0.25rem;
+      text-align: center;
     }
 
     select.dropdown {

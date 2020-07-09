@@ -13,15 +13,18 @@ export const RecAreaMap = ({ chosenState }) => {
   const [viewPort, setViewPort] = useState({
     altitude: 1.5,
     bearing: 0,
-    height: '80vh',
-    width: '80vw',
-    zoom: 3,
+    height: 650,
+    latitude: 39.8283,
+    longitude: -98.5795,
     maxPitch: 60,
     maxZoom: 24,
+    minPitch: 0,
     minZoom: 0,
     pitch: 0,
-    latitude: 63.29777484,
-    longitude: -151.0526568
+    transitionDuration: 3000,
+    transitionInterruption: 1,
+    width: 300,
+    zoom: 5.538494375443473
   })
 
   function calculateBounds(array) {
@@ -36,7 +39,7 @@ export const RecAreaMap = ({ chosenState }) => {
   }
 
   useEffect(() => {
-    axios.get(`/api/recareas/states/${chosenState}`)
+    axios.get(`/api/recareas/states/${chosenState.value}`)
       .then(axiosResp => {
         const recAreas = axiosResp.data
         updateRecAreasData(recAreas)
