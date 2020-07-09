@@ -99,9 +99,14 @@ body {
   }
 }
 
-body.dark-mode {
+#dark-mode {
   background-color: var(--color-inky-blue);
   color: var(--color-off-white);
+  #homepage {
+    button {
+      box-shadow: none;
+    }
+  }
 }
 
 #splashscreen {

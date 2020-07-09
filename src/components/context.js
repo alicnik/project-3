@@ -131,7 +131,7 @@ export const ThemeProvider = ({ children }) => {
 
   const toggleDarkMode = () => {
     setDarkModeOn(previous => !previous)
-    document.body.classList.toggle('dark-mode')
+    document.body.id ? document.body.id = '' : document.body.id = 'dark-mode'
   }
 
   return (
