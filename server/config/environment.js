@@ -5,7 +5,7 @@ const env = process.env.NODE_ENV || 'development'
 const dbURI = env === 'production'
 
   ? process.env.MONGODB_URI
-  : 'mongodb://localhost/wildernessdb-${env}'
+  : `mongodb://localhost/wildernessdb-${env}`
 
 
 const secret = 'campgrounds are the same as campsites and area 51 is a rec area but trump did not want you to know'

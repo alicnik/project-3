@@ -2,9 +2,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const Router = require('./router')
-const port = 8000
+const { port, dbURI } = require('./config/environment')
 
-mongoose.connect('mongodb://localhost/wildernessdb', {
+mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
