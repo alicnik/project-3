@@ -10,7 +10,9 @@ export const UserProvider = ({ children }) => {
 
   const [currentUser, setCurrentUser] = useState({
     isLoggedIn: !!localStorage.getItem('token'),
-    id: jwt.decode(localStorage.getItem('token'))?.sub
+    id: jwt.decode(localStorage.getItem('token'))?.sub,
+    showWishList: true,
+    showVisited: true
   })
 
   useEffect(() => {
@@ -127,7 +129,10 @@ export const ThemeProvider = ({ children }) => {
 
   const [darkModeOn, setDarkModeOn] = useState(false)
 
-  const toggleDarkMode = () => setDarkModeOn(previous => !previous)
+  const toggleDarkMode = () => {
+    setDarkModeOn(previous => !previous)
+    document.body.classList.toggle('dark-mode')
+  }
 
   return (
     <ThemeContext.Provider value={{ darkModeOn, toggleDarkMode }}>

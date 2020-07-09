@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema({
   homeState: { type: mongoose.SchemaTypes.Mixed },
   showWishList: { type: Boolean },
   showVisited: { type: Boolean },
+  darkModeOn: { type: Boolean },
   campgroundWishList: [{ type: mongoose.Schema.ObjectId, ref: 'Campground' }],
   recAreaWishList: [{ type: mongoose.Schema.ObjectId, ref: 'RecArea' }],
   campgroundsVisited: [{ type: mongoose.Schema.ObjectId, ref: 'Campground' }],

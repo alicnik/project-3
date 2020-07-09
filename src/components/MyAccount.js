@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'
 import Axios from 'axios'
-import { UserContext } from './Context'
+import { UserContext, ThemeProvider } from './Context'
 import { Link } from 'react-router-dom'
 import { ReviewListItem } from './ReviewList'
 import { SiteList } from './SiteList'
@@ -15,6 +15,8 @@ export const MyAccount = () => {
   const [userDetails, setUserDetails] = useState()
   const [editingBio, setEditingBio] = useState(false)
   const [bio, setBio] = useState('')
+  const [avatar, setAvatar] = useState('')
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     Axios.get(`/api/users/${currentUser.id}`)
@@ -24,9 +26,34 @@ export const MyAccount = () => {
       })
   }, [])
 
-  function handleClick(e) {
+  useEffect(() => {
+    if (!avatar) return
+    Axios.put(`/api/users/${currentUser.id}`, { avatar }, { headers: { Authorization: `Bearer ${token}` } })
+      .then(response => setUserDetails({
+        ...userDetails,
+        avatar: response.data.avatar
+      }))
+      .catch(err => console.log(err))
+  }, [avatar])
+
+  function handleAvatarClick() {
+    console.log('Line 40')
+    window.cloudinary.createUploadWidget(
+      {
+        cloudName: 'wilderness',
+        uploadPreset: 'wild_app',
+        cropping: true,
+        croppingAspectRatio: 1,
+        googleApiKey: process.env.GOOGLE_IMAGE_SEARCH_API_KEY
+      },
+      (err, result) => {
+        setAvatar(result.info.secure_url)
+      }
+    ).open()
+  }
+
+  function handleBioClick(e) {
     e.preventDefault()
-    const token = localStorage.getItem('token')
     Axios.put(`/api/users/${currentUser.id}`, { bio }, { headers: { Authorization: `Bearer ${token}` } })
       .then(response => {
         setUserDetails({
@@ -34,9 +61,7 @@ export const MyAccount = () => {
           bio: response.data.bio
         })
         setEditingBio(false)
-      }
-      )
-
+      })
       .catch(error => console.log(error))
   }
 
@@ -51,8 +76,8 @@ export const MyAccount = () => {
         <div className="bio">
           <h1>My Account</h1>
           <h2>{userDetails.firstName} {userDetails.lastName}</h2>
-          <img src={userDetails.avatar} alt="user avatar" />
-          <Link to='account/settings'><p className="link">Change avatar</p></Link>
+          <img className='user-avatar-img' src={userDetails.avatar} alt="user avatar" />
+          <p onClick={handleAvatarClick} className="link">Change avatar</p>
           <h3>My bio:</h3>
           <div className="bio-options">
             {userDetails.bio ?
@@ -68,7 +93,7 @@ export const MyAccount = () => {
               <br></br>
               <textarea id="edit-bio" name="bio" value={bio} cols="30" rows="7" onChange={(e) => setBio(e.target.value)}></textarea>
               <br></br>
-              <button onClick={handleClick}>Save</button>
+              <button onClick={handleBioClick}>Save</button>
             </form>}
           </div>
         </div>
@@ -76,7 +101,7 @@ export const MyAccount = () => {
         <Tabs>
           <TabList>
             <Tab>Locations</Tab>
-            <Tab>Reviews</Tab>
+            <Tab>My Reviews</Tab>
             <Tab>Settings</Tab>
           </TabList>
           <TabPanel>
@@ -126,7 +151,6 @@ export const MyAccount = () => {
             </Tabs>
           </TabPanel>
           <TabPanel>
-            <h3>My reviews:</h3>
             {(userDetails.recAreaReviews.length || userDetails.campgroundReviews.length) ?
               <div className="my-reviews">
                 <div className="rec-area-reviews">
@@ -140,7 +164,9 @@ export const MyAccount = () => {
             }
           </TabPanel>
           <TabPanel>
-            <Settings />
+            <ThemeProvider>
+              <Settings />
+            </ThemeProvider>
           </TabPanel>
         </Tabs>
       </FadeIn>

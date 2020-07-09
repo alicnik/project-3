@@ -29,15 +29,6 @@ export const Settings = () => {
   }
 
   return <section id="settings">
-    <p>Set home state</p>
-
-
-
-    <select className="dropdown" name="state" id="state" value={homeState} onChange={handleChange}>
-      <option value=''>None</option>
-      {states.map((state, i) => <option key={i} value={state.value}>{state.label}</option>)}
-    </select>
-
     <p>Dark mode</p>
     <label htmlFor="dark-mode">
       <input 
@@ -71,6 +62,11 @@ export const Settings = () => {
       <span className="first-label-span">On</span>
       <span className="second-label-span">Off</span>
     </label>
+    <p>Set home state</p>
+    <select className="dropdown" name="state" id="state" value={homeState} onChange={handleChange}>
+      <option value=''>None</option>
+      {states.map((state, i) => <option key={i} value={state.value}>{state.label}</option>)}
+    </select>
     <button onClick={handleSubmit}>Save Settings</button>
   </section>
 }
