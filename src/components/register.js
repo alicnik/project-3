@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers'
 import * as Yup from 'yup'
 import axios from 'axios'
+import FadeIn from 'react-fade-in'
 
 const registerSchema = Yup.object().shape({
   username: Yup.string()
@@ -50,28 +51,30 @@ export const Register = () => {
 
   return (
     <section id="register">
-      <h1>Join the Wilderness</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="firstName">Enter your first name</label>
-        <input id="firstName" type="text" name="firstName" autoComplete="off" ref={register} />
-        <p>{errors.firstName?.message}</p>
-        <label htmlFor="lastName">Enter your last name</label>
-        <input id="lastName" type="text" name="lastName" autoComplete="off" ref={register} />
-        <p>{errors.lastName?.message}</p>
-        <label htmlFor="username">Choose a username</label>
-        <input id="username" type="text" name="username" autoComplete="off" ref={register} />
-        <p>{errors.username?.message}</p>
-        <label htmlFor="email">Enter your email address</label>
-        <input id="email" type="email" name="email" autoComplete="off" ref={register} />
-        <p>{errors.email?.message}</p>
-        <label htmlFor="password">Choose a password</label>
-        <input id="password" type="password" name="password" autoComplete="off" ref={register} />
-        <p>{errors.password?.message}</p>
-        <label htmlFor="passswordConfirmation">Confirm your password</label>
-        <input id="passwordConfirmation" type="password" name="passwordConfirmation" autoComplete="off" ref={register} />
-        <p>{errors.passwordConfirmation?.message}</p>
-        <button type="submit">Submit</button>
-      </form>
+      <FadeIn>
+        <h1>Join the Wilderness</h1>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="firstName">Enter your first name</label>
+          <input id="firstName" type="text" name="firstName" autoComplete="off" ref={register} />
+          <p>{errors.firstName?.message}</p>
+          <label htmlFor="lastName">Enter your last name</label>
+          <input id="lastName" type="text" name="lastName" autoComplete="off" ref={register} />
+          <p>{errors.lastName?.message}</p>
+          <label htmlFor="username">Choose a username</label>
+          <input id="username" type="text" name="username" autoComplete="off" ref={register} />
+          <p>{errors.username?.message}</p>
+          <label htmlFor="email">Enter your email address</label>
+          <input id="email" type="email" name="email" autoComplete="off" ref={register} />
+          <p>{errors.email?.message}</p>
+          <label htmlFor="password">Choose a password</label>
+          <input id="password" type="password" name="password" autoComplete="off" ref={register} />
+          <p>{errors.password?.message}</p>
+          <label htmlFor="passswordConfirmation">Confirm your password</label>
+          <input id="passwordConfirmation" type="password" name="passwordConfirmation" autoComplete="off" ref={register} />
+          <p>{errors.passwordConfirmation?.message}</p>
+          <button type="submit">Submit</button>
+        </form>
+      </FadeIn>
     </section>
   )
 

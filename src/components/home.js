@@ -21,21 +21,23 @@ export const Home = () => {
   return (
     <section id="homepage">
       <div className="hero">
-        <h1>Welcome<br/><em>to the</em><br/>Wilderness{currentUser.firstName && <>,<br/><em>{currentUser.firstName}</em></>}</h1>
+        <h1>Welcome to the Wilderness{currentUser.firstName && <>, <em>{currentUser.firstName}</em></>}</h1>
       </div>
-      <Link to='/recareas'>
-        <button>Browse Rec Areas</button>
-      </Link>
-      <Link to={`/recareas/${randomRecAreaId}`}>
-        <button>Inspiration</button>
-      </Link>
-      {currentUser.isLoggedIn ? 
-        <Link to='/account'>
-          <button>My Account</button>
-        </Link> : 
-        <Link to='/register'>
-          <button>Register</button>
-        </Link>}
+      <div className="home-btns">
+        <Link to='/recareas'>
+          <button>Browse Rec Areas</button>
+        </Link>
+        <Link to={`/recareas/${randomRecAreaId}`}>
+          <button>Inspiration</button>
+        </Link>
+        {currentUser.isLoggedIn ?
+          <Link to='/account'>
+            <button>My Account</button>
+          </Link> :
+          <Link to='/register'>
+            <button>Register</button>
+          </Link>}
+      </div>
     </section>
   )
 

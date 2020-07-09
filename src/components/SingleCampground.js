@@ -6,16 +6,19 @@ import { faClock as checkInTime, faQuestionCircle } from '@fortawesome/free-regu
 import { faDog as petsAllowed, faClock as checkOutTime, faCarSide } from '@fortawesome/free-solid-svg-icons'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { Carousel } from 'react-responsive-carousel'
+import { parseHtml } from './helpers'
+
+
 import { ReviewListItem } from './ReviewList'
 import { PostReviewButton } from './PostReviewButton'
 import { StarRating } from './StarRating'
 import { RatingIcons } from './RatingIcons'
 import { UserContext } from './Context'
-import loadingGif from '../assets/loading.gif'
 import { Favourite } from './Favourite'
 import { Visited } from './Visited'
 import { Contact } from './Contact'
-import { parseHtml } from './helpers'
+import loadingGif from '../assets/loading.gif'
+import FadeIn from 'react-fade-in'
 
 export const SingleCampground = () => {
 
@@ -45,96 +48,97 @@ export const SingleCampground = () => {
 
   return (
     <section id='single-site' className="single-campground">
+      <FadeIn>
+        <div className="site-info campground-info">
+          <h1>{campground.name}</h1>
 
-      <div className="site-info campground-info">
-        <h1>{campground.name}</h1>
-
-        <div className="site-review-header">
-          {campground.reviews.length >= 1 ?
+          <div className="site-review-header">
+            {campground.reviews.length >= 1 ?
             <>
             {currentUser.isLoggedIn ? 
               <StarRating rating={campground.avgRating} setRating={reviewViaStarRating}/> :
               <RatingIcons rating={campground.avgRating} showNumOfReviews={false}/>}
             <p>Rating: {campground.avgRating} ({campground.reviews.length})</p> 
             </>
-            :
-            <div className="no-reviews">
-              <FontAwesomeIcon icon={faQuestionCircle} color='green' />
-              <p>No reviews yet.&nbsp;
-                {currentUser.isLoggedIn &&
+              :
+              <div className="no-reviews">
+                <FontAwesomeIcon icon={faQuestionCircle} color='green' />
+                <p>No reviews yet.&nbsp;
+                  {currentUser.isLoggedIn &&
                 <Link to={{
                   pathname: `/${siteCollection}/${siteId}/postreview`,
                   state: { siteCollection: 'campgrounds', siteId: campgroundId }
                 }}>Leave a review.</Link>}
-              </p>
-            </div>
-          }
-        </div>
+                </p>
+              </div>
+            }
+          </div>
     
 
-        <div className="carousel-container">
-          <Carousel autoplay dynamicHeight showThumbs={false}>
-            {campground.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
-          </Carousel>
-        </div>
+          <div className="carousel-container">
+            <Carousel autoplay dynamicHeight showThumbs={false}>
+              {campground.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
+            </Carousel>
+          </div>
 
-        <div className="wish-list-visited-container" style={{ display: currentUser.isLoggedIn ? 'flex' : 'none' }}>
-          {currentUser.isLoggedIn && <> 
+          <div className="wish-list-visited-container" style={{ display: currentUser.isLoggedIn ? 'flex' : 'none' }}>
+            {currentUser.isLoggedIn && <> 
           <p>Add to wishlist</p> <Favourite />
           <p>Mark as visited</p> <Visited /> </>
-          }
-        </div>
+            }
+          </div>
 
-        <div className="campground-attributes">
-          {<>
+          <div className="campground-attributes">
+            {<>
             <FontAwesomeIcon icon={faCarSide} color='green' />
             <p><strong>Accessible by car?</strong> {campground.accessible ? 'Yes' : 'No'}</p>
           </>
-          }
-          {campground.attributes.map((attribute, i) => {
-            return (
-              <div key={i} className='single-attribute'>
-                <FontAwesomeIcon icon={attributeIcons[attribute.name]} color='green' />
-                <p>
-                  <strong>{attribute.description}</strong>: {attribute.value === 'true' ? 'Yes' :
-                    attribute.value === 'false' ? 'No' : attribute.value}
-                </p>
+            }
+            {campground.attributes.map((attribute, i) => {
+              return (
+                <div key={i} className='single-attribute'>
+                  <FontAwesomeIcon icon={attributeIcons[attribute.name]} color='green' />
+                  <p>
+                    <strong>{attribute.description}</strong>: {attribute.value === 'true' ? 'Yes' :
+                      attribute.value === 'false' ? 'No' : attribute.value}
+                  </p>
+                </div>
+              )
+            })}
+          </div>
+
+          <Tabs>
+            <TabList>
+              <Tab>Info</Tab>
+              <Tab>Reviews</Tab>
+            </TabList>
+            <TabPanel>
+              <div className='accordion-container'>
+                <article className="description">
+                  <h2>Description</h2>
+                  {parseHtml(campground.description)}
+                </article>
               </div>
-            )
-          })}
+              <Contact site={campground} />
+            </TabPanel>
+            <TabPanel>
+              <div className="reviews">
+                {campground.reviews.length ?
+                  campground.reviews.map((review, i) => <ReviewListItem
+                    key={i}
+                    review={review}
+                    siteCollection='campgrounds'
+                  />) :
+                  <p style={{ 'marginTop': '1rem' }}>No reviews yet.</p>
+                }
+                <PostReviewButton />
+                {!currentUser.isLoggedIn && <p className="post-review-button-note">You must be logged in to leave a review.</p>}
+
+              </div>
+            </TabPanel>
+          </Tabs>
         </div>
-
-        <Tabs>
-          <TabList>
-            <Tab>Info</Tab>
-            <Tab>Reviews</Tab>
-          </TabList>
-          <TabPanel>
-            <div className='accordion-container'>
-              <article className="description">
-                <h2>Description</h2>
-                {parseHtml(campground.description)}
-              </article>
-            </div>
-            <Contact site={campground} />
-          </TabPanel>
-          <TabPanel>
-            <div className="reviews">
-              {campground.reviews.length ?
-                campground.reviews.map((review, i) => <ReviewListItem
-                  key={i}
-                  review={review}
-                  siteCollection='campgrounds'
-                />) :
-                <p style={{ 'marginTop': '1rem' }}>No reviews yet.</p>
-              }
-              <PostReviewButton />
-              {!currentUser.isLoggedIn && <p className="post-review-button-note">You must be logged in to leave a review.</p>}
-
-            </div>
-          </TabPanel>
-        </Tabs>
-      </div>
+      </FadeIn>
     </section>
   )
 
