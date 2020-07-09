@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC&family=Poppins:wght@300;400;500;600&display=swap");
 @import url("../../node_modules/react-tabs/style/react-tabs.css");
 @import url("../../node_modules/react-responsive-carousel/lib/styles/carousel.css");
-
 @mixin global-button {
   padding: 1rem 2rem;
   border: none;
@@ -27,7 +26,6 @@ div.react-tabs {
   & > ul {
     display: flex;
     margin: 0;
-
     li {
       flex: 1;
       text-align: center;
@@ -36,7 +34,6 @@ div.react-tabs {
       font-size: 1.7rem;
       letter-spacing: 0.1rem;
       border-bottom: 2px solid rgb(50, 50, 50);
-
       &.react-tabs__tab--selected {
         border: 2px solid rgb(50, 50, 50);
         border-bottom: 1px dashed grey;
@@ -44,7 +41,6 @@ div.react-tabs {
       }
     }
   }
-
   div.react-tabs__tab-panel {
     border: 2px solid rgb(50, 50, 50);
     border-top: none;
@@ -94,11 +90,9 @@ body {
   font-family: var(--body-font);
   font-weight: 300;
   background-color: var(--color-off-white);
-
   #root {
     height: 100%;
   }
-
   main {
     height: 90vh;
   }
@@ -143,25 +137,20 @@ body {
     text-align: center;
     margin: 2rem 0;
   }
-
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     div {
       text-align: center;
     }
-
     label {
       margin-bottom: 0.3rem;
     }
-
     input {
       padding: 0.5rem;
       margin-bottom: 1rem;
     }
-
     button {
       @include global-button();
       margin-top: 1rem;
@@ -274,17 +263,9 @@ body {
     flex-direction: column;
     margin: 1rem auto;
     max-width: 11rem;
-
     p {
       padding-right: 0.25rem;
       text-align: center;
-    }
-
-    select.dropdown {
-      background: none;
-      padding: 0.2rem 0.4rem;
-      border: 2px solid black;
-      border-radius: 4px;
     }
   }
   h1 {
@@ -378,76 +359,62 @@ body {
 
 #single-site {
   padding: 1rem;
-
   h1 {
     text-align: center;
     font-family: var(--wilderness-font);
     font-size: 2.5rem;
     margin-bottom: 0.4rem;
   }
-
   .site-review-header {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-
     p {
       font-size: 0.9rem;
     }
-
     .display-rating {
       padding: 0.3rem 0;
     }
-
     .widget-ratings {
       max-width: 70%;
       display: flex;
       height: min-content;
-
       .widget-container {
         padding: 0 !important;
         width: min-content;
         height: min-content;
         transform: scale(0.7);
-
         svg {
           width: 40px !important;
           height: 40px !important;
         }
       }
     }
-
     .no-reviews {
       display: flex;
       align-items: center;
       margin: 0.3rem 0 0.2rem;
-
       p {
         margin-left: 0.5rem;
       }
     }
   }
-
   .carousel-container {
     width: 100%;
     margin: 1rem 0;
   }
-
   .wish-list-visited-container {
     display: flex;
     align-items: center;
     justify-content: space-around;
     margin: 1.5rem 0 1.5rem;
-
     svg {
       transform: scale(1.3) translateX(-5px);
     }
-
     svg:first-of-type {
       margin-right: 1rem;
     }
   }
-
   .campground-attributes,
   address#contact {
     h2 {
@@ -458,21 +425,17 @@ body {
       margin-left: 0.6rem;
     }
   }
-
   .campground-attributes {
     margin-bottom: 1rem;
     padding: 0.3rem;
   }
-
   button {
     @include global-button();
     margin: 2rem 0 1rem;
   }
-
   p.post-review-button-note {
     font-size: 0.8rem;
   }
-
   .reviews,
   .accordion-container {
     display: flex;
@@ -487,6 +450,14 @@ body {
   flex-direction: column;
   align-items: center;
 
+  select.dropdown {
+    padding: 0.5rem;
+    margin: 0.5rem 0 2rem;
+    background: none;
+    border: 2px solid black;
+    border-radius: 4px;
+  }
+
   p {
     font-size: 1.2rem;
   }
@@ -498,7 +469,6 @@ body {
     font-size: 1.4rem;
     font-family: var(--body-font);
     margin: 1.5rem auto 3rem;
-
     input {
       width: 110px;
       height: 30px;
@@ -509,7 +479,6 @@ body {
       position: relative;
       // margin-left: 30px;
       order: 2;
-
       &::before {
         content: "";
         position: absolute;
@@ -523,15 +492,12 @@ body {
         border-radius: 50%;
         transition: 0.5s ease;
       }
-
       &:checked::before {
         left: 80px;
       }
-
       &:checked + span.first-label-span {
         color: rgb(179, 179, 179);
       }
-
       &:checked ~ span.second-label-span {
         color: black;
       }
@@ -544,7 +510,6 @@ body {
       order: 3;
     }
   }
-
   button {
     @include global-button();
     margin: 1rem 0 2rem;
@@ -562,40 +527,33 @@ body {
   .review-header {
     display: flex;
     width: 100%;
-
     .review-avatar {
       height: 100%;
       width: 20vw;
       display: flex;
       align-items: center;
     }
-
     .review-meta-info {
       flex: 1;
       margin: 0 1rem;
-
       p {
         font-size: 0.9rem;
         line-height: 1.2;
       }
-
       p.reviewer {
         font-size: 1.1rem;
         margin-bottom: 0.1rem;
         font-weight: 500;
       }
-
       div.display-rating {
         margin-top: 0.6rem;
         transform: scale(1.1) translateX(4%);
       }
     }
   }
-
   .review-content {
     padding-top: 1.3rem;
     width: 100%;
-
     h4 {
       margin: 0 0 0.5rem;
       text-transform: capitalize;
@@ -603,7 +561,6 @@ body {
       font-size: 1rem;
       font-weight: 500;
     }
-
     .comments {
       h5 {
         font-size: 1.4rem;
@@ -614,11 +571,9 @@ body {
       p {
         font-size: 0.9rem;
       }
-
       p.comment-meta-info {
         font-weight: 500;
       }
-
       h6 {
         font-size: 0.9rem;
         margin: 1.2rem 0;
@@ -638,22 +593,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     label {
       margin-bottom: 0.6rem;
     }
-
     input,
     div.widget-ratings,
     textarea {
       margin-bottom: 1.6rem;
     }
-
     input,
     textarea {
       padding: 0.5rem;
     }
-
     button {
       @include global-button();
     }
@@ -667,21 +618,17 @@ body {
     text-align: center;
     margin: 2rem 0;
   }
-
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     label {
       margin-bottom: 1rem;
     }
-
     textarea {
       padding: 0.5rem;
       margin-bottom: 2rem;
     }
-
     button {
       @include global-button();
       margin: 1rem;
@@ -692,13 +639,10 @@ body {
 #my-account {
   div.react-tabs__tab-panel {
     padding: 0.6rem;
-
     .review-header {
       align-items: center;
-
       .review-avatar {
         width: 40vw;
-
         img {
           width: 40vw;
           height: 40vw;
@@ -706,7 +650,6 @@ body {
           border-radius: 50%;
         }
       }
-
       .review-meta-info {
         h3 {
           margin: 0 0 0.6rem;
@@ -714,6 +657,7 @@ body {
       }
     }
   }
+
   .bio {
     margin: 1.6rem;
     text-align: center;
@@ -721,29 +665,36 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: var(--wilderness-font);
+
     h1 {
       font-size: 2.5rem;
     }
+
     h2 {
       font-size: 2rem;
       margin-top: 0.5em;
     }
+
     h3 {
       margin-bottom: 0.3rem;
       font-size: 1.8rem;
     }
+
     p {
       margin: 0.5rem;
     }
+
     .link {
       font-family: var(--body-font);
       font-size: 0.9rem;
       color: var(--color-forest-green);
       text-decoration: underline;
     }
+
     #edit-bio {
       font-family: var(--body-font);
     }
+
     .bio-options {
       font-family: var(--body-font);
 
@@ -760,7 +711,6 @@ body {
         @include global-button();
       }
     }
-
     img {
       max-width: 50%;
     }
@@ -774,7 +724,6 @@ body {
     text-decoration: none;
     font-family: var(--wilderness-font);
     color: black;
-
     .site-list-item {
       text-align: center;
       text-decoration: none;
@@ -789,12 +738,10 @@ body {
       border-radius: 20px;
       padding-top: 1.3rem;
       padding: 1rem;
-
       img {
         max-width: 90%;
         margin-top: 1rem;
       }
-
       h3 {
         margin-top: 1rem;
         margin-bottom: 0em;
@@ -802,7 +749,6 @@ body {
         font-size: 2rem;
         color: black;
       }
-
       .visited {
         text-decoration: none;
       }
@@ -819,7 +765,6 @@ body {
     background-color: rgba(0, 0, 0, 0);
     border: none;
   }
-
   .mapboxgl-popup-content {
     width: 80%;
     .popoutRec,
@@ -828,6 +773,8 @@ body {
       flex-direction: column;
       align-items: center;
       h3 {
+        text-decoration: underline;
+        color: var(--color-forest-green);
         word-wrap: break-word;
         max-width: 80%;
         text-align: center;
@@ -897,6 +844,37 @@ body {
     h1 {
       margin-top: 2em;
     }
+  }
+
+  #splashscreen {
+    svg {
+      top: -2vh;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .buttons {
+      top: 560px;
+    }
+  }
+
+  #navbar {
+    justify-content: space-between;
+    ul {
+      margin: 0 20px;
+    }
+    img.logo {
+      margin: 0 20px;
+      height: 8vh;
+      display: flex;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+  }
+
+  #login {
+    h1 {
+      margin-top: 2em;
+    }
     form {
       margin-top: 1rem;
     }
@@ -930,6 +908,7 @@ body {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+
       button {
         box-shadow: 3px 3px 10px 2px rgba(0, 0, 0, 0.4),
           -3px -3px 10px 2px rgba(255, 255, 255, 0.9);
@@ -954,6 +933,15 @@ body {
       height: 300px;
       object-fit: cover;
       object-position: center;
+    }
+  }
+
+  #single-site {
+    .carousel-container {
+      max-width: 80vw;
+      margin: 50px;
+      display: flex;
+      justify-content: center;
     }
   }
 }

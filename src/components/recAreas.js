@@ -9,17 +9,12 @@ import { states } from './helpers'
 import Select from 'react-select'
 import { UserContext } from './Context'
 
-
-// TODO Provide an emoji icon for the areas which  have campgrounds ⛺️ or only hotels 🏨 
-
 export const RecAreas = () => {
 
   const { currentUser } = useContext(UserContext)
   const [recAreasData, updateRecAreasData] = useState([])
   const [query, setQuery] = useState({})
   const [chosenState, setChosenState] = useState(currentUser.homeState || states[0])
-
-  // console.log('Line 22', currentUser)
 
   useEffect(() => {
     axios.get(`/api/recareas/states/${chosenState.value}`)
@@ -38,6 +33,22 @@ export const RecAreas = () => {
 
   const getFullStateName = (stateAbbreviation) => states.find(state => state.value === stateAbbreviation).label
 
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: 'none',
+      border: '2px solid black'
+    }),
+    menu: (provided) => ({
+      ...provided,
+      backgroundColor: 'rgb(247, 240, 230)'
+    }),
+    container: (provided) => ({
+      ...provided,
+      width: '180px'
+    })
+  }
+
   if (!recAreasData.length)
     return <div id="loading-container">
       <img className="loading" src={loadingGif} alt="loading" />
@@ -51,15 +62,16 @@ export const RecAreas = () => {
 
     <div className="sort-by-state">
       <p>Sort by US state: </p>
-      
-      <Select 
-        className="dropdown" 
-        name="state" 
-        id="state" 
+
+      <Select
+        className="dropdown"
+        name="state"
+        id="state"
         defaultValue={chosenState}
-        onChange={handleChange} 
+        onChange={handleChange}
         options={states}
         isSearchable
+        styles={customStyles}
       />
 
     </div>
@@ -92,7 +104,7 @@ export const RecAreas = () => {
         <RecAreaMap chosenState={chosenState} />
       </TabPanel>
     </Tabs>
-    
+
 
   </section>
 }

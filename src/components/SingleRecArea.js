@@ -56,21 +56,21 @@ export const SingleRecArea = (props) => {
 
           <div className="site-review-header">
             {recArea.reviews.length >= 1 ?
-            <>
-              {currentUser.isLoggedIn ?
-                <StarRating rating={recArea.avgRating} setRating={reviewViaStarRating} /> :
-                <RatingIcons rating={recArea.avgRating} showNumOfReviews={false} />
-              }
-              <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
-            </> :
+              <>
+                {currentUser.isLoggedIn ?
+                  <StarRating rating={recArea.avgRating} setRating={reviewViaStarRating} /> :
+                  <RatingIcons rating={recArea.avgRating} showNumOfReviews={false} />
+                }
+                <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
+              </> :
               <div className="no-reviews">
                 <FontAwesomeIcon icon={faQuestionCircle} color='green' />
                 <p>No reviews yet.&nbsp;
                   {currentUser.isLoggedIn &&
-                <Link to={{
-                  pathname: `/${siteCollection}/${siteId}/postreview`,
-                  state: { siteCollection: 'recareas', siteId: recAreaId }
-                }}> Leave a review.</Link>}</p>
+                    <Link to={{
+                      pathname: `/${siteCollection}/${siteId}/postreview`,
+                      state: { siteCollection: 'recareas', siteId: recAreaId }
+                    }}> Leave a review.</Link>}</p>
               </div>
             }
           </div>
@@ -80,11 +80,11 @@ export const SingleRecArea = (props) => {
               {recArea.media.map((image, i) => <img key={i} src={image.url} alt={image.title} />)}
             </Carousel>
           </div>
-        
+
           <div className="wish-list-visited-container" style={{ display: currentUser.isLoggedIn ? 'flex' : 'none' }}>
-            {currentUser.isLoggedIn && <> 
-          <p>Add to wishlist</p> <Favourite />
-          <p>Mark as visited</p> <Visited /> </>
+            {currentUser.isLoggedIn && <>
+              <p>Add to wishlist</p> <Favourite />
+              <p>Mark as visited</p> <Visited /> </>
             }
           </div>
 
@@ -109,7 +109,7 @@ export const SingleRecArea = (props) => {
                   {recArea.campgrounds.length ? <button>Find Campsites</button> : <button>Find Hotels</button>}
                 </Link>
               </div>
-              <Contact site={recArea}/>
+              <Contact site={recArea} />
             </TabPanel>
 
             <TabPanel>
