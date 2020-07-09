@@ -114,6 +114,15 @@ export const MyAccount = () => {
                 {currentUser.showWishList ?
                   <>
                     <h3 className="account-tab-title">Places I want to go:</h3>
+<<<<<<< HEAD
+                    {(userDetails.recAreaWishList.length || userDetails.campgroundWishList.length) ?
+                      <div className="wish-list">
+                        {userDetails.recAreaWishList.map((recArea, i) => <Link to={{ pathname: `/recareas/${recArea._id}`, state: { recAreaId: recArea._id } }} key={i}><SiteList site={recArea} /></Link>)}
+                        {userDetails.campgroundWishList.map((campground, i) => <Link to={`/campgrounds/${campground._id}`} key={i}><SiteList site={campground} /></Link>)}
+                      </div> :
+                      <p>You haven&apos;t put any places on your wish list yet. Just click on the heart to add a recreational area or campground to your list.</p>
+                    }
+=======
                     <div className="all-tiles">
                       {(userDetails.recAreaWishList.length || userDetails.campgroundWishList.length) ?
                         <div className="wish-list">
@@ -123,6 +132,7 @@ export const MyAccount = () => {
                         <p>You haven&apos;t put any places on your wish list yet. Just click on the heart to add a recreational area or campground to your list.</p>
                       }
                     </div>
+>>>>>>> development
                   </> :
                   <p>Turn on &lsquo;Show wish list&lsquo; in settings if you want to see anything here!</p>
                 }

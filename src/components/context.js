@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState, useEffect, useContext } from 'react'
 import jwt from 'jsonwebtoken'
 import Axios from 'axios'
 
@@ -127,15 +127,32 @@ export const ThemeContext = createContext()
 
 export const ThemeProvider = ({ children }) => {
 
-  const [darkModeOn, setDarkModeOn] = useState(false)
+  const [darkMode, setDarkMode] = useState(false)
+  const { currentUser } = useContext(UserContext)
 
-  const toggleDarkMode = () => {
-    setDarkModeOn(previous => !previous)
-    document.body.id ? document.body.id = '' : document.body.id = 'dark-mode'
+  useEffect(() => {
+    if (!currentUser.isLoggedIn) {
+      setDarkMode(false)
+      implementDarkMode(false)
+      return
+    }
+    Axios
+      .get(`/api/users/${currentUser.id}`)
+      .then(response => {
+        setDarkMode(response.data.darkMode)
+        implementDarkMode(response.data.darkMode)
+      })
+      .catch(err => console.log(err))
+  }, [currentUser.isLoggedIn])
+
+  const toggleDarkModeInContext = (e) => {
+    setDarkMode(!e.target.checked)
   }
 
+  const implementDarkMode = (userPref = darkMode) => userPref ? document.body.id = 'dark-mode' : document.body.id = ''
+
   return (
-    <ThemeContext.Provider value={{ darkModeOn, toggleDarkMode }}>
+    <ThemeContext.Provider value={{ darkMode, setDarkMode, toggleDarkModeInContext, implementDarkMode }}>
       {children}
     </ThemeContext.Provider>
   )
