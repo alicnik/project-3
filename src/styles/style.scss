@@ -8,6 +8,7 @@
   border-radius: 15px;
   font-family: var(--wilderness-font);
   font-size: 1.7rem;
+  cursor: pointer;
 }
 
 :root {
@@ -95,6 +96,16 @@ body {
   }
   main {
     height: 90vh;
+  }
+}
+
+#dark-mode {
+  background-color: var(--color-inky-blue);
+  color: var(--color-off-white);
+  #homepage {
+    button {
+      box-shadow: none;
+    }
   }
 }
 
@@ -532,10 +543,22 @@ body {
       width: 20vw;
       display: flex;
       align-items: center;
+
+      img {
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+      }
     }
     .review-meta-info {
       flex: 1;
       margin: 0 1rem;
+      a {
+        h3 {
+          text-decoration: underline;
+          color: var(--color-forest-green);
+        }
+      }
       p {
         font-size: 0.9rem;
         line-height: 1.2;
@@ -675,6 +698,12 @@ body {
       margin-top: 0.5em;
     }
 
+    img.user-avatar-img {
+      height: 200px;
+      width: 200px;
+      border-radius: 50%;
+    }
+
     h3 {
       margin-bottom: 0.3rem;
       font-size: 1.8rem;
@@ -689,6 +718,7 @@ body {
       font-size: 0.9rem;
       color: var(--color-forest-green);
       text-decoration: underline;
+      cursor: pointer;
     }
 
     #edit-bio {
@@ -706,6 +736,7 @@ body {
         font-family: var(--body-font);
         text-decoration: underline;
         color: var(--color-forest-green);
+        cursor: pointer;
       }
       button {
         @include global-button();
@@ -755,7 +786,6 @@ body {
     }
   }
 }
-
 
 #map-container {
   width: 100%;
@@ -823,28 +853,28 @@ body {
       transform: translateX(-50%);
     }
     #browse {
-        select.dropdown {
-            margin-bottom: 1.5rem;
-        }
-        #all-tiles {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .tile {
-            width: 27vw;
-            min-height: 550px;
-        }
-        img {
-            height: 300px;
-            object-fit: cover;
-            object-position: center;
-        }
-    .buttons {
-      top: 560px;
+      select.dropdown {
+        margin-bottom: 1.5rem;
+      }
+      #all-tiles {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .tile {
+        width: 27vw;
+        min-height: 550px;
+      }
+      img {
+        height: 300px;
+        object-fit: cover;
+        object-position: center;
+      }
+      .buttons {
+        top: 560px;
+      }
     }
   }
-}
 
   #single-site {
     h1 {
@@ -991,6 +1021,29 @@ body {
     justify-content: center;
     article.hotel-tile {
       width: 27vw;
+    }
+  }
+}
+#my-account {
+  .my-reviews {
+    #review-container {
+      padding: 2rem;
+      width: auto;
+      .review-header {
+        .review-avatar {
+          width: auto;
+          img {
+            width: 150px;
+            height: 150px;
+          }
+        }
+        .review-meta-info {
+          margin-left: 6vw;
+          h3 {
+            font-size: 2rem;
+          }
+        }
+      }
     }
   }
 }
