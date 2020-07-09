@@ -44,7 +44,7 @@ export const RecAreas = () => {
 
     <div className="sort-by-state">
       <p>Sort by US state: </p>
-      <select name="state" id="state" value={query.state} onChange={handleChange}>
+      <select className="dropdown" name="state" id="state" value={query.state} onChange={handleChange}>
         {states.sort().map((state, i) => <option key={i} value={state}>{state}</option>)}
       </select>
     </div>
@@ -74,8 +74,6 @@ export const RecAreas = () => {
 
       </TabPanel>
       <TabPanel>
-        <h2>Map View</h2>
-
         <RecAreaMap chosenState={chosenState} />
       </TabPanel>
     </Tabs>

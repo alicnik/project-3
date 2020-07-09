@@ -41,41 +41,47 @@ export const MyAccount = () => {
   if (!userDetails) return <h1>Loading...</h1>
 
   return (
-    <section className="my-account">
-      <h1>My Account</h1>
-      <h2>{userDetails.firstName} {userDetails.lastName}</h2>
-      <img src={userDetails.avatar} alt="user avatar" />
-      <Link to='account/settings'><p>Change avatar</p></Link>
-      <h3>My bio:</h3>
-      {userDetails.bio ?
-        <>
-          <p>{userDetails.bio}</p>
-          <span onClick={() => setEditingBio(true)}>Edit bio</span>
-        </>
-        :
-        <p>No bio yet...<span onClick={() => setEditingBio(true)}>add one</span></p>
-      }
-      {editingBio && <form>
-        <label htmlFor="edit-bio">Edit your bio here</label>
-        <textarea id="edit-bio" name="bio" value={bio} onChange={(e) => setBio(e.target.value)}></textarea>
-        <button onClick={handleClick}>Save</button>
-      </form>}
+    <section id="my-account">
+      <div className="bio">
+        <h1>My Account</h1>
+        <h2>{userDetails.firstName} {userDetails.lastName}</h2>
+        <img src={userDetails.avatar} alt="user avatar" />
+        <Link to='account/settings'><p className="link">Change avatar</p></Link>
+        <h3>My bio:</h3>
+        <div className="bio-options">
+          {userDetails.bio ?
+            <>
+              <p>{userDetails.bio}</p>
+              <span className="link" onClick={() => setEditingBio(true)}>Edit bio</span>
+            </>
+            :
+            <p>No bio yet...<span className="add-bio" onClick={() => setEditingBio(true)}>add one</span></p>
+          }
+          {editingBio && <form>
+            <label htmlFor="edit-bio">Edit your bio here</label>
+            <br></br>
+            <textarea id="edit-bio" name="bio" value={bio} onChange={(e) => setBio(e.target.value)}></textarea>
+            <br></br>
+            <button onClick={handleClick}>Save</button>
+          </form>}
+        </div>
+      </div>
 
       <Tabs>
         <TabList>
-          <Tab>My Locations</Tab>
-          <Tab>My Reviews</Tab>
-          <Tab>My Settings</Tab>
+          <Tab>Locations</Tab>
+          <Tab>Reviews</Tab>
+          <Tab>Settings</Tab>
         </TabList>
         <TabPanel>
           <Tabs>
             <TabList>
-              <Tab>My Wishlist</Tab>
-              <Tab>Places I&apos;ve Visited</Tab>
+              <Tab>Wishlist</Tab>
+              <Tab>Visited</Tab>
             </TabList>
             <TabPanel>
               {currentUser.showWishList && <>
-                <h3>Places I want to go:</h3>
+                <h3 className="account-tab-title">Places I want to go:</h3>
                 {(userDetails.recAreaWishList.length || userDetails.campgroundWishList.length) ?
                   <div className="wish-list">
                     <div className="rec-area-wish-list">
@@ -91,7 +97,7 @@ export const MyAccount = () => {
             </TabPanel>
             <TabPanel>
               {currentUser.showVisited && <>
-                <h3>Places I&apos;ve been:</h3>
+                <h3 className="account-tab-title">Places I&apos;ve been:</h3>
                 {(userDetails.recAreasVisited.length || userDetails.campgroundsVisited.length) ?
                   <div className="visited">
                     <div className="rec-areas-visited">
