@@ -13,8 +13,6 @@ import { Campgrounds } from './components/Campgrounds'
 import { SingleRecArea } from './components/SingleRecArea'
 import { SingleCampground } from './components/SingleCampground'
 import { MyAccount } from './components/MyAccount'
-// import { RecAreaMap } from './components/RecAreaMap'
-// import { CampgroundMap } from './components/CampgroundMap'
 import { NavBar } from './components/NavBar'
 import { ScrollToTop } from './components/ScrollToTop'
 import { Settings } from './components/Settings'
@@ -35,7 +33,7 @@ const App = () => {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/home" component={Home} />
-              {/* <Route exact path="/postreview" component={PostReview} /> */}
+              <Route exact path="/postreview" component={PostReview} />
               <Route exact path="/:siteCollection/:siteId/postreview" component={PostReview} />
               <Route exact path="/reviews/:id/postcomment" component={PostComment} />
               <Route exact path="/recareas" component={RecAreas} />

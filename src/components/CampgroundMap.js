@@ -132,5 +132,3 @@ export const CampgroundMap = () => {
   )
 
 }
-
-// ? two components into one page; rather than adding another route

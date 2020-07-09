@@ -56,10 +56,10 @@ export const MyAccount = () => {
           <h3>My bio:</h3>
           <div className="bio-options">
             {userDetails.bio ?
-            <>
-              <p>{userDetails.bio}</p>
-              <span className="link" onClick={() => setEditingBio(true)}>Edit bio</span>
-            </>
+              <>
+                <p>{userDetails.bio}</p>
+                <span className="link" onClick={() => setEditingBio(true)}>Edit bio</span>
+              </>
               :
               <p>No bio yet...<span className="add-bio" onClick={() => setEditingBio(true)}>add one</span></p>
             }
@@ -87,39 +87,39 @@ export const MyAccount = () => {
               </TabList>
               <TabPanel>
                 {currentUser.showWishList ?
-                <>
-                  <h3 className="account-tab-title">Places I want to go:</h3>
-                  {(userDetails.recAreaWishList.length || userDetails.campgroundWishList.length) ?
-                    <div className="wish-list">
-                      <div className="rec-area-wish-list">
-                        {userDetails.recAreaWishList.map((recArea, i) => <Link to={{ pathname: `/recareas/${recArea._id}`, state: { recAreaId: recArea._id } }} key={i}><SiteList site={recArea} /></Link>)}
-                      </div>
-                      <div className="campground-wish-list">
-                        {userDetails.campgroundWishList.map((campground, i) => <Link to={`/campgrounds/${campground._id}`} key={i}><SiteList site={campground} /></Link>)}
-                      </div>
-                    </div> :
-                    <p>You haven&apos;t put any places on your wish list yet. Just click on the heart to add a recreational area or campground to your list.</p>
-                  }
-                </> :
+                  <>
+                    <h3 className="account-tab-title">Places I want to go:</h3>
+                    {(userDetails.recAreaWishList.length || userDetails.campgroundWishList.length) ?
+                      <div className="wish-list">
+                        <div className="rec-area-wish-list">
+                          {userDetails.recAreaWishList.map((recArea, i) => <Link to={{ pathname: `/recareas/${recArea._id}`, state: { recAreaId: recArea._id } }} key={i}><SiteList site={recArea} /></Link>)}
+                        </div>
+                        <div className="campground-wish-list">
+                          {userDetails.campgroundWishList.map((campground, i) => <Link to={`/campgrounds/${campground._id}`} key={i}><SiteList site={campground} /></Link>)}
+                        </div>
+                      </div> :
+                      <p>You haven&apos;t put any places on your wish list yet. Just click on the heart to add a recreational area or campground to your list.</p>
+                    }
+                  </> :
                   <p>Turn on &lsquo;Show wish list&lsquo; in settings if you want to see anything here!</p>
                 }
               </TabPanel>
               <TabPanel>
                 {currentUser.showVisited ?
-                <>
-                  <h3 className="account-tab-title">Places I&apos;ve been:</h3>
-                  {(userDetails.recAreasVisited.length || userDetails.campgroundsVisited.length) ?
-                    <div className="visited">
-                      <div className="rec-areas-visited">
-                        {userDetails.recAreasVisited.map((recArea, i) => <Link to={{ pathname: `/recareas/${recArea._id}`, state: { recAreaId: recArea._id } }} key={i}><SiteList key={i} site={recArea} /></Link>)}
-                      </div>
-                      <div className="campgrounds-visited">
-                        {userDetails.campgroundsVisited.map((campground, i) => <Link to={`/campgrounds/${campground._id}`} key={i}><SiteList key={i} site={campground} /></Link>)}
-                      </div>
-                    </div> :
-                    <p>You haven&apos;t marked any places as visited yet. Just click on the tick to add a recreational area or campground to your list of visited places.</p>
-                  }
-                </> :
+                  <>
+                    <h3 className="account-tab-title">Places I&apos;ve been:</h3>
+                    {(userDetails.recAreasVisited.length || userDetails.campgroundsVisited.length) ?
+                      <div className="visited">
+                        <div className="rec-areas-visited">
+                          {userDetails.recAreasVisited.map((recArea, i) => <Link to={{ pathname: `/recareas/${recArea._id}`, state: { recAreaId: recArea._id } }} key={i}><SiteList key={i} site={recArea} /></Link>)}
+                        </div>
+                        <div className="campgrounds-visited">
+                          {userDetails.campgroundsVisited.map((campground, i) => <Link to={`/campgrounds/${campground._id}`} key={i}><SiteList key={i} site={campground} /></Link>)}
+                        </div>
+                      </div> :
+                      <p>You haven&apos;t marked any places as visited yet. Just click on the tick to add a recreational area or campground to your list of visited places.</p>
+                    }
+                  </> :
                   <p>Turn on &lsquo;Show visited locations&lsquo; in settings if you want to see anything here!</p>
                 }
               </TabPanel>

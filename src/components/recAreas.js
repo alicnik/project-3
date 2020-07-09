@@ -51,13 +51,13 @@ export const RecAreas = () => {
 
     <div className="sort-by-state">
       <p>Sort by US state: </p>
-      
-      <Select 
-        className="dropdown" 
-        name="state" 
-        id="state" 
+
+      <Select
+        className="dropdown"
+        name="state"
+        id="state"
         defaultValue={chosenState}
-        onChange={handleChange} 
+        onChange={handleChange}
         options={states}
         isSearchable
       />
@@ -92,7 +92,7 @@ export const RecAreas = () => {
         <RecAreaMap chosenState={chosenState} />
       </TabPanel>
     </Tabs>
-    
+
 
   </section>
 }
