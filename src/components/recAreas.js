@@ -56,21 +56,22 @@ export const RecAreas = () => {
       </TabList>
 
       <TabPanel>
-
-        {recAreasData.map((recArea, index) => {
-          return (
-            <Link to={{ pathname: `/recareas/${recArea._id}`, state: { recAreaId: recArea._id } }} key={index}>
-              <article className="tile">
-                <h2>{recArea.name}</h2>
-                <div className="rating">
-                  <RatingIcons rating={recArea.avgRating} numOfReviews={recArea.reviews.length} />
-                </div>
-                <img className="preview-img" src={recArea.media[0].url} alt={recArea.name} />
-                {recArea.city ? <h3>{recArea.city}, {recArea.state}</h3> : <h3>{states[recArea.state]}</h3>}
-              </article>
-            </Link>
-          )
-        })}
+        <section id="all-tiles">
+          {recAreasData.map((recArea, index) => {
+            return (
+              <Link to={{ pathname: `/recareas/${recArea._id}`, state: { recAreaId: recArea._id } }} key={index}>
+                <article className="tile">
+                  <h2>{recArea.name}</h2>
+                  <div className="rating">
+                    <RatingIcons rating={recArea.avgRating} numOfReviews={recArea.reviews.length} />
+                  </div>
+                  <img className="preview-img" src={recArea.media[0].url} alt={recArea.name} />
+                  {recArea.city ? <h3>{recArea.city}, {recArea.state}</h3> : <h3>{states[recArea.state]}</h3>}
+                </article>
+              </Link>
+            )
+          })}
+        </section>
 
       </TabPanel>
       <TabPanel>
