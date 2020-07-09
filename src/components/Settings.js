@@ -7,16 +7,18 @@ import { states } from './helpers'
 export const Settings = () => {
 
   const { currentUser, toggleListDisplay, updateUserHomeState } = useContext(UserContext)
-  const { darkModeOn, toggleDarkMode } = useContext(ThemeContext)
+  const { darkMode, toggleDarkModeInContext, implementDarkMode } = useContext(ThemeContext)
   const [homeState, setHomeState] = useState(currentUser.homeState?.value || '')
   const history = useHistory()
   
   function handleSubmit() {
+    implementDarkMode()
     const token = localStorage.getItem('token')
     Axios.put(`/api/users/${currentUser.id}`, { 
       showVisited: currentUser.showVisited, 
       showWishList: currentUser.showWishList,
-      homeState: states.find(state => state.value === homeState)
+      homeState: states.find(state => state.value === homeState),
+      darkMode
     }, { headers: { Authorization: `Bearer ${token}` } })
       .then(() => history.push('/account'))
       .catch(err => console.log(err))
@@ -32,8 +34,8 @@ export const Settings = () => {
     <p>Dark mode</p>
     <label htmlFor="dark-mode">
       <input 
-        onClick={toggleDarkMode} 
-        defaultChecked={!darkModeOn}
+        onChange={toggleDarkModeInContext} 
+        checked={!darkMode}
         type="checkbox" 
         name="darkMode" 
         id="dark-mode"/>

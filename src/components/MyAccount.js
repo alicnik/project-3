@@ -116,12 +116,8 @@ export const MyAccount = () => {
                     <h3 className="account-tab-title">Places I want to go:</h3>
                     {(userDetails.recAreaWishList.length || userDetails.campgroundWishList.length) ?
                       <div className="wish-list">
-                        <div className="rec-area-wish-list">
-                          {userDetails.recAreaWishList.map((recArea, i) => <Link to={{ pathname: `/recareas/${recArea._id}`, state: { recAreaId: recArea._id } }} key={i}><SiteList site={recArea} /></Link>)}
-                        </div>
-                        <div className="campground-wish-list">
-                          {userDetails.campgroundWishList.map((campground, i) => <Link to={`/campgrounds/${campground._id}`} key={i}><SiteList site={campground} /></Link>)}
-                        </div>
+                        {userDetails.recAreaWishList.map((recArea, i) => <Link to={{ pathname: `/recareas/${recArea._id}`, state: { recAreaId: recArea._id } }} key={i}><SiteList site={recArea} /></Link>)}
+                        {userDetails.campgroundWishList.map((campground, i) => <Link to={`/campgrounds/${campground._id}`} key={i}><SiteList site={campground} /></Link>)}
                       </div> :
                       <p>You haven&apos;t put any places on your wish list yet. Just click on the heart to add a recreational area or campground to your list.</p>
                     }

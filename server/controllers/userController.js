@@ -40,6 +40,8 @@ function login(req, res) {
         recAreaWishList: user.recAreaWishList,
         campgroundsVisited: user.campgroundsVisited,
         recAreasVisited: user.recAreasVisited,
+        homeState: user.homeState,
+        darkModeOn: user.darkModeOn,
         token
       })
     })
