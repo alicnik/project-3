@@ -19,6 +19,7 @@
   --color-orange: #fa5210;
   --color-forest-green: #285d43;
   --color-off-white: rgb(247, 240, 230);
+  --color-grey-blue: rgb(18, 55, 67);
   --wilderness-font: "Amatic SC", cursive;
   --body-font: "Poppins", sans-serif;
 }
@@ -113,6 +114,28 @@ body {
   #my-account {
     button {
       box-shadow: none;
+      background-color: var(--color-grey-blue);
+      color: var(--color-off-white);
+      border: 2px solid var(--color-off-white);
+    }
+    a {
+      color: var(--color-pink);
+    }
+    .star-number {
+      color: var(--color-off-white);
+    }
+    .tile {
+      background-color: var(--color-grey-blue);
+      box-shadow: none;
+      h3, h2, p {
+        color: var(--color-off-white);
+      }
+    }
+  }
+  #navbar {
+    background-color: var(--color-grey-blue);
+    .nav-btn:hover {
+      background-color: var(--color-inky-blue);
     }
   }
 }
