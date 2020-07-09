@@ -43,7 +43,7 @@ export const ReviewListItem = ({ review, displayName = true, displayAvatar = tru
       
       {enableComments && 
         <div className="comments">
-          <h5>Comments:</h5>
+          {review.comments.length >= 1 && <h5>Comments:</h5>}
           {review.comments.map((comment, i) => (
             <div className='comment' key={i}>
               <p className="comment-meta-info">{comment.user.firstName || comment.user.username} at {timeFrom(comment.createdAt)} on {dateFrom(comment.createdAt)}</p>

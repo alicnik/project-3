@@ -45,7 +45,7 @@ export const RecAreas = () => {
     <div className="sort-by-state">
       <p>Sort by US state: </p>
       <select name="state" id="state" value={query.state} onChange={handleChange}>
-        {states.sort().map((state, i) => <option key={i} value={state}>{state}</option>)}
+        {Object.keys(states).sort().map((state, i) => <option key={i} value={state}>{states[state]}</option>)}
       </select>
     </div>
 
@@ -66,7 +66,7 @@ export const RecAreas = () => {
                   <RatingIcons rating={recArea.avgRating} numOfReviews={recArea.reviews.length} />
                 </div>
                 <img className="preview-img" src={recArea.media[0].url} alt={recArea.name} />
-                <h3>{recArea.city}, {recArea.state}</h3>
+                {recArea.city ? <h3>{recArea.city}, {recArea.state}</h3> : <h3>{states[recArea.state]}</h3>}
               </article>
             </Link>
           )

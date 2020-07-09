@@ -63,18 +63,19 @@ export const MyAccount = () => {
 
       <Tabs>
         <TabList>
-          <Tab>My Locations</Tab>
-          <Tab>My Reviews</Tab>
-          <Tab>My Settings</Tab>
+          <Tab>Locations</Tab>
+          <Tab>Reviews</Tab>
+          <Tab>Settings</Tab>
         </TabList>
         <TabPanel>
           <Tabs>
             <TabList>
-              <Tab>My Wishlist</Tab>
-              <Tab>Places I&apos;ve Visited</Tab>
+              <Tab>Wishlist</Tab>
+              <Tab>Visited</Tab>
             </TabList>
             <TabPanel>
-              {currentUser.showWishList && <>
+              {currentUser.showWishList ? 
+              <>
                 <h3>Places I want to go:</h3>
                 {(userDetails.recAreaWishList.length || userDetails.campgroundWishList.length) ?
                   <div className="wish-list">
@@ -87,10 +88,13 @@ export const MyAccount = () => {
                   </div> :
                   <p>You haven&apos;t put any places on your wish list yet. Just click on the heart to add a recreational area or campground to your list.</p>
                 }
-              </>}
+              </> :
+                <p>Turn on &lsquo;Show wish list&lsquo; in settings if you want to see anything here!</p>
+              }
             </TabPanel>
             <TabPanel>
-              {currentUser.showVisited && <>
+              {currentUser.showVisited ? 
+              <>
                 <h3>Places I&apos;ve been:</h3>
                 {(userDetails.recAreasVisited.length || userDetails.campgroundsVisited.length) ?
                   <div className="visited">
@@ -103,7 +107,9 @@ export const MyAccount = () => {
                   </div> :
                   <p>You haven&apos;t marked any places as visited yet. Just click on the tick to add a recreational area or campground to your list of visited places.</p>
                 }
-              </>}
+              </> :
+                <p>Turn on &lsquo;Show visited locations&lsquo; in settings if you want to see anything here!</p>
+              }
             </TabPanel>
           </Tabs>
         </TabPanel>
