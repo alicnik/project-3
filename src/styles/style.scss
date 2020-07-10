@@ -106,6 +106,10 @@ body {
   #homepage {
     background-image: url(../assets/dark-background.png);
     background-size: cover;
+    .hero {
+      background-image: url(../assets/nightlake.jpg);
+      background-position: 50% 32%;
+    }
   }
   background-color: var(--color-inky-blue);
   color: var(--color-off-white);
