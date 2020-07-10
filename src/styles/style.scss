@@ -25,6 +25,7 @@
 }
 
 div.react-tabs {
+  margin-top: 2rem;
   & > ul {
     display: flex;
     margin: 0;
@@ -124,10 +125,12 @@ body {
         color: var(--color-off-white);
       }
     }
-    p.link, span.link {
+    p.link,
+    span.link,
+    span.add-bio {
       color: var(--color-pink);
     }
-    .site-list-item{
+    .site-list-item {
       box-shadow: none;
       background-color: var(--color-grey-blue);
       h3 {
@@ -157,7 +160,9 @@ body {
     .tile {
       background-color: var(--color-grey-blue);
       box-shadow: none;
-      h3, h2, p {
+      h3,
+      h2,
+      p {
         color: var(--color-off-white);
       }
     }
@@ -166,6 +171,30 @@ body {
     background-color: var(--color-grey-blue);
     .nav-btn:hover {
       background-color: var(--color-inky-blue);
+    }
+  }
+  select#state.dropdown {
+    border: none;
+    background-color: var(--color-grey-blue);
+    color: white;
+  }
+  #settings {
+    input {
+      background-color: var(--color-pink);
+
+      &::before {
+        background-color: var(--color-grey-blue);
+      }
+      &:checked + span.first-label-span {
+        color: #3a3d40;
+      }
+
+      &:checked ~ span.second-label-span {
+        color: white;
+      }
+    }
+    span.second-label-span {
+      color: #3a3d40;
     }
   }
 }
@@ -353,6 +382,7 @@ body {
     .tile {
       text-align: center;
       display: flex;
+      min-width: 365px;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -1045,7 +1075,7 @@ body {
     .wish-list-visited-container {
       justify-content: center;
       p {
-        margin: 0 40px
+        margin: 0 40px;
       }
     }
     #review-container {
@@ -1068,7 +1098,6 @@ body {
       flex-flow: initial;
     }
   }
-  
 
   #hotels {
     .hotel-tiles {
@@ -1109,7 +1138,7 @@ body {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-evenly;
-      .site-list-item{
+      .site-list-item {
         margin-top: 25px;
         width: 27vh;
         min-height: 300px;
@@ -1128,7 +1157,7 @@ body {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-evenly;
-      .site-list-item{
+      .site-list-item {
         margin-top: 25px;
         width: 27vh;
         min-height: 300px;
@@ -1143,16 +1172,5 @@ body {
         }
       }
     }
-
   }
-
-
-
-
-
-
-
-
-
 }
-

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import MapGL, { Marker, Popup, WebMercatorViewport, FlyToInterpolator } from 'react-map-gl'
-
+import { ThemeContext } from './context'
 
 //! can change API token and  mapbox account
 
@@ -69,13 +69,15 @@ export const RecAreaMap = ({ chosenState }) => {
     return () => window.removeEventListener('keydown', listener)
   }, [])
 
+  const darkBody = !!document.body.id
+
   return (
     <section id="map-container">
       <MapGL
         className="rec-map"
-        mapboxApiAccessToken={'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'}
+        mapboxApiAccessToken={darkBody ? 'pk.eyJ1IjoiYWxpY25payIsImEiOiJja2Jja2kwMmwwMnM3MnNxZWx2aXR1YjdpIn0.rPq9vNb1zInDizAx_EMXPA' : 'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'}
         {...viewPort}
-        mapStyle="mapbox://styles/zchabek/ckcbrcts80cxf1ip9emnpyj48"
+        mapStyle={darkBody ? 'mapbox://styles/alicnik/ckcfm582m09tf1imq1vhqauog' : 'mapbox://styles/zchabek/ckcbrcts80cxf1ip9emnpyj48'}
         onViewportChange={(viewPort) => setViewPort(viewPort)}
       >
         {recAreasData.map(recArea => {

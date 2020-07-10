@@ -32,13 +32,13 @@ export const Settings = () => {
 
   return <section id="settings">
     <p>Dark mode</p>
-    <label htmlFor="dark-mode">
+    <label htmlFor="dark-mode-toggle">
       <input 
         onChange={toggleDarkModeInContext} 
         checked={!darkMode}
         type="checkbox" 
         name="darkMode" 
-        id="dark-mode"/>
+        id="dark-mode-toggle"/>
       <span className="first-label-span">On</span>
       <span className="second-label-span">Off</span>
     </label>

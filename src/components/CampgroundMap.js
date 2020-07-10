@@ -85,12 +85,14 @@ export const CampgroundMap = () => {
     return () => window.removeEventListener('keydown', listener)
   }, [])
 
+  const darkBody = !!document.body.id
+
   return (
     <section id="map-container">
       <MapGL
-        mapboxApiAccessToken={'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'}
+        mapboxApiAccessToken={darkBody ? 'pk.eyJ1IjoiYWxpY25payIsImEiOiJja2Jja2kwMmwwMnM3MnNxZWx2aXR1YjdpIn0.rPq9vNb1zInDizAx_EMXPA' : 'pk.eyJ1IjoiemNoYWJlayIsImEiOiJja2NhcDAwdWMxd3h6MzFsbXQzMXVobDh2In0.RIvofanub0AhjJm3Om2_HQ'}
         {...viewPort}
-        mapStyle="mapbox://styles/zchabek/ckcbqjm986dug1kpuzi036e6q"
+        mapStyle={darkBody ? 'mapbox://styles/alicnik/ckcfm582m09tf1imq1vhqauog' : 'mapbox://styles/zchabek/ckcbqjm986dug1kpuzi036e6q'}
         onViewportChange={(viewPort) => setViewPort(viewPort)}
       >
         {campgroundsData.map(campground => {

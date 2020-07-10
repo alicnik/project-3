@@ -34,19 +34,26 @@ export const RecAreas = () => {
 
   const getFullStateName = (stateAbbreviation) => states.find(state => state.value === stateAbbreviation).label
 
+  const darkBody = !!document.body.id
+
   const customStyles = {
     control: (provided) => ({
       ...provided,
-      backgroundColor: 'none',
-      border: '2px solid black'
+      backgroundColor: darkBody ? 'var(--color-grey-blue)' : 'none',
+      border: darkBody ? 'none' : '2px solid black',
+      margin: '0.5rem 0 1rem'
     }),
     menu: (provided) => ({
       ...provided,
-      backgroundColor: 'rgb(247, 240, 230)'
+      backgroundColor: darkBody ? 'var(--color-grey-blue)' : 'rgb(247, 240, 230)'
     }),
     container: (provided) => ({
       ...provided,
       width: '180px'
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: darkBody ?  'white' : 'var(--color-grey-blue)'
     })
   }
 

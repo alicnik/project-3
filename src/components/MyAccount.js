@@ -86,7 +86,7 @@ export const MyAccount = () => {
                 <span className="link" onClick={() => setEditingBio(true)}>Edit bio</span>
               </>
               :
-              <p>No bio yet...<span className="add-bio" onClick={() => setEditingBio(true)}>add one</span></p>
+              <p>No bio yet . . .  &nbsp;<span className="add-bio" onClick={() => setEditingBio(true)}>add one</span></p>
             }
             {editingBio && <form>
               <label htmlFor="edit-bio">Edit your bio here</label>
