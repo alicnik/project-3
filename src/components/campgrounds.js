@@ -36,11 +36,6 @@ export const Campgrounds = (props) => {
     }
   }, [])
 
-
-  useEffect(() => {
-    setHotelsData(testData)
-  }, [])
-
   if (campgroundsData?.length === 0) {
     if (!hotelsData.length) return <div id="loading-container">
       <img className="loading" src={loadingGif} alt="loading" />
@@ -55,7 +50,7 @@ export const Campgrounds = (props) => {
               <article key={i} className="hotel-tile">
                 <div className="hotel-info">
                   <h2>{hotel.name}</h2>
-                  <img src={hotel.photo.images.medium.url} alt={hotel.name} />
+                  <img src={hotel.photo?.images?.medium.url} alt={hotel.name} />
                   <p className="location">{hotel.location_string}</p>
                   <p className="ranking">{hotel.ranking}</p>
                   <RatingIcons iconStyle='circle' color={darkMode ? 'hot-pink' : 'green'} rating={Number(hotel.rating)} numOfReviews={Number(hotel.num_reviews)} />
