@@ -47,6 +47,11 @@ export const RecAreas = () => {
       ...provided,
       backgroundColor: darkBody ? 'var(--color-grey-blue)' : 'rgb(247, 240, 230)'
     }),
+    option: (provided, { isFocused }) => ({
+      ...provided,
+      backgroundColor: isFocused && (darkBody ? 'var(--color-inky-blue)' : 'green'),
+      color: isFocused && darkBody && 'hotPink'
+    }),
     container: (provided) => ({
       ...provided,
       width: '180px'
