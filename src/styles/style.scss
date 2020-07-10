@@ -504,6 +504,15 @@ body {
   .carousel-container {
     width: 100%;
     margin: 1rem 0;
+
+    li.slide {
+      background: none;
+      display: flex;
+      max-height: 600px;
+      align-items: center;
+      flex-direction: row;
+      flex-flow: initial;
+    }
   }
   .wish-list-visited-container {
     display: flex;
@@ -831,9 +840,9 @@ body {
         @include global-button();
       }
     }
-    img {
-      max-width: 50%;
-    }
+    // img {
+    //   max-width: 50%;
+    // }
   }
   .account-tab-title {
     font-family: var(--wilderness-font);
@@ -1086,14 +1095,6 @@ body {
           height: 5rem;
         }
       }
-    }
-    li.slide {
-      background: none;
-      display: flex;
-      max-height: 600px;
-      align-items: center;
-      flex-direction: row;
-      flex-flow: initial;
     }
   }
 
