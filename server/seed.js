@@ -19,7 +19,7 @@ mongoose.connect(dbURI, {
   console.log('Mongoose connected!')
   db.dropDatabase()
     .then(() => {
-      const facilitiesData = fs.readFileSync('server/data/finalFacilities.json')
+      const facilitiesData = fs.readFileSync('./server/data/finalFacilities.json')
       const facilitiesContent = JSON.parse(facilitiesData)
       return Campground.create(facilitiesContent.map(facility => {
         return {
@@ -44,7 +44,7 @@ mongoose.connect(dbURI, {
     })
     .then(returnedCampgrounds => {
       console.log(`${returnedCampgrounds.length} campgrounds created. Happy camping!`)
-      const recAreaData = fs.readFileSync('server/data/finalRecAreaData.json')
+      const recAreaData = fs.readFileSync('./server/data/finalRecAreaData.json')
       const recAreaContent = JSON.parse(recAreaData)
       return RecArea.create(recAreaContent.map(recArea => ({
         ridbRecAreaId: recArea.RecAreaID,
