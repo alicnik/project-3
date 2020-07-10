@@ -1,17 +1,15 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Ratings from 'react-ratings-declarative'
-import { ThemeContext } from './context'
+
 
 // rating prop will be state in parent postreview?
 export const StarRating = ({ rating, setRating = f => f }) => {
 
-  const { darkMode } = useContext(ThemeContext)
-
-  return (
+  return ( 
     <Ratings
       rating={rating}
       changeRating={setRating}
-      widgetRatedColors={darkMode ? 'hotPink' : 'orange'}
+      widgetRatedColors={document.body.id === 'dark-mode' ? 'hotPink' : 'orange'}
     >
       <Ratings.Widget />
       <Ratings.Widget />
@@ -19,10 +17,7 @@ export const StarRating = ({ rating, setRating = f => f }) => {
       <Ratings.Widget />
       <Ratings.Widget />
     </Ratings>
-  )
-
-
-  
+  ) 
 }
 
 
