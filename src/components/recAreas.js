@@ -7,11 +7,12 @@ import { RecAreaMap } from './RecAreaMap'
 import loadingGif from '../assets/loading.gif'
 import { states } from './helpers'
 import Select from 'react-select'
-import { UserContext } from './Context'
+import { UserContext, ThemeContext } from './Context'
 
 export const RecAreas = () => {
 
   const { currentUser } = useContext(UserContext)
+  const { darkMode } = useContext(ThemeContext)
   const [recAreasData, updateRecAreasData] = useState([])
   const [query, setQuery] = useState({})
   const [chosenState, setChosenState] = useState(currentUser.homeState || states[0])
@@ -58,7 +59,7 @@ export const RecAreas = () => {
 
   return <section id="browse">
 
-    <h1>Rec Areas</h1>
+    <h1>Places of Interest</h1>
 
     <div className="sort-by-state">
       <p>Sort by US state: </p>

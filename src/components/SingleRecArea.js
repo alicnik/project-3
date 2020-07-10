@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons'
 
 import { Favourite } from './Favourite'
-import { UserContext } from './Context'
+import { UserContext, ThemeContext } from './Context'
 import { Visited } from './Visited'
 import { ReviewListItem } from './ReviewList'
 import { PostReviewButton } from './PostReviewButton'
@@ -23,7 +23,7 @@ import { Contact } from './Contact'
 export const SingleRecArea = (props) => {
 
 
-
+  const { darkMode } = useContext(ThemeContext)
   const [recArea, setRecArea] = useState()
   const { currentUser } = useContext(UserContext)
   const recAreaId = props.location.state?.recAreaId || props.location.pathname.match(/\/(\w+)$/)[1]
@@ -64,7 +64,7 @@ export const SingleRecArea = (props) => {
                 <p>({recArea.reviews.length} {recArea.reviews.length === 1 ? 'review' : 'reviews'})</p>
               </> :
               <div className="no-reviews">
-                <FontAwesomeIcon icon={faQuestionCircle} color='green' />
+                <FontAwesomeIcon icon={faQuestionCircle} color={darkMode ? 'hotPink' : 'green'} />
                 <p>No reviews yet.&nbsp;
                   {currentUser.isLoggedIn &&
                     <Link to={{
