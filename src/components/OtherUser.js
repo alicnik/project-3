@@ -12,7 +12,7 @@ const possessive = (name) => (/s$/i).test(name) ? `${name}'` : `${name}'s`
 export const OtherUser = () => {
 
   const [otherUser, setOtherUser] = useState()
-  const [,otherUserId] = useLocation().pathname.match(/\/users\/(\w+)$/)
+  const [, otherUserId] = useLocation().pathname.match(/\/users\/(\w+)$/)
 
   useEffect(() => {
     Axios.get(`/api/users/${otherUserId}`)
@@ -33,7 +33,6 @@ export const OtherUser = () => {
             <h1>{otherUser.firstName} {otherUser.lastName}</h1>
             <img className="user-avatar-img" src={otherUser.avatar} alt="user avatar" />
             {otherUser.bio && <>
-              <h3>{possessive(otherUser.firstName)} bio</h3>
               <p>{otherUser.bio}</p>
             </>}
           </FadeIn>
@@ -84,7 +83,7 @@ export const OtherUser = () => {
             }
           </TabPanel>
         </Tabs>
-       
+
 
 
 
