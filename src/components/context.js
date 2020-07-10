@@ -139,7 +139,7 @@ export const ThemeProvider = ({ children }) => {
     Axios
       .get(`/api/users/${currentUser.id}`)
       .then(response => {
-        setDarkMode(response.data.darkMode)
+        setDarkMode(response.data.darkMode ?? false)
         implementDarkMode(response.data.darkMode)
       })
       .catch(err => console.log(err))
