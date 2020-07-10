@@ -88,6 +88,14 @@ export const parseHtml = (htmlInput) => {
     },
     {
       shouldProcessNode: function(node) {
+        return node.name && node.name === 'body'
+      },
+      processNode: function (node) {
+        return null
+      }
+    },
+    {
+      shouldProcessNode: function(node) {
         return true
       },
       processNode: processNodeDefinitions.processDefaultNode

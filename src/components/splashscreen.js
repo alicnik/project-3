@@ -12,6 +12,7 @@ export const Splashscreen = () => {
     <section id="splashscreen">
       <Svg />
       <div className="buttons">
+        <h1>Wilderness</h1>
         <Link to='/home'>
           <button>Explore the Wild</button>
         </Link>
