@@ -14,8 +14,8 @@ export const Campgrounds = (props) => {
   const { darkMode } = useContext(ThemeContext)
   const [campgroundsData, setCampgroundsData] = useState()
   const [hotelsData, setHotelsData] = useState([])
-  // const latitude = props.location.state?.latitude
-  // const longitude = props.location.state?.longitude
+  const latitude = props.location.state?.latitude
+  const longitude = props.location.state?.longitude
 
   useEffect(() => {
     if (!campgroundsData) {
@@ -26,14 +26,14 @@ export const Campgrounds = (props) => {
           setCampgroundsData(response.data)
         })
         .catch(err => console.log(err))
+      if (!(longitude && latitude)) return
+      Axios.get(`https://tripadvisor1.p.rapidapi.com/hotels/list-by-latlng?lang=en_US&limit=10&latitude=${latitude}&longitude=${longitude}`, { headers: { 
+        'x-rapidapi-host': 'tripadvisor1.p.rapidapi.com', 
+        'x-rapidapi-key': 'b50bd94073msh2aef30ca2a2af07p1207f4jsne19499e10efe' } 
+      })
+        .then(response => setHotelsData(response.data.data))
+        .catch(err => console.log(err))
     }
-
-    // if (!(longitude && latitude)) return
-    // Axios.get(`https://tripadvisor1.p.rapidapi.com/hotels/list-by-latlng?lang=en_US&limit=10&latitude=${latitude}&longitude=${longitude}`, { headers: { 
-    //   'x-rapidapi-host': 'tripadvisor1.p.rapidapi.com', 
-    //   'x-rapidapi-key': process.env.TRIPADVISOR_API_KEY } 
-    // })
-    //   .then(response => setHotelsData(response.data.data))
   }, [])
 
 
@@ -71,6 +71,7 @@ export const Campgrounds = (props) => {
       </section>
     )
   }
+
 
   if (!campgroundsData) return <h1>Loading...</h1>
 
