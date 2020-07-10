@@ -16,7 +16,7 @@ import { MyAccount } from './components/MyAccount'
 import { NavBar } from './components/NavBar'
 import { ScrollToTop } from './components/ScrollToTop'
 import { Settings } from './components/Settings'
-import { RecAreasPaginated } from './components/recAreasPaginated'
+import { RecAreasPaginated } from './components/RecAreasPaginated'
 import { OtherUser } from './components/OtherUser'
 
 const App = () => {

@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import MapGL, { Marker, Popup, WebMercatorViewport, FlyToInterpolator } from 'react-map-gl'
-import { ThemeContext } from './context'
+// import { ThemeContext } from './context'
 
 //! can change API token and  mapbox account
 
