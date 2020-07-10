@@ -15,7 +15,7 @@
   --color-brown: #6f4c15;
   --color-yellow: #f0d92a;
   --color-inky-blue: #0a1e1f;
-  --color-pink: #ef3d6d;
+  --color-pink: rgb(255, 105, 180);
   --color-orange: #fa5210;
   --color-forest-green: #285d43;
   --color-off-white: rgb(247, 240, 230);
@@ -112,6 +112,29 @@ body {
   #single-site,
   #settings,
   #my-account {
+    header.review-header {
+      h3 {
+        color: var(--color-off-white);
+      }
+    }
+    p.link, span.link {
+      color: var(--color-pink);
+    }
+    .site-list-item{
+      box-shadow: none;
+      background-color: var(--color-grey-blue);
+      h3 {
+        color: var(--color-off-white);
+      }
+    }
+    button.markerButton {
+      background: none;
+      border: none;
+    }
+    .react-tabs__tab--selected {
+      background-color: var(--color-grey-blue);
+      color: var(--color-off-white);
+    }
     button {
       box-shadow: none;
       background-color: var(--color-grey-blue);

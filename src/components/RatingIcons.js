@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCircle as emptyCircle,
@@ -10,16 +10,23 @@ import {
   faStar as wholeStar,
   faStarHalfAlt as halfStar
 } from '@fortawesome/free-solid-svg-icons'
+import { ThemeContext } from './Context'
 
 
 export const RatingIcons = ({
   iconStyle = 'star',
-  color = 'orange',
+  color,
   num = 5,
   rating,
   showNumOfReviews = true,
   numOfReviews
 }) => {
+
+  const { darkMode } = useContext(ThemeContext)
+
+  if (!color) {
+    color = darkMode ? 'hot-pink' : 'orange'
+  }
 
   const icons = {
     star: { empty: emptyStar, half: halfStar, whole: wholeStar },

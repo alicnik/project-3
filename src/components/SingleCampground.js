@@ -13,7 +13,7 @@ import { ReviewListItem } from './ReviewList'
 import { PostReviewButton } from './PostReviewButton'
 import { StarRating } from './StarRating'
 import { RatingIcons } from './RatingIcons'
-import { UserContext } from './Context'
+import { UserContext, ThemeContext } from './Context'
 import { Favourite } from './Favourite'
 import { Visited } from './Visited'
 import { Contact } from './Contact'
@@ -22,6 +22,7 @@ import FadeIn from 'react-fade-in'
 
 export const SingleCampground = () => {
 
+  const { darkMode } = useContext(ThemeContext)
   const [campground, setCampground] = useState()
   const { pathname } = useLocation()
   const campgroundId = pathname.match(/campgrounds\/(\w+)$/)[1]
@@ -54,26 +55,26 @@ export const SingleCampground = () => {
 
           <div className="site-review-header">
             {campground.reviews.length >= 1 ?
-            <>
-            {currentUser.isLoggedIn ? 
-              <StarRating rating={campground.avgRating} setRating={reviewViaStarRating}/> :
-              <RatingIcons rating={campground.avgRating} showNumOfReviews={false}/>}
-            <p>Rating: {campground.avgRating} ({campground.reviews.length})</p> 
-            </>
+              <>
+                {currentUser.isLoggedIn ?
+                  <StarRating rating={campground.avgRating} setRating={reviewViaStarRating} /> :
+                  <RatingIcons rating={campground.avgRating} showNumOfReviews={false} />}
+                <p>Rating: {campground.avgRating} ({campground.reviews.length})</p>
+              </>
               :
               <div className="no-reviews">
-                <FontAwesomeIcon icon={faQuestionCircle} color='green' />
+                <FontAwesomeIcon icon={faQuestionCircle} color={darkMode ? 'hotPink' : 'green'} />
                 <p>No reviews yet.&nbsp;
                   {currentUser.isLoggedIn &&
-                <Link to={{
-                  pathname: `/${siteCollection}/${siteId}/postreview`,
-                  state: { siteCollection: 'campgrounds', siteId: campgroundId }
-                }}>Leave a review.</Link>}
+                    <Link to={{
+                      pathname: `/${siteCollection}/${siteId}/postreview`,
+                      state: { siteCollection: 'campgrounds', siteId: campgroundId }
+                    }}>Leave a review.</Link>}
                 </p>
               </div>
             }
           </div>
-    
+
 
           <div className="carousel-container">
             <Carousel autoplay dynamicHeight showThumbs={false}>
@@ -82,17 +83,17 @@ export const SingleCampground = () => {
           </div>
 
           <div className="wish-list-visited-container" style={{ display: currentUser.isLoggedIn ? 'flex' : 'none' }}>
-            {currentUser.isLoggedIn && <> 
-          <p>Add to wishlist</p> <Favourite />
-          <p>Mark as visited</p> <Visited /> </>
+            {currentUser.isLoggedIn && <>
+              <p>Add to wishlist</p> <Favourite />
+              <p>Mark as visited</p> <Visited /> </>
             }
           </div>
 
           <div className="campground-attributes">
             {<>
-            <FontAwesomeIcon icon={faCarSide} color='green' />
-            <p><strong>Accessible by car?</strong> {campground.accessible ? 'Yes' : 'No'}</p>
-          </>
+              <FontAwesomeIcon icon={faCarSide} color='green' />
+              <p><strong>Accessible by car?</strong> {campground.accessible ? 'Yes' : 'No'}</p>
+            </>
             }
             {campground.attributes.map((attribute, i) => {
               return (
