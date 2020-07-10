@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'
 import Axios from 'axios'
-import { UserContext, ThemeProvider } from './Context'
+import { UserContext } from './Context'
 import { Link } from 'react-router-dom'
 import { ReviewListItem } from './ReviewList'
 import { SiteList } from './SiteList'
@@ -160,9 +160,9 @@ export const MyAccount = () => {
             }
           </TabPanel>
           <TabPanel>
-            <ThemeProvider>
-              <Settings />
-            </ThemeProvider>
+
+            <Settings />
+
           </TabPanel>
         </Tabs>
       </FadeIn>
