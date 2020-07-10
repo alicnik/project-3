@@ -519,6 +519,9 @@ body {
   }
   .campground-attributes,
   address#contact {
+    margin-bottom: 1rem;
+    padding: 0.3rem;
+    text-align: center;
     h2 {
       margin-bottom: 0.5rem;
     }
@@ -526,10 +529,6 @@ body {
       display: inline-block;
       margin-left: 0.6rem;
     }
-  }
-  .campground-attributes {
-    margin-bottom: 1rem;
-    padding: 0.3rem;
   }
   button {
     @include global-button();
