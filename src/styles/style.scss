@@ -201,17 +201,217 @@ body {
   }
 }
 
+@keyframes flicker {
+  0% {
+    transform: rotate(-1deg);
+  }
+  20% {
+    transform: rotate(1deg) scale(1.01);
+    opacity: 0.9;
+  }
+  40% {
+    transform: rotate(-1deg) scale(0.98);
+  }
+  60% {
+    transform: rotate(1deg) scale(1.01);
+    opacity: 0.9;
+  }
+  80% {
+    transform: rotate(-1deg) scale(0.98);
+  }
+  100% {
+    transform: rotate(1deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+    box-shadow: 2px 2px 8px white;
+  }
+}
+
+@keyframes waft {
+  0% {
+    transform: rotate(-1deg) translateX(-0.1px);
+  }
+  20% {
+    transform: rotate(1deg) translateX(0.1px);
+  }
+  40% {
+    transform: rotate(0deg) translateX(-0.1px);
+  }
+  60% {
+    transform: rotate(1deg) translateX(0.1px);
+  }
+  80% {
+    transform: rotate(-1deg) translateX(-0.1px);
+  }
+  100% {
+    transform: rotate(0deg) translateX(0.1px);
+  }
+}
+@keyframes waftReverse {
+  0% {
+    transform: rotate(1deg) translateX(0.1px);
+  }
+  20% {
+    transform: rotate(-1deg) translateX(-0.1px);
+  }
+  40% {
+    transform: rotate(0deg) translateX(0.1px);
+  }
+  60% {
+    transform: rotate(-1deg) translateX(-0.1px);
+  }
+  80% {
+    transform: rotate(1deg) translateX(0.1px);
+  }
+  100% {
+    transform: rotate(0deg) translateX(-0.1px);
+  }
+}
+
 #splashscreen {
   position: relative;
   height: 100vh;
   overflow: hidden;
   background-image: linear-gradient(0deg, #252f15, #3a682b, #1f58a5);
+
   svg {
     position: absolute;
     top: -6.5vh;
     left: -30vw;
     transform: scale(0.85);
+
+    #background-flames-5,
+    #background-flames-1 {
+      animation: flicker 12s ease-in-out alternate-reverse infinite;
+      transform-origin: bottom;
+    }
+    #inner-flame,
+    #background-flames-2 {
+      animation: flicker 9s ease-in-out alternate-reverse infinite 600ms;
+      transform-origin: bottom;
+    }
+    #outer-flame,
+    #background-flames-3 {
+      animation: flicker 15s ease-in-out alternate-reverse infinite 400ms;
+      transform-origin: bottom;
+    }
+    #outermost-flame,
+    #background-flames-4 {
+      animation: flicker 8s ease-in-out alternate-reverse infinite 200ms;
+      transform-origin: bottom;
+    }
+
+    #star-1 {
+      animation: twinkle 4s ease-in-out infinite alternate-reverse;
+    }
+    #star-2 {
+      animation: twinkle 1s ease-in-out infinite alternate-reverse 200ms;
+    }
+    #star-3 {
+      animation: twinkle 3s ease-in-out infinite alternate-reverse 1200ms;
+    }
+    #star-4 {
+      animation: twinkle 2s ease-in-out infinite alternate-reverse 400ms;
+    }
+    #star-5 {
+      animation: twinkle 3s ease-in-out infinite alternate-reverse 1000ms;
+    }
+    #star-6 {
+      animation: twinkle 3s ease-in-out infinite alternate-reverse 600ms;
+    }
+    #star-7 {
+      animation: twinkle 5s ease-in-out infinite alternate-reverse 800ms;
+    }
+
+    #leaf-1 {
+      animation: waft 8s ease-in-out infinite alternate-reverse;
+      transform-origin: bottom;
+    }
+    #leaf-2 {
+      animation: waft 8s ease-in-out infinite alternate-reverse 300ms;
+      transform-origin: bottom;
+    }
+    #leaf-3 {
+      animation: waftReverse 8s ease-in-out infinite alternate-reverse 50ms;
+      transform-origin: bottom;
+    }
+    #leaf-4 {
+      animation: waft 8s ease-in-out infinite alternate-reverse 550ms;
+      transform-origin: bottom;
+    }
+    #leaf-5 {
+      animation: waftReverse 8s ease-in-out infinite alternate-reverse 350ms;
+      transform-origin: bottom;
+    }
+    #leaf-6 {
+      animation: waft 8s ease-in-out infinite alternate-reverse 100ms;
+      transform-origin: bottom;
+    }
+    #leaf-7 {
+      animation: waftReverse 8s ease-in-out infinite alternate-reverse 600ms;
+      transform-origin: bottom;
+    }
+    #leaf-8 {
+      animation: waft 8s ease-in-out infinite alternate-reverse 400ms;
+      transform-origin: bottom;
+    }
+    #leaf-9 {
+      animation: waftReverse 8s ease-in-out infinite alternate-reverse 150ms;
+      transform-origin: bottom;
+    }
+    #leaf-10 {
+      animation: waft 8s ease-in-out infinite alternate-reverse 650ms;
+      transform-origin: bottom;
+    }
+    #leaf-11 {
+      animation: waftReverse 8s ease-in-out infinite alternate-reverse 450ms;
+      transform-origin: bottom;
+    }
+    #leaf-12 {
+      animation: waft 8s ease-in-out infinite alternate-reverse 200ms;
+      transform-origin: bottom;
+    }
+    #leaf-13 {
+      animation: waftReverse 8s ease-in-out infinite alternate-reverse 700ms;
+      transform-origin: bottom;
+    }
+    #leaf-14 {
+      animation: waft 8s ease-in-out infinite alternate-reverse 500ms;
+      transform-origin: bottom;
+    }
+    #leaf-15 {
+      animation: waftReverse 8s ease-in-out infinite alternate-reverse 250ms;
+      transform-origin: bottom;
+    }
+    #leaf-16 {
+      animation: waft 8s ease-in-out infinite alternate-reverse 750ms;
+      transform-origin: bottom;
+    }
+    #arm-and-marshmallow {
+      animation: smore 6s ease-in-out infinite alternate-reverse;
+      transform-origin: bottom right;
+    }
   }
+
+  @keyframes smore {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(1px);
+    }
+  }
+
   .buttons {
     h1 {
       display: none;
@@ -220,6 +420,7 @@ body {
       font-size: 8vw;
       text-transform: uppercase;
     }
+
     position: absolute;
     top: 460px;
     bottom: 0;
@@ -229,10 +430,12 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+
     a {
       margin-bottom: 1.2rem;
       color: rgb(247, 240, 230);
     }
+
     button {
       @include global-button();
     }
