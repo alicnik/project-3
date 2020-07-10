@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { RatingIcons } from './RatingIcons'
-import { testData } from './helpers'
+// import { testData } from './helpers'
 import Axios from 'axios'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { CampgroundMap } from './CampgroundMap'
