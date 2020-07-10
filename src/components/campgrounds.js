@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { RatingIcons } from './RatingIcons'
 import { testData } from './helpers'
@@ -7,9 +7,11 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { CampgroundMap } from './CampgroundMap'
 import loadingGif from '../assets/loading.gif'
 import FadeIn from 'react-fade-in'
+import { ThemeContext } from './Context'
 
 export const Campgrounds = (props) => {
 
+  const { darkMode } = useContext(ThemeContext)
   const [campgroundsData, setCampgroundsData] = useState()
   const [hotelsData, setHotelsData] = useState([])
   // const latitude = props.location.state?.latitude
@@ -56,7 +58,7 @@ export const Campgrounds = (props) => {
                   <img src={hotel.photo.images.medium.url} alt={hotel.name} />
                   <p className="location">{hotel.location_string}</p>
                   <p className="ranking">{hotel.ranking}</p>
-                  <RatingIcons iconStyle='circle' color='green' rating={Number(hotel.rating)} numOfReviews={Number(hotel.num_reviews)} />
+                  <RatingIcons iconStyle='circle' color={darkMode ? 'hotPink' : 'green'} rating={Number(hotel.rating)} numOfReviews={Number(hotel.num_reviews)} />
                   <p className="price">Price: {hotel.price}</p>
                   <a href={`https://www.tripadvisor.co.uk/Search?q=${hotel.name.replace(/\W+/g, '%20')}`} target='_blank' rel='noreferrer'>
                     <button>Find out more</button>

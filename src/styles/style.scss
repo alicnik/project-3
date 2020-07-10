@@ -112,6 +112,13 @@ body {
   #single-site,
   #settings,
   #my-account {
+    .hotel-tile {
+      background-color: var(--color-grey-blue);
+      box-shadow: none;
+      button {
+        background-color: var(--color-inky-blue);
+      }
+    }
     header.review-header {
       h3 {
         color: var(--color-off-white);
