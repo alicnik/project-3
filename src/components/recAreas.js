@@ -90,7 +90,7 @@ export const RecAreas = () => {
                 <article className="tile">
                   <h2>{recArea.name}</h2>
                   <div className="rating">
-                    <RatingIcons rating={recArea.avgRating} numOfReviews={recArea.reviews.length} />
+                    <RatingIcons rating={recArea.avgRating} numOfReviews={recArea.reviews.length} color={darkMode ? 'hot-pink' : 'orange'} />
                   </div>
                   <img className="preview-img" src={recArea.media[0].url} alt={recArea.name} />
                   {recArea.city ? <h3>{recArea.city}, {recArea.state}</h3> : <h3>{getFullStateName(recArea.state)}</h3>}
