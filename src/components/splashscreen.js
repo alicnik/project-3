@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from './Context'
 
-import Svg from '../assets/splashscreen.svg'
+import { SvgSplash } from './SvgSplash'
 
 export const Splashscreen = () => {
 
@@ -10,7 +10,7 @@ export const Splashscreen = () => {
 
   return (
     <section id="splashscreen">
-      <Svg />
+      <SvgSplash />
       <div className="buttons">
         <h1>Wilderness</h1>
         <Link to='/home'>
