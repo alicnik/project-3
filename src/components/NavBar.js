@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from './Context'
 import { Link, useLocation } from 'react-router-dom'
-import loadingGif from '../assets/loading.gif'
+import loadingGif from '../assets/wildie.png'
 
 export const NavBar = () => {
 
