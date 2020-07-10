@@ -4,6 +4,8 @@ import { RatingIcons } from './RatingIcons'
 import { timeFrom, dateFrom } from './helpers'
 import { UserContext } from './Context'
 
+
+
 export const ReviewListItem = ({ review, displayName = true, displayAvatar = true, enableComments = true }) => {
 
   const location = useLocation().pathname
@@ -23,7 +25,9 @@ export const ReviewListItem = ({ review, displayName = true, displayAvatar = tru
         }
       </div>
       <div className="review-meta-info">
-        {displayName && <p className="reviewer"><strong>{review.user.firstName} {review.user.lastName}</strong></p>}
+        {displayName && <Link to={`/users/${review.user._id}`}>
+          <p className="reviewer"><strong>{review.user.firstName} {review.user.lastName}</strong></p>
+        </Link>}
         {displayAvatar || 
         review.recAreaRef ? 
           <Link to={`/recareas/${review.recAreaRef?._id}`}>
