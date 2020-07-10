@@ -630,14 +630,13 @@ body {
     width: 100%;
     .review-avatar {
       height: 100%;
-      width: 20vw;
+      width: 25vw;
       display: flex;
       align-items: center;
 
       img {
         border-radius: 50%;
-        height: 150px;
-        width: 150px;
+        width: 100%;
       }
     }
     .review-meta-info {
