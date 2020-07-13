@@ -3,6 +3,10 @@ import { UserContext } from './Context'
 import { Link } from 'react-router-dom'
 import Axios from 'axios'
 
+Array.prototype.randomElement = function() {
+  return this[Math.floor(Math.random() * this.length)]
+}
+
 export const Home = () => {
 
   const { currentUser } = useContext(UserContext)
@@ -10,13 +14,14 @@ export const Home = () => {
   const [randomRecAreaId, setRandomRecAreaId] = useState()
 
   useEffect(() => {
+    if (randomRecAreaId) return
     Axios.get('/api/recareas')
       .then(response => {
         const randomRecArea = response.data.randomElement()
         setRandomRecAreaId(randomRecArea._id)
       })
       .catch(err => console.log(err))
-  }, [])
+  })
 
   return (
     <section id="homepage">
