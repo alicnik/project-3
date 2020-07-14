@@ -19,11 +19,6 @@ mongoose.connect(
 
 const expressServer = express()
 
-expressServer.use('/', express.static(dist))
-expressServer.get('*', function(req, res) {
-  res.sendFile(path.join(dist, 'index.html'))
-})
-
 expressServer.use((req, res, next) => {
   console.log(`Incoming ${req.method} to ${req.url}`)
   next()
@@ -36,3 +31,9 @@ expressServer.use('/api/', Router)
 expressServer.listen(port)
 
 module.exports = expressServer
+
+expressServer.use('/', express.static(dist))
+
+expressServer.get('*', function(req, res) {
+  res.sendFile(path.join(dist, 'index.html'))
+})

@@ -3,9 +3,7 @@ import { UserContext } from './Context'
 import { Link } from 'react-router-dom'
 import Axios from 'axios'
 
-Array.prototype.randomElement = function() {
-  return this[Math.floor(Math.random() * this.length)]
-}
+
 
 export const Home = () => {
 
@@ -17,6 +15,9 @@ export const Home = () => {
     if (randomRecAreaId) return
     Axios.get('/api/recareas')
       .then(response => {
+        Array.prototype.randomElement = function() {
+          return this[Math.floor(Math.random() * this.length)]
+        }
         const randomRecArea = response.data.randomElement()
         setRandomRecAreaId(randomRecArea._id)
       })
