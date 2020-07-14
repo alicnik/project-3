@@ -10,7 +10,7 @@ Array.prototype.randomElement = function () {
   return this[Math.floor(Math.random() * this.length)]
 }
 
-console.log('This is dbURI: ', dbURI)
+console.log('This dbURI: ', dbURI)
 
 mongoose.connect(dbURI, {
   useNewUrlParser: true,
