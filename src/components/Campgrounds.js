@@ -22,7 +22,6 @@ export const Campgrounds = (props) => {
       const recAreaId = props.location.pathname.match(/recareas\/(\w+)\/campgrounds/)[1]
       Axios.get(`/api/recareas/${recAreaId}/campgrounds`)
         .then(response => {
-          console.log(response)
           setCampgroundsData(response.data)
         })
         .catch(err => console.log(err))

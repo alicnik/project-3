@@ -37,7 +37,6 @@ export const MyAccount = () => {
   }, [avatar])
 
   function handleAvatarClick() {
-    console.log('Line 40')
     window.cloudinary.createUploadWidget(
       {
         cloudName: 'wilderness',

@@ -70,20 +70,3 @@ const recAreasWithAddressesMediaAndWebsite = recAreasWithAddressesAndMedia.map(r
 }).filter(recArea => recArea)
 
 fs.writeFile('finalRecAreaData.json', JSON.stringify(recAreasWithAddressesMediaAndWebsite), err => console.log(err) )
-
-// module.exports = recAreasWithAddressesMediaAndWebsite.map(recArea => recArea.RecAreaID)
-
-// const activitiesData = fs.readFileSync('./archive/EntityActivities_API_v1.json')
-// const activitiesContent = JSON.parse(activitiesData).RECDATA
-// .filter(activity => activity.ActivityDescription && activity.EntityType === 'Rec Area')
-// const finalRecAreas = recAreasWithAddressesMediaAndWebsite.map(recArea => {
-//   const matchedActivities = activitiesContent.filter(activity => activity.EntityID === recArea.RecAreaID)
-//   .map(activity => activity.ActivityDescription)
-//   if (!matchedActivities) return
-//   return {
-//     ...recArea,
-//     keywords: [...matchedActivities]
-//   }
-// }).filter(recArea => recArea)
-
-// fs.writeFile('finalRecAreaData.json', JSON.stringify(finalRecAreas), err => console.log(err) )

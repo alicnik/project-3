@@ -96,7 +96,6 @@ export const RecAreas = () => {
       </TabList>
       <TabPanel>
         <section id="all-tiles">
-          {console.log('recdata:', recAreasData)}
           {recAreasData.map((recArea, index) => {
             return (
               <Link to={{ pathname: `/recareas/${recArea._id}`, state: { recAreaId: recArea._id } }} key={index}>

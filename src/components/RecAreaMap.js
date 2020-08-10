@@ -44,8 +44,6 @@ export const RecAreaMap = ({ chosenState }) => {
         const recAreas = axiosResp.data
         updateRecAreasData(recAreas)
         const bounds = calculateBounds(recAreas)
-        console.log('Line 38', viewPort)
-        console.log('line 39', new WebMercatorViewport(viewPort))
         const { longitude, latitude, zoom } = new WebMercatorViewport(viewPort).fitBounds(bounds, { padding: 60, offset: [0, -50] })
         setViewPort({
           ...viewPort,

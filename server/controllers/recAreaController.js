@@ -18,7 +18,6 @@ function paginate(req, res) {
 }
 
 function getByState(req, res) {
-  console.log(req.params.state)
   RecArea
     .find({ state: req.params.state })
     .then(recAreas => res.status(200).send(recAreas))

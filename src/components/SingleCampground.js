@@ -22,18 +22,17 @@ import FadeIn from 'react-fade-in'
 
 export const SingleCampground = () => {
 
-  const { darkMode } = useContext(ThemeContext)
   const [campground, setCampground] = useState()
-  const { pathname } = useLocation()
-  const campgroundId = pathname.match(/campgrounds\/(\w+)$/)[1]
-  const attributeIcons = { petsAllowed, checkInTime, checkOutTime }
-  const [, siteCollection, siteId] = useLocation().pathname.match(/\/(\w+)\/(\w+)$/)
   const { currentUser } = useContext(UserContext)
+  const { darkMode } = useContext(ThemeContext)
+  const [, siteCollection, siteId] = useLocation().pathname.match(/\/(\w+)\/(\w+)$/)
+  const attributeIcons = { petsAllowed, checkInTime, checkOutTime }
 
   useEffect(() => {
-    Axios.get(`/api/campgrounds/${campgroundId}`)
+    Axios.get(`/api/campgrounds/${siteId}`)
       .then(response => setCampground(response.data))
-  }, [campgroundId])
+      .catch(error => console.log(error))
+  }, [siteId])
 
   function reviewViaStarRating(e) {
     history.push({
@@ -68,13 +67,12 @@ export const SingleCampground = () => {
                   {currentUser.isLoggedIn &&
                     <Link to={{
                       pathname: `/${siteCollection}/${siteId}/postreview`,
-                      state: { siteCollection: 'campgrounds', siteId: campgroundId }
+                      state: { siteCollection, siteId }
                     }}>Leave a review.</Link>}
                 </p>
               </div>
             }
           </div>
-
 
           <div className="carousel-container">
             <Carousel autoplay dynamicHeight showThumbs={false}>

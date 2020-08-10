@@ -94,11 +94,9 @@ function editUserProfile(req, res) {
       return user
     })
     .then(updatedUser => {
-      // console.log('line 71', updatedUser)
       res.status(201).send(updatedUser)
     })
     .catch(error => {
-      // console.log(error)
       res.status(400).send(error)
     })
 }
