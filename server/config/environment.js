@@ -4,7 +4,7 @@ const env = process.env.NODE_ENV || 'development'
 
 const dbURI = env === 'production'
 
-  ? process.env.MONGODB_URI
+  ? process.env.ATLASDB_URI
   : `mongodb://localhost/wildernessdb-${env}`
 
 
