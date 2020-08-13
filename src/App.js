@@ -16,7 +16,6 @@ import { MyAccount } from './components/MyAccount'
 import { NavBar } from './components/NavBar'
 import { ScrollToTop } from './components/ScrollToTop'
 import { Settings } from './components/Settings'
-import { RecAreasPaginated } from './components/RecAreasPaginated'
 import { OtherUser } from './components/OtherUser'
 
 const App = () => {
@@ -46,7 +45,6 @@ const App = () => {
               <Route exact path='/account/settings' component={Settings} />
               <Route exact path='/users/:id' component={OtherUser} />
               <Route path='/recareas/:id/campgrounds' component={Campgrounds} />
-              <Route path='/recareasp' component={RecAreasPaginated} />
             </Switch>
           </main>
         </ThemeProvider>
