@@ -19,6 +19,7 @@ export const Home = () => {
           return this[Math.floor(Math.random() * this.length)]
         }
         const randomRecArea = response.data.randomElement()
+        console.log(randomRecArea)
         setRandomRecAreaId(randomRecArea._id)
       })
       .catch(err => console.log(err))

@@ -4,21 +4,22 @@ All credit to Ali Bhimani and Richard Bekoe for their imagination, skill, and su
 
 ## Contents
 
-1. [Brief](#brief)
-2. [Approach](#approach)
-3. [Technologies Used](#technologies-used)
-4. [Wireframe](#wireframe)
-5. [Responsibilities](#responsibilities)
-   - [Data Mining](#data-mining)
-   - [SVG Animation](#svg-animation)
-   - [Campground Page](#campground-page)
-   - [React Context API](#react-context-api)
-   - [Cloudinary](#cloudinary)
-   - [User Preferences](#user-preferences)
-6. [Key Learnings](#key-learnings)
-7. [Achievements](#achievements)
-8. [Challenges](#challenges)
-9. [Conclusions](#conclusions)
+- [Contents](#contents)
+- [Brief](#brief)
+- [Approach](#approach)
+- [Technologies Used](#technologies-used)
+- [Wireframe](#wireframe)
+- [Responsibilities](#responsibilities)
+  - [Data Mining](#data-mining)
+  - [SVG Animation](#svg-animation)
+  - [Campground Page](#campground-page)
+  - [React Context API](#react-context-api)
+  - [Cloudinary](#cloudinary)
+  - [User Preferences](#user-preferences)
+- [Key Learnings](#key-learnings)
+- [Achievements](#achievements)
+- [Challenges](#challenges)
+- [Conclusions](#conclusions)
 
 ## Brief
 
@@ -67,7 +68,7 @@ A challenge from the outset was the limit set by the RIDB API on the number of r
 
 I devised a solution which relied upon filtering and mapping the data into usable files that could be seeded into our database, see `./server/data/recAreaFilter.js` and `./server/data/facilitiesFilter.js`. The benefits of this approach were that the data on our back end contained only that which we needed to use and by filtering through the data dump we were able to apply quality control to ensure that our user experience would be consistent, for example ensuring that campgrounds always had contact details that we could display on the front end.
 
-```
+``` javascript
 const fs = require('fs')
 
 const fullFacilitiesData = fs.readFileSync('./archive/Facilities_API_v1.json')
@@ -172,7 +173,7 @@ As a natural consequence of the degree of oversight I had over the data we were 
 
 Campground Model/Schema:
 
-```
+``` javascript
 const mongoose = require('mongoose')
 
 const campgroundSchema = new mongoose.Schema({
@@ -211,7 +212,8 @@ My initial mockup ended up laying the groundwork for the colour palette and desi
 
 ![Initial Mockup](./readme_files/svg-animation.gif)
 
-```@keyframes flicker {
+``` css
+@keyframes flicker {
   0% {
     transform: rotate(-1deg);
   }
@@ -295,7 +297,7 @@ To facilitate navigation and in response to bugs with the user clicking the brow
 
 A loading GIF is in place while the API call for the relevant campground is being made. Details for each campground are displayed with varying conditional logic depending on whether the user is logged in and whether the campground has certain attributes (such as being accessible by car). The campground's reviews are also listed on the page and a logged-in user has the ability to leave their own review.
 
-```
+``` javascript
 export const SingleCampground = () => {
 
   const [campground, setCampground] = useState()
@@ -423,7 +425,7 @@ export const SingleCampground = () => {
 
 Since a lot of the conditional rendering in our app was dependent upon the user's login status and preferences, I leveraged the context API to facilitate access to the current user's details across the app.
 
-```
+``` javascript
 export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
@@ -545,7 +547,7 @@ export const UserProvider = ({ children }) => {
 
 The Cloudinary API was implemented to allow users to change their avatars on the app. The Cloudinary widget was imported in the body of our index.html which allowed for straightforward access to the global window object from within React to open the image upload widget:
 
-```
+``` javascript
 function handleAvatarClick() {
     window.cloudinary.createUploadWidget(
       {
@@ -566,7 +568,7 @@ function handleAvatarClick() {
 
 Since my first project, I had been interested in storing user preferences so was keen to implement a settings component whereby a user could update their display options. I was also eager to have dark mode and home state options, with the home state setting changing the behaviour of the areas of interest search.
 
-```
+``` javascript
 export const Settings = () => {
 
   const { currentUser, toggleListDisplay, updateUserHomeState } = useContext(UserContext)
